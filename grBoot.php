@@ -1,15 +1,16 @@
 <?php 
 
-
-namespace grBooker;
-
-
+/*
+Plugin Name: GreenRecs Scheduler Calendar
+Author: scneptune
+Description: A plugin to allow patients to schedule an appt with a doctor.
+Version: 0.0.1
+*/
 
 class grBoot {
 	function __construct() {
-			add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'), 10 );
+			add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'));
 	}
-
 
 	public function register_calendar_script() {
 		wp_register_script( 'jquery_calendar', plugins_url( 'vendors/js/jquery.weekcalendar.js',  __FILE__  ) , array('jquery', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));

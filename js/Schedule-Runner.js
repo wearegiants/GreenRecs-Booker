@@ -12,6 +12,7 @@
    	type: 'GET',
    	datatype: "jsonp",
    	success: function (data){
+   		console.log(data);
    		TriggerInit(data);
    	},
    	error : function( data ) {
@@ -20,7 +21,7 @@
    	}
 
    });
-
+    })(jQuery);
 function TriggerInit(rawData){
 
     var $schedule = {
@@ -90,7 +91,7 @@ console.log($schedule, 'this is the schedule');
 
 	
 }
-    })(jQuery);
+
 });
 
 
