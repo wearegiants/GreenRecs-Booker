@@ -24,14 +24,13 @@ class grBoot {
 		wp_enqueue_style('cal_add_greenrec', plugins_url( 'css/greensched.min.css', __FILE__ ) );
 		wp_enqueue_style('jquery_cal_style', plugins_url( 'vendors/css/jquery.weekcalendar.css',  __FILE__  ), 'jquery-ui-core' );
 		wp_enqueue_style('cal_add_style', plugins_url('vendors/css/default.css', __FILE__) );
-		//wp_enqueue_style('cal_add_gcal_style', plugins_url('vendors/css/gcalendar.css', __FILE__) );
-		wp_enqueue_style('jquery_ui_custom', plugins_url('vendors/css/jquery-ui-1.8.11.custom.css', __FILE__), 'jquery-ui-core');
+		wp_enqueue_style('cal_add_gcal_style', plugins_url('vendors/css/gcalendar.css', __FILE__) );
+		//wp_enqueue_style('jquery_ui_custom', plugins_url('vendors/css/jquery-ui-1.8.11.custom.css', __FILE__), 'jquery-ui-core');
 
 	}
 
 	public function markup() {
-		global $post;
-		var_dump($post);
+		
 	}
 }
 new grBoot();

@@ -45,7 +45,8 @@ function TriggerInit(rawData){
     		},
     		eventNew: function(calEvent, $event, FreeBusyManager, calendar){
 	    		var isFree = true;
-	    		console.log(FreeBusyManager);
+	    		// calEvent.end = new Date(calEvent.start.getTime() + (30 * 60000));
+	    		console.log(calEvent, $event);
 	    		$.each(FreeBusyManager.getFreeBusys(calEvent.start, calEvent.end), function() {
 	    			if (
 	    			this.getStart().getTime() != calEvent.end.getTime()
@@ -72,12 +73,16 @@ function TriggerInit(rawData){
 		data: function(start, end, callback) {
 			callback($schedule);
 		},
+		resizable : function (calEvent, $event) {
+			return false;
+		},
 		businessHours: {start: 9, end: 18, limitDisplay: true},
 		users: $schedule.userNames,
 		showAsSeperateUser: true,
 		displayOddEven: false,
 		displayFreeBusys: true,
         		daysToShow: 3,
+        		defaultEventLength: 1,
 		headerSeperator: '</br> ',
 		useShortDayNames: true,
 		dateFormat: 'd F y',
