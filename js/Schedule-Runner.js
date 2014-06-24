@@ -1,18 +1,17 @@
- $(document).ready(function(){
+jQuery(document).ready(function($){
   (function($) {
-   var d = new Date();
-    d.setDate(d.getDate() - d.getDay());
-    var year = d.getFullYear();
-    var month = d.getMonth();
-    var day = d.getDate();
+   // var d = new Date();
+   //  d.setDate(d.getDate() - d.getDay());
+   //  var year = d.getFullYear();
+   //  var month = d.getMonth();
+   //  var day = d.getDate();
 
    $.ajax({
    	// url: 'https://greenrecs.com/yerbaverde/BookSchedule'
    	url: 'https://yerbaverde.local/BookSchedule',
    	type: 'GET',
-   	datatype: "jsonp",
+   	datatype: "json",
    	success: function (data){
-   		console.log(data);
    		TriggerInit(data);
    	},
    	error : function( data ) {
@@ -26,22 +25,19 @@ function TriggerInit(rawData){
 
     var $schedule = {
     	options: {
-    		timeslotsPerHour: rawData['doctors'].length,
-    		defaultFreeBusy: {free: false}
+    		timeslotHeight: 40
     	},
     	events: rawData.appointments,
     	freebusys: rawData.availibility,
     	userNames : rawData.doctors
     };
-
-console.log($schedule, 'this is the schedule');
    
     	var $calendar = $('#calendar').weekCalendar({
-    		timeslotsPerHour : $schedule.options.timeslotsPerHour,
+    		timeslotsPerHour: 2,
     		scrollToHourMillis: 0,
 		height: function($calendar){
-
-    		},
+			return 800 -$('h1').outerHeight(true);
+		},
     		eventRender: function(calEvent, $event){
     			if (calEvent.end.getTime() < new Date().getTime()) {
     				$event.css('backgroundColor', '#22b73a');
@@ -49,7 +45,8 @@ console.log($schedule, 'this is the schedule');
     		},
     		eventNew: function(calEvent, $event, FreeBusyManager, calendar){
 	    		var isFree = true;
-	    		$.each(FreeBusyManager.getgetFreeBusys(calEvent.start, calEvent.end), function() {
+	    		console.log(FreeBusyManager);
+	    		$.each(FreeBusyManager.getFreeBusys(calEvent.start, calEvent.end), function() {
 	    			if (
 	    			this.getStart().getTime() != calEvent.end.getTime()
 	    			&& this.getEnd().getTime() != calEvent.start.getTime()
@@ -61,6 +58,7 @@ console.log($schedule, 'this is the schedule');
 	    		});
 	    		if (!isFree) {
 	    			$(calendar).weekCalendar('removeEvent', calEvent.id);
+	    			alert("We're sorry but GreenRecs does not currently have an availible time slot with this doctor, please choose another time or another doctor.");
 	    			return false;
 	    		}
 	    		calEvent.id - calEvent.userId + '_' + calEvent.start.getTime();
@@ -74,13 +72,13 @@ console.log($schedule, 'this is the schedule');
 		data: function(start, end, callback) {
 			callback($schedule);
 		},
+		businessHours: {start: 9, end: 18, limitDisplay: true},
 		users: $schedule.userNames,
 		showAsSeperateUser: true,
-		displayOddEven: true,
-		displayFreeBusy: true,
-		daysToShow: 7,
-		switchDisplay: {'1 day': 1, 'work week' : 5, 'full week': 7},
-		headerSeperator: ' ',
+		displayOddEven: false,
+		displayFreeBusys: true,
+        		daysToShow: 3,
+		headerSeperator: '</br> ',
 		useShortDayNames: true,
 		dateFormat: 'd F y',
 		hourLine: true,
