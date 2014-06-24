@@ -1,5 +1,30 @@
-.schedule-calendar {
-	width: 800px;
+.schedule_cal{
+	width: 900px;
 	position: relative;
+	.wc-container {
+		.wc-nav {
+			float: none;
+			text-align: center;
+			button.ui-button {
+				font-size: 12px;
+				&.wc-today {
+					background: none;
+				}
+			}
+		}
+		.wc-title {
+			text-align: center;
+		}
+		.wc-grid-timeslot-header, .wc-header .wc-time-column-header {
+			width: 85px;
+		}
+		.wc-today {
+			background: #fffe95 !important;
+		}
+		.wc-business-hours {
+			background: #7fdcaa !important; //more important than jquery ui's styling.
+			color: white;
+		}
+	}
 	
 }
