@@ -6,6 +6,7 @@ jQuery(document).ready(function($){
    //  var month = d.getMonth();
    //  var day = d.getDate();
 
+
    $.ajax({
    	// url: 'https://greenrecs.com/yerbaverde/BookSchedule'
    	url: 'https://yerbaverde.local/BookSchedule',
@@ -21,11 +22,74 @@ jQuery(document).ready(function($){
 
    });
     })(jQuery);
+
+var modal = (function(){
+    var 
+    method = {},
+    $overlay,
+    $modal,
+    $close;
+
+    $modal = $('#scheduleModal');
+    $overlay = $('#overlayBg');
+    $close = $('#closeModal');
+
+    // Center the modal in the viewport
+    method.center = function (settings) {
+    var top, left;
+
+    top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+    left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
+
+	    $modal.css({
+	        top:top + $(window).scrollTop(), 
+	        left:left + $(window).scrollLeft()
+	    });
+    };
+    // Open the modal
+    method.open = function (settings) {
+    	$modal.css({
+	        // width: 600, 
+	        height: 'auto'
+	    })
+
+	method.center();
+
+	$(window).bind('resize.modal', method.center);
+
+    $modal.show();
+    $overlay.show();
+
+    };
+
+    // Close the modal
+    method.close = function () {
+	    $modal.hide();
+	    $overlay.hide();
+	    $(window).unbind('resize.modal');
+    };
+
+    return method;
+}());
+
+modal.close();
+
+$('#calendar_active').click( function (e){
+	e.preventDefault();
+	modal.open();
+});
+
+$('#closeModal').click( function(e) {
+	e.preventDefault;
+	modal.close();
+});
+
+
 function TriggerInit(rawData){
 
     var $schedule = {
     	options: {
-    		timeslotHeight: 40
+    		timeslotHeight: 60
     	},
     	events: rawData.appointments,
     	freebusys: rawData.availibility,
@@ -36,7 +100,7 @@ function TriggerInit(rawData){
     		timeslotsPerHour: 2,
     		scrollToHourMillis: 0,
 		height: function($calendar){
-			return 800 -$('h1').outerHeight(true);
+			return 480;
 		},
     		eventRender: function(calEvent, $event){
     			if (calEvent.end.getTime() < new Date().getTime()) {
@@ -76,20 +140,25 @@ function TriggerInit(rawData){
 		resizable : function (calEvent, $event) {
 			return false;
 		},
-		businessHours: {start: 9, end: 18, limitDisplay: true},
+		businessHours: {start: 8, end: 20, limitDisplay: true},
 		users: $schedule.userNames,
 		showAsSeperateUser: true,
-		displayOddEven: false,
+		displayOddEven: true,
 		displayFreeBusys: true,
         		daysToShow: 3,
         		defaultEventLength: 1,
-		headerSeperator: '</br> ',
 		useShortDayNames: true,
 		dateFormat: 'd F y',
 		hourLine: true,
     	});
+
+if(window.outerWidth <= 767) {
+	$calendar.weekCalendar({daysToShow: 1});
+	$('#scheduleModal').css({ width: '100%' });
+	$calendar.weekCalendar('refresh');
+}
 	// $('#data_source').change(function(){
-	// 	$calendar.weekCalendar('refresh');
+	
 	// });
 
 	
