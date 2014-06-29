@@ -13,6 +13,7 @@ class grBoot {
 	}
 	function callback_hooks () {
 		add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'));
+		add_action('wp_footer', array($this, 'markup'));
 	}
 	function register_calendar_script() {
 		wp_register_script( 'jquery_calendar', plugins_url( 'vendors/js/jquery.weekcalendar.js',  __FILE__  ) , array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
@@ -30,7 +31,16 @@ class grBoot {
 	}
 
 	public function markup() {
-		
+		?>
+	<div id='overlayBg'></div>
+	<div id='scheduleModal'>
+	<div class="modal-container">
+		<div class="row clearfix"><a href='#' id='closeModal'>&times;</a></div>
+	    	<div class="row clearfix"> <div class="ErrorMsg"></div>
+	    	<div id='calendar'></div></div>
+	    </div>
+	   </div>
+	<?php 
 	}
 }
 new grBoot();
