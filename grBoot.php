@@ -12,8 +12,10 @@ class grBoot {
 		$this->callback_hooks();
 	}
 	function callback_hooks () {
-		add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'));
-		add_action('wp_footer', array($this, 'markup'));
+			add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'));
+			add_action('wp_footer', array($this, 'markup'));
+			add_action('wp_ajax_eventPost', array($this, 'eventPost'));
+			add_action('wp_ajax_no_priv_eventPost', array($this, 'eventPost'));
 	}
 	function register_calendar_script() {
 		wp_register_script( 'jquery_calendar', plugins_url( 'vendors/js/jquery.weekcalendar.js',  __FILE__  ) , array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
@@ -38,9 +40,24 @@ class grBoot {
 		<div class="row clearfix"><a href='#' id='closeModal'>&times;</a></div>
 	    	<div class="row clearfix"> <div class="ErrorMsg"></div>
 	    	<div id='calendar'></div></div>
+	    	<div class="row clearfix">
+		    	<form method="post" id="cal_schedule" action="eventPost">
+		    		<?php wp_nonce_field('schedule_nonce', 'schedule_nonce'); ?>
+		    		<input type="submit" value="Confirm Appointment" id="cal_submit" >
+		    	</form>
+	    	</div>
 	    </div>
 	   </div>
 	<?php 
 	}
+	function eventPost ($data) {
+
+		// if (!isset(wp_verify_nonce( 'schedule_nonce', 'schedule_nonce'))) {
+
+		// }
+		// $_POST['schedule_nonce'];
+
+	}
+
 }
 new grBoot();

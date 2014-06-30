@@ -103,14 +103,28 @@ function TriggerInit(rawData){
 			return 480;
 		},
     		eventRender: function(calEvent, $event){
+    			calEvent.title = 'Your GreenRecs Consultation Appointment';
     			if (calEvent.end.getTime() < new Date().getTime()) {
     				$event.css('backgroundColor', '#22b73a');
     			}
     		},
+    		eventClick: function(calEvent, $event) {
+    			console.log(calEvent, $event);
+    			console.log('ok', 'lets do a bubble zoom for this');
+    		},
+    		beforeEventNew: function ($event, ui) {
+    			console.log($event);
+    			console.log(ui.createdFromSingleClick);
+    			$totalEvents = $calendar.weekCalendar('serializeEvents');
+    			if ($totalEvents.length > 1) {
+    				console.log($totalEvents[0]);
+    			}
+    		
+    		},
     		eventNew: function(calEvent, $event, FreeBusyManager, calendar){
 	    		var isFree = true;
 	    		// calEvent.end = new Date(calEvent.start.getTime() + (30 * 60000));
-	    		console.log(calEvent, $event);
+	    		// console.log(calEvent, $event);
 	    		$.each(FreeBusyManager.getFreeBusys(calEvent.start, calEvent.end), function() {
 	    			if (
 	    			this.getStart().getTime() != calEvent.end.getTime()
@@ -131,7 +145,8 @@ function TriggerInit(rawData){
 	    			userId: calEvent.userId,
 	    			start: calEvent.start,
 	    			end: calEvent.end,
-	    			free: false
+	    			free: false,
+	    			title: 'Your GreenRecs Consultation Appointment'
 	    		});
 		},
 		data: function(start, end, callback) {
@@ -160,6 +175,24 @@ if(window.outerWidth <= 767) {
 	// $('#data_source').change(function(){
 	
 	// });
+$('#cal_submit').on('click', function(event){
+	event.preventDefault();
+	$nonce = $('#schedule_nonce').val();
+	$eventsList = $calendar.weekCalendar('serializeEvents')
+	console.log($nonce);
+	// $.ajax({
+	// 	type: "POST",
+	// 	url: "/wp-admin/admin-ajax.php"
+	// 	data: {
+	// 		'schedule_nonce' : $nonce,
+	//                     'events' : $eventsList
+	// 	},
+	//	success:function(data) {
+	//         $()
+	// 	}
+	// });
+});
+
 
 	
 }
