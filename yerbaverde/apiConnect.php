@@ -3,9 +3,13 @@
 //apiConnect.php
 
 namespace YerbaVerde;
-class apiController {
-	
-	
+class apiCall {
+	/**
+	 *  Master call to Yerba Verde
+	 * @author SCNEPTUNE 
+	 * @param string $method method route name
+	 * @param array $data array of form data
+	 */
 	public function callYerbaVerde($method, $data) {
 		$sendItem = array();
 		$sendItem['signature'] = hash_hmac('sha256', implode($data), $this->getTheSalt());
@@ -54,6 +58,9 @@ class apiController {
 	function ErrorMessaging($error) {
 		return 'GreenRecs :' . $error;
 	}
+	function getPageUrl($page = false) {
+	    return controllerVerde::getPageUrl($page);
+	}
 	//appends a nonce to our form fields.
 	function getSubmitFields($action_name) {
     	$output = '<input type="hidden" name="action" value="gr_wp_nonce"><input type="hidden" name="method" value="'.$action_name.'">';
@@ -61,7 +68,12 @@ class apiController {
     	return $output;
   	}
 
-
+  	//simple json array formatter
+  	 function echoJSONResponse($array) {
+	    header('Content-Type: application/json');
+	    echo json_encode($array);
+	    die;
+	  }
 
 
 
