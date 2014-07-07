@@ -6,8 +6,13 @@ class controllerVerde {
 //controllerVerde.php
 
 const NAMESPACE_STRING = "YerbaVerde\\";
+const SYSTEM_PAGE_KEY = "_yv_system_page";
+const PAGE_SHORTCODE = "yv_page";
+const REDIRECT_KEY = "gr_fwd";
 
 private static $_instance;
+private $_pages = array();
+private $_page_ids = array();
 
 function __construct() {
     add_action('wp_ajax_green_rec_form', array(&$this, 'doFormSubmit'));
@@ -53,7 +58,7 @@ function __construct() {
    */
   static function getInstance() {
     if(is_null(self::$_instance)) {
-      self::$_instance = new Plugin();
+      self::$_instance = new controllerVerde();
     }
     return self::$_instance;
   }
@@ -84,10 +89,85 @@ function __construct() {
     die;
   }
 
+  /**
+   * Gets page permalink from system page registry
+   * @since 0.1
+   * @author SCNEPTUNE
+   * @param string $name unique page name
+   */
+  static function getPageUrl($name, $redirect = false) {
+
+    if(empty($name)) {
+      return false;
+    }
+
+    $yv = controllerVerde::getInstance();
+    $page_id = $yv->getPageId($name);
+    if($page_id) {
+      return get_permalink($page_id);
+    } else {
+      return false;
+    }
+  }
 
 
-   public function doEnable() {
+  /**
+    * Creates a system page and tags it with system meta values
+    * @since 0.1
+    * @author SCNEPTUNE
+    * @param object $object action object
+    */
+  private function createSystemPage($object) {
+    global $wpdb, $wp_rewrite;
+
+    $pages = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '".self::SYSTEM_PAGE_KEY."' AND meta_value = '".$object->getUniqueName()."'", ARRAY_A);
+    if(count($pages) == 0) {
+      $post = array(
+        'post_title' => $object->getDefaultTitle(),
+        'slug' => $object->getUniqueName(),
+        'post_status' => 'publish',
+        'post_type' => 'page',
+        'comment_status' => "closed",
+        'visibility' => "public",
+        'ping_status' => "closed",
+        'post_category' => array(1),
+        'post_content' => "[".self::PAGE_SHORTCODE." id=".$object->getUniqueName()."]"
+      );
+      $post_id = wp_insert_post($post);
+      add_post_meta($post_id, self::SYSTEM_PAGE_KEY, $object->getUniqueName());
+      $wp_rewrite->flush_rules();
+    }
+  }
+
+/**
+* Create system pages upon activation
+* @since 0.1
+* @author SCNEPTUNE
+*/
+  public function doEnable() {
     foreach($this->getPluginActions() as $class_name) {
       $object = new $class_name;
+      if($object->hasPage()) {
+        $this->createSystemPage(new $class_name);
+      }
+    }
+  }
+
+    /**
+    * Delete system pages upon disable
+    * @since 0.1
+    * @author SCNEPTUNE
+    */
+  public function doDisable() {
+    global $wpdb;
+    $pages = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '".self::SYSTEM_PAGE_KEY."'", ARRAY_A);
+    if(!empty($pages)) {
+      foreach($pages as $page) {
+        delete_post_meta($page["post_id"], self::SYSTEM_PAGE_KEY);
+        wp_delete_post($page["post_id"], true);
+      }
+    }
+    wp_cache_delete("cm_users_pages");
+  }
 
 }
