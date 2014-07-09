@@ -17,6 +17,8 @@ private $_page_ids = array();
 function __construct() {
     add_action('wp_ajax_green_rec_form', array(&$this, 'doFormSubmit'));
     add_action('wp_ajax_nopriv_green_rec_form', array(&$this, 'doFormSubmit'));
+    add_action('init', array(&$this, 'setYVPages'));
+      add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
 }
 
 
@@ -109,8 +111,17 @@ function __construct() {
       return false;
     }
   }
+   public function getPluginPath() {
+    return GR_PLUGIN_PATH;
+  }
 
-
+  public function getPageId($name) {
+    if(isset($this->_page_ids[$name])) {
+      return $this->_page_ids[$name];
+    } else {
+      return false;
+    }
+  }
   /**
     * Creates a system page and tags it with system meta values
     * @since 0.1
@@ -136,6 +147,38 @@ function __construct() {
       $post_id = wp_insert_post($post);
       add_post_meta($post_id, self::SYSTEM_PAGE_KEY, $object->getUniqueName());
       $wp_rewrite->flush_rules();
+    }
+  }
+
+    /**
+    * Grabs system pages from database, caches result
+    * @since 0.1
+    * @author SCNEPTUNE
+    */
+  public function setYVPages() {
+    global $wpdb;
+    $result = wp_cache_get('yv_pages');
+    if(false === $result) {
+      $output = array(
+        "by_id" => array(),
+        "by_name" => array()
+      );
+      $db_results = $wpdb->get_results("SELECT meta_value, post_id FROM $wpdb->postmeta WHERE meta_key = '".self::SYSTEM_PAGE_KEY."'", ARRAY_A);
+      foreach($db_results as $array) {
+        $output["by_name"][$array['meta_value']] = $array["post_id"];
+        $output["by_id"][$array['post_id']] = $array["meta_value"];
+      }
+      wp_cache_set('yv_pages', $output);
+      $result = $output;
+    }
+    $this->_page_ids = $result["by_name"];
+    $this->_pages = $output["by_id"];
+  }
+  
+  function doActionShortcode($attrs) {
+    if(isset($attrs['id'])) {
+      $object = $this->getActionClassName($attrs['id']);
+      return $object->getTemplate();
     }
   }
 
@@ -167,7 +210,7 @@ function __construct() {
         wp_delete_post($page["post_id"], true);
       }
     }
-    wp_cache_delete("cm_users_pages");
+    wp_cache_delete("yv_pages");
   }
 
 }
