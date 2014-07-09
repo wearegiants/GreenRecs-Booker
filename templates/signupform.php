@@ -1,5 +1,5 @@
 <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
-<?php echo $this->getSubmitFields('signup');?>
+<?php echo $this->getSubmitFields('SignupapiCall', 'Signup');?>
 <div class="col-md-10 col-centered">
     <!-- General Patient Information -->
 
@@ -37,11 +37,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
                         <div class="btn-group date">
-                            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
-                                Day
-                                <span class="caret"></span>
-                            </button>
-                            <select name="data[dob-day]" class="dropdown-menu" role="menu" data-error="data[dob-day]">
+                            <select name="data[dob-day]" role="menu" data-error="data[dob-day]">
                                 <option selected value="01"> 01</option>
                                 <option value="02"> 02</option>
                                 <option value="03">03</option>
@@ -84,11 +80,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
                         <div class="btn-group date">
-                            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
-                                Mo
-                                <span class="caret"></span>
-                            </button>
-                            <select name="data[dob-month]" class="dropdown-menu" role="menu" data-error="data[dob-month]">
+                            <select name="data[dob-month]" role="menu" data-error="data[dob-month]">
                                 <option selected value="01">January</option>
                                 <option value="02">February</option>
                                 <option value="03">March</option>
@@ -112,11 +104,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="input-group">
                         <div class="btn-group date">
-                            <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
-                                Year
-                                <span class="caret"></span>
-                            </button>
-                            <select name="data[dob-year]" class="dropdown-menu" role="menu" data-error="data[dob-year]">
+                            <select name="data[dob-year]"  role="menu" data-error="data[dob-year]">
                                 <option selected value="1996">1996</option>
                                 <option value="1995">1995</option>
                                 <option value="1994">1994</option>
