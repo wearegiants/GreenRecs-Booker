@@ -18,10 +18,13 @@ if(defined("ABSPATH") && defined("WPINC")) {
   include_once "calendar/grCalBoot.php";
   new \GreenRecs\grCalBoot();
 
-//Routing
+//API Routing
 
   include_once "yerbaverde/controllerVerde.php";
-  include_once "yerbaverde/apiConnect.php";
+  include_once "yerbaverde/apiCall.php";
+  include_once "yerbaverde/apiCallProperties.php";
+
+  include_once "apiCalls/SignupapiCall.php";
 
 $yvApi = \YerbaVerde\controllerVerde::getInstance();
 
