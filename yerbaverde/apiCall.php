@@ -62,9 +62,10 @@ class apiCall {
 	    return controllerVerde::getPageUrl($page);
 	}
 	//appends a nonce to our form fields.
-	function getSubmitFields($action_name) {
-    	$output = '<input type="hidden" name="action" value="gr_wp_nonce"><input type="hidden" name="method" value="'.$action_name.'">';
-    	$output .= wp_nonce_field('gr_wp_nonce','green_rec_form_nonce', true, false);
+	function getSubmitFields($action_name, $method) {
+    	$output = '<input type="hidden" name="action" value="' . $action_name . '"><input type="hidden" name="method" value="'.$method.'">';
+    	$output .= wp_nonce_field('green_rec_form_nonce', 'gr_wp_nonce', true, false);
+
     	return $output;
   	}
 
