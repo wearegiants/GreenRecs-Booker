@@ -9,7 +9,7 @@ class SignupapiCall extends apiCall implements apiCallProperties {
   }
 
   function getUniqueName() {
-    return "patientsignup";
+    return "Signup";
   }
 
   function getTemplate() {
@@ -22,11 +22,11 @@ class SignupapiCall extends apiCall implements apiCallProperties {
 
   function doSubmitProcess($params) {
     $fieldCheck = array($params['first_name'], $params["last_name"], 
-      $params['city'], $params['address'], $params['emr_name'], 
+      $params['city'], $params['emr_name'], 
       $params['emr_rel']);
 
     $errors = array();
-
+  
     foreach ($fieldCheck as $value) {
         if (!preg_match('/^[a-z .\-]+$/i', $value)) {
           $errors[] = array(
@@ -37,7 +37,8 @@ class SignupapiCall extends apiCall implements apiCallProperties {
       }
 
     if(count($errors) > 0) {
-      $this->echoJSONResponse(array(
+      $this->echoJSONResponse(
+        array(
           "status" => 1,
           "msgtype" => "bulk",
           "errors" => $errors
@@ -47,7 +48,8 @@ class SignupapiCall extends apiCall implements apiCallProperties {
 
     $api_result = $this->callYerbaVerde("testApi", $params);
 
-    $this->echoJSONResponse(array(
+    $this->echoJSONResponse(
+      array(
         "status" => 0,
         "message" => "Successfully submitted an application",
         "msgtype" => "global"
