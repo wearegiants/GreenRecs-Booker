@@ -27,7 +27,8 @@ class apiCall {
 				return false;
 			}
 		}
-
+		var_dump($response['response']);
+		echo $response['body'];
 		if( is_wp_error($response) || $response['response']['code' === 500] ){
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
@@ -56,14 +57,14 @@ class apiCall {
 	}
 	//error message prefix template
 	function ErrorMessaging($error) {
-		return 'GreenRecs :' . $error;
+		return 'GreenRecs :' . json_encode($error);
 	}
 	function getPageUrl($page = false) {
 	    return controllerVerde::getPageUrl($page);
 	}
 	//appends a nonce to our form fields.
-	function getSubmitFields($action_name, $method) {
-    	$output = '<input type="hidden" name="action" value="' . $action_name . '"><input type="hidden" name="method" value="'.$method.'">';
+	function getSubmitFields($action_name ) {
+    	$output = '<input type="hidden" name="action" value="green_rec_form"><input type="hidden" name="method" value="'. $action_name .'">';
     	$output .= wp_nonce_field('green_rec_form_nonce', 'gr_wp_nonce', true, false);
 
     	return $output;
