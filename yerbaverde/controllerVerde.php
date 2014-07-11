@@ -18,9 +18,14 @@ function __construct() {
     add_action('wp_ajax_green_rec_form', array(&$this, 'doFormSubmit'));
     add_action('wp_ajax_nopriv_green_rec_form', array(&$this, 'doFormSubmit'));
     add_action('init', array(&$this, 'setYVPages'));
-      add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
+    add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
+    add_action('wp_enqueue_scripts', array(&$this, 'process_ajax'));
 }
 
+
+function process_ajax() {
+  wp_enqueue_script('gr_ajax', GR_PLUGIN_URL.'js/grajax.js', 'jquery' ,null ,true);
+}
 
 /**
     * Gets list of loaded actions that can be executed by this plugin, caches result
@@ -71,7 +76,7 @@ function __construct() {
    * @author SCNEPTUNE
    */
   public function doFormSubmit() {
-    if(!empty($_POST) && wp_verify_nonce($_POST['green_rec_form_nonce'], 'gr_wp_nonce')) {
+    if(!empty($_POST) && wp_verify_nonce($_POST['gr_wp_nonce'], 'green_rec_form_nonce')) {
       if(isset($_POST["method"])) {
         $object = $this->getActionClassName($_POST["method"]);
         if($object) {
