@@ -1,5 +1,5 @@
-<form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
-<?php echo $this->getSubmitFields('SignupapiCall', 'Signup');?>
+<form role="form" id="patientSignup" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
+<?php echo $this->getSubmitFields('Signup');?>
 <div class="col-md-10 col-centered">
     <!-- General Patient Information -->
 
@@ -933,7 +933,7 @@
       
   <div class="question text-center col-md-12"> 
   <div class="spacer"></div>
-  <input class="btn btn-primary btn-lg custom" type="submit" value="Submit" />
+  <input class="btn btn-primary btn-lg custom" data-form-id="patientSignup" type="submit" value="Submit" />
   </div>
 </div>
 </div>
