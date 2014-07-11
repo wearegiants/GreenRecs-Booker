@@ -8,12 +8,18 @@ class grCalBoot {
 		$this->callback_hooks();
 	}
 	function callback_hooks () {
-			add_action('wp_enqueue_scripts', array($this, 'register_calendar_script'));
-			add_action('wp_footer', array($this, 'modalMarkup'));
+			add_action('the_post', array($this, 'checkpage'));
 			add_action('wp_ajax_eventPost', array($this, 'eventPost'));
 			add_action('wp_ajax_no_priv_eventPost', array($this, 'eventPost'));
 	}
+	function checkpage (){
+		if (is_front_page()){
+		add_action('wp_footer', array($this, 'register_calendar_script'));
+		add_action('wp_footer', array($this, 'modalMarkup'));
+		}
+	}
 	function register_calendar_script() {
+		
 		wp_register_script( 'jquery_calendar', GR_PLUGIN_URL .  'vendors/js/jquery.weekcalendar.js' , array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
 		wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/date.js', 'jquery');
 		wp_register_script('calendar_custom', GR_PLUGIN_URL .  'js/Schedule-Runner.js', 'jquery' );
@@ -25,7 +31,7 @@ class grCalBoot {
 		wp_enqueue_style('cal_add_style', GR_PLUGIN_URL . 'vendors/css/default.css' );
 		wp_enqueue_style('cal_add_gcal_style', GR_PLUGIN_URL . 'vendors/css/gcalendar.css' );
 		//wp_enqueue_style('jquery_ui_custom', GR_PLUGIN_URL . 'vendors/css/jquery-ui-1.8.11.custom.css', __FILE__), 'jquery-ui-core');
-
+		
 	}
 
 	public function modalMarkup() {
