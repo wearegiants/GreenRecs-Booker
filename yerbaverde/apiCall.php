@@ -27,9 +27,9 @@ class apiCall {
 				return false;
 			}
 		}
-		var_dump($response['response']);
-		echo $response['body'];
-		if( is_wp_error($response) || $response['response']['code' === 500] ){
+		// var_dump($response);
+		// die();
+		if( is_wp_error($response) || $response['response']['code'] === 500 ){
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
 		} else {

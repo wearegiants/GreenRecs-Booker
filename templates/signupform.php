@@ -443,38 +443,38 @@
         <div class="row input-group">
           <div class="col-md-4 col-sm-6">
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Medications">Medications</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Medications">Medications</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Surgery">Surgery</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Surgery">Surgery</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Therapeutic Injections">Therapeutic injections</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Therapeutic Injections">Therapeutic injections</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Physical Therapy">Physical Therapy</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Physical Therapy">Physical Therapy</label>
             </div>
           </div>
           <div class="col-md-4 col-sm-6">
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Osteopathic Care">Osteopathic care </label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Osteopathic Care">Osteopathic care </label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Chiropractic Care">Chiropractic Care</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Chiropractic Care">Chiropractic Care</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Acupuncture">Acupuncture</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Acupuncture">Acupuncture</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="Counseling">Counseling</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Counseling">Counseling</label>
             </div>
           </div>
           <div class="clearfix"></div>
           <div class="col-md-3">
             <div class="checkbox">
-              <label><input type="checkbox" name="data[can_sympt_treat]" value="other">Other</label>
+              <label><input type="checkbox" name="data[can_sympt_treat][]" value="Other">Other</label>
             </div>
-            <input type="text" name="data[can_sympt_treat]" class="form-control">
+            <input type="text" name="data[can_sympt_treat_other]" class="form-control">
           </div>
         </div>
       </div>
@@ -779,7 +779,7 @@
         <div class="row input-group">
           <div class="col-md-3">
             <label>Other</label>
-            <input type="text" class="form-control" name="data[use_consumpt]">
+            <input type="text" class="form-control" name="data[use_consumpt_other]">
           </div>
         </div>
       </div>
@@ -866,8 +866,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign1]"></div>
+    <div class="col-md-10"><p>
     I understand that I must be a California State resident to obtain an approval or recommendation for the use of cannabis (medical marijuana) under California’s Compassionate Use Act of 1996 (Health &amp; Safety Code #11362.5).
     </p></div>
     </div>
@@ -875,8 +875,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign2]"></div>
+    <div class="col-md-10"><p>
     I have provided an authentic, state or federal issued valid proof of my identity and/or California residency.
     </p></div>
     </div>
@@ -884,8 +884,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign3]"></div>
+    <div class="col-md-10"><p>
     I am 18 years of age or older.
     </p></div>
     </div>
@@ -893,8 +893,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign4]"></div>
+    <div class="col-md-10"><p>
     I acknowledge that GreenRecs or any and all doctors in the GreenRecs physicians network did
     has not directed, conspired, aid or assisted me (the patient) in obtaining medical marijuana.
     </p></div>
@@ -903,8 +903,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign5]"></div>
+    <div class="col-md-10"><p>
     Physician Release of Liability - Agreed &amp; Accepted By Patient <br>
     <a href="#">Please read in full. Click here to view.</a>
     </p></div>
@@ -913,8 +913,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign6]"></div>
+    <div class="col-md-10"><p>
     I have read and accept the GreenRecs terms and conditions in full.<br>
     <a href="#">Please read in full. Click here to view.</a>
     </p></div>
@@ -923,8 +923,8 @@
   
   <div class="question col-md-12"><div class="row">
     <div class="input-group">
-    <div class="col-md-1"><input type="text" class="form-control" name="data[sign]"></div>
-    <div class="col-md-11"><p>
+    <div class="col-md-2"><input type="text" class="form-control" name="data[sign7]"></div>
+    <div class="col-md-10"><p>
     I acknowledge that the information provided is true and correct and under the penalty of perjury
     etc...etc... (final verbiage pending)
     </p></div>
