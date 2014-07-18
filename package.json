@@ -1,6 +1,6 @@
 {
   "name": "GreenRecs-Scheduler",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A scheudling mechanism for doctors",
   "main": "Gruntfile.js",
   "scripts": {
