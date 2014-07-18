@@ -9,6 +9,7 @@ const NAMESPACE_STRING = "YerbaVerde\\";
 const SYSTEM_PAGE_KEY = "_yv_system_page";
 const PAGE_SHORTCODE = "yv_page";
 const REDIRECT_KEY = "gr_fwd";
+const ERROR_PREFIX = "Green-recs.org";
 
 private static $_instance;
 private $_pages = array();
