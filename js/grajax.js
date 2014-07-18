@@ -4,7 +4,6 @@ jQuery(document).ready(function($) {
 
 //Collect all our data off a form on the page, 
 function fData (context) {
-	console.log(context);
 		if (!context.getAttribute('data-form-id')) {
      	 		var curForm = ($('form')[0]);
 	  	} else {
@@ -14,7 +13,7 @@ function fData (context) {
 	};
 
 $('input[type="submit"]').on('click', function(){
-	// event.preventDefault();
+	event.preventDefault();
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
 	var dataAction = formSelect.getAttribute('action');
