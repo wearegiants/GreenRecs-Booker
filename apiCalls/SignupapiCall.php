@@ -20,31 +20,60 @@ class SignupapiCall extends apiCall implements apiCallProperties {
     return true;
   }
 
-  function doSubmitProcess($params) {
-
-    $errors = array();
-  
-    // var_dump($params);
-    function alphavalid($value) {
+ function alphavalid($value, $fieldname) {
             if (!preg_match('/^[a-z .\-]+$/i', $value)) {
-              $errors[] = array(
+              return array(
                 "message" => "This field can only contain alphabetic characters. ie. (A-Z).",
-                "field" => $value
+                "field" => $fieldname
               );
             }
       }
-      
-    foreach( $params as $key => $value) {
-       if( $key == 'city' || $key == 'first_name' || $key == 'last_name' || $key == 'emr_name' || $key == 'emr_rel')  {
-          alphavalid($value);
-       }
+      function noempty($value, $fieldname) {
+          if( empty($value) ){
+            return array(
+              "message" => "This is a required field and must be filled out to the best of your knowledge",
+              "field" => $fieldname
+              );
+          } 
+      }
 
+      function patient_sign ($value, $fieldname, $params) {
+        if ($params['sign1'] != $value) {
+          return array (
+            "message" => "Your initaled signature does not match in this field",
+            "field" => $fieldname
+            );
+        }
+      }
+      function symptMerge ($params) {
+        $newTreat = implode(" ,", $params['can_sympt_treat']);
+        unset($params['can_sympt_treat']);
+        $params['can_sympt_treat'] = $newTreat;
+      }
+  function doSubmitProcess($params) {
+      $params['dob'] = $params['dob-year'] . '-' . $params['dob-month'] . '-' . $params['dob-day'];
+      $errors = array();
+      $this->symptMerge($params);
+    foreach( $params as $key => $value) {
+      if (strlen($value) == 0) {
+        if ($key != 'address2' || $key != 'can_sympt_treat_other' || $key != 'can_sympt_treat' || $key != 'can_sympt_med' || $key != 'legal_can' || $key != 'legal_prob'){
+          $testEmpty = $this->noempty($value, $key);
+          ($testEmpty ? $errors[] = $testEmpty : false); 
+          }
+      }
+       if( $key == 'city' || $key == 'first_name' || $key == 'last_name' || $key == 'emr_name' || $key == 'emr_rel' || $key == 'can_sympt_condition')  {
+           //reseting these because they get overwritten in the next check
+           $testAlpha = $this->alphavalid($value, $key);
+          ($testAlpha ? $errors[] = $testAlpha : false);
+       }
+      if ($key == 'sign2' || $key ==  'sign3' ||$key ==  'sign4' ||$key ==  'sign5' ||$key ==  'sign6' ||$key ==  'sign7' ) {
+         $testPat = $this->patient_sign($value, $key, $params);
+         ($testPat ? $errors[] = $testPat : $params['pat_sign'] = $value);
+      }
     }
 
-   
-
     if(count($errors) > 0) {
-      $this->echoJSONResponse(
+      return $this->echoJSONResponse(
         array(
           "status" => 1,
           "msgtype" => "bulk",
@@ -53,9 +82,11 @@ class SignupapiCall extends apiCall implements apiCallProperties {
       );
     }
 
-    $api_result = $this->callYerbaVerde("testApi", $params);
+    $api_result = $this->callYerbaVerde("patient_add", $params);
 
-    $this->echoJSONResponse(
+// var_dump($api_result);
+
+ $this->echoJSONResponse(
       array(
         "status" => 0,
         "message" => "Successfully submitted an application",
