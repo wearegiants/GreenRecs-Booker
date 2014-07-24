@@ -16,6 +16,10 @@ $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
+	// if (formSelect == 'cal_schedule') {
+	// 	console.log(dataForm);
+	// 	return false;
+	// }
 	var dataAction = formSelect.getAttribute('action');
 	console.log(dataForm, dataAction);
 	ajaxSubmit(dataForm, dataAction);

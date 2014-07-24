@@ -25,6 +25,7 @@ if(defined("ABSPATH") && defined("WPINC")) {
   include_once "yerbaverde/apiCallProperties.php";
 
   include_once "apiCalls/SignupapiCall.php";
+  include_once "apiCalls/ScheduleEventapiCall.php";
 
 $yvApi = \YerbaVerde\controllerVerde::getInstance();
 
