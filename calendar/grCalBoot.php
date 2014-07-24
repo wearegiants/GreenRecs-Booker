@@ -8,10 +8,7 @@ class grCalBoot {
 		$this->callback_hooks();
 	}
 	function callback_hooks () {
-			add_action('the_post', array($this, 'checkpage'));
-			add_action('wp_ajax_eventPost', array($this, 'eventPost'));
-			add_action('wp_ajax_no_priv_eventPost', array($this, 'eventPost'));
-	}
+			add_action('the_post', array($this, 'checkpage'));	}
 	function checkpage (){
 		if (is_front_page()){
 		add_action('wp_footer', array($this, 'register_calendar_script'));
@@ -22,7 +19,7 @@ class grCalBoot {
 		
 		wp_register_script( 'jquery_calendar', GR_PLUGIN_URL .  'vendors/js/jquery.weekcalendar.js' , array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
 		wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/date.js', 'jquery');
-		wp_register_script('calendar_custom', GR_PLUGIN_URL .  'js/Schedule-Runner.js', 'jquery' );
+		wp_register_script('calendar_custom', GR_PLUGIN_URL .  'js/greenrecs.min.js', 'jquery' );
 		wp_enqueue_script('date_lib');
 		wp_enqueue_script('jquery_calendar' );
 		wp_enqueue_script( 'calendar_custom');
@@ -44,8 +41,10 @@ class grCalBoot {
 	    	<div id='calendar'></div></div>
 	    	<div class="row clearfix">
 		    	<form method="post" id="cal_schedule" action="eventPost">
-		    		<?php $this->getNonceType('schedule_nonce', 'schedulepost'); ?>
-		    		<input type="submit" value="Confirm Appointment" id="cal_submit" >
+		    	<?php // $yvApi->getSubmitFields('ScheduleEvent'); ?>
+		    	
+		    		<input type="submit"  value="Confirm Appointment" class="btn btn-lrg btn-default" data-form-id="cal_schedule" >
+		    	
 		    	</form>
 	    	</div>
 	    </div>
@@ -55,14 +54,6 @@ class grCalBoot {
 	// set name value for the nonce used. 
 	function getNonceType ($name, $action = null){
 		wp_nonce_field($action, $name);
-	}
-	function eventPost ($data) {
-
-		// if (!empty($_POST) && wp_verify_nonce( $_POST['schedule_nonce'],  ))) {
-
-		// }
-		
-
 	}
 
 }
