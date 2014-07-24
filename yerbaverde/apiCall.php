@@ -27,15 +27,13 @@ class apiCall {
 				return false;
 			}
 		}
-		// var_dump($response);
-		// die();
+		
 		if( is_wp_error($response) || $response['response']['code'] === 500 ){
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
 		} else {
 			$body = json_decode(trim($response['body']), true);
 		}
-
 		if (isset($body['type']) && $body['type'] == "error") {
 			trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
 			return false;
