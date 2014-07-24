@@ -16,32 +16,44 @@ $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
-	// if (formSelect == 'cal_schedule') {
-	// 	console.log(dataForm);
-	// 	return false;
-	// }
+	if (formSelect == $('form#cal_schedule')[0]) {
+		var captureEvents = $('#calendar').weekCalendar('serializeEvents');
+
+		if (captureEvents.length == 0) { 
+			console.log('hey buddy you\'re missing an appointment');
+			return false;
+		} else {
+			mutableId = captureEvents[0].userId;
+			captureEvents[0]['doc_name'] = $schedule['userNames'][mutableId];
+			var CalEventJSON = $.param(captureEvents[0]);
+			dataForm.append('data[event]', CalEventJSON);
+
+		}
+	}
 	var dataAction = formSelect.getAttribute('action');
-	console.log(dataForm, dataAction);
 	ajaxSubmit(dataForm, dataAction);
 	
 	});
 
-function ajaxSubmit(formData, actionPost) {
-	return $.ajax({
-		url: actionPost,
-		type: 'POST',
-		success: function (data) {
-			console.log(data);
-		},
-		error: function (data) {
-			console.log(data);
-		},
-		data: formData,
-		cache: false,
-		contentType: false,
-		processData: false
-	}, 'json');
+	function ajaxSubmit(formData, actionPost) {
+		return $.ajax({
+			url: actionPost,
+			type: 'POST',
+			success: function (data) {
+			 
+			 if ('redirect' in data) {
+			 	window.location = data.redirect ;
+			 }
+			},
+			error: function (data) {
+				console.log(data);
+			},
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false
+		}, 'json');
 
-};
+	};
 
 });
