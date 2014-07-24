@@ -1,14 +1,5 @@
 jQuery(document).ready(function($){
-  (function($) {
-   // var d = new Date();
-   //  d.setDate(d.getDate() - d.getDay());
-   //  var year = d.getFullYear();
-   //  var month = d.getMonth();
-   //  var day = d.getDate();
-
-
    $.ajax({
-   	// url: 'https://greenrecs.com/yerbaverde/BookSchedule'
    	url: 'https://yerbaverde.local/freeschedule',
    	type: 'GET',
    	datatype: "json",
@@ -21,7 +12,7 @@ jQuery(document).ready(function($){
    	}
 
    });
-    })(jQuery);
+
 
 var modal = (function(){
     var 
@@ -56,6 +47,7 @@ var modal = (function(){
 	method.center();
 
 	$(window).bind('resize.modal', method.center);
+	$(window).bind('scroll.modal', method.center);
 
     $modal.show();
     $overlay.show();
@@ -67,6 +59,7 @@ var modal = (function(){
 	    $modal.hide();
 	    $overlay.hide();
 	    $(window).unbind('resize.modal');
+	    $(window).unbind('scroll.modal');
     };
 
     return method;
@@ -97,7 +90,6 @@ function TriggerInit(rawData){
     	freebusys: rawData.availibility,
     	userNames : rawData.doctors
     };
-   	console.log($schedule);
 
     	var $calendar = $('#calendar').weekCalendar({
     		timeslotsPerHour: 2,
@@ -112,16 +104,16 @@ function TriggerInit(rawData){
     			}
     		},
     		eventClick: function(calEvent, $event) {	
-    			$totalEvents = $calendar.weekCalendar('serializeEvents');
-    			if ($totalEvents.length > 1 ) { 
-    				return false;
-    			}
+    			// $totalEvents = this.weekCalendar('serializeEvents');
+    			// if ($totalEvents.length > 1 ) { 
+    			// 	return false;
+    			// }
     		},
     		beforeEventNew: function ($event, ui) {
-    			// $totalEvents = $calendar.weekCalendar('serializeEvents');
-    			// if ($totalEvents.length > 1 ) {
-    			// 	console.log($totalEvents[0]);
-    			// }
+    			$totalEvents = $(this).weekCalendar('serializeEvents');
+    			if ($totalEvents.length > 1 ) {
+    			 	return false;
+    			}
     		
     		},
     		eventNew: function(calEvent, $event, FreeBusyManager, calendar){
@@ -138,16 +130,16 @@ function TriggerInit(rawData){
 	    		});
 	    		if (!isFree) {
 	    			$(calendar).weekCalendar('removeEvent', calEvent.id);
-	    			alert("We're sorry but GreenRecs does not currently have an availible time slot with this doctor, please choose another time or another doctor.");
+	    			alert("We're sorry but GreenRecs does not currently have this availible time slot with this doctor, please choose another time or another doctor.");
 	    			return false;
 	    		}
-	    		// calEvent.id - calEvent.userId + '_' + calEvent.start.getTime();
+	    		
 	    		$(calendar).weekCalendar('updateFreeBusy', {
 	    			userId: calEvent.userId,
 	    			start: calEvent.start,
 	    			end: calEvent.end,
-	    			free: false,
-	    			// title: 'Your GreenRecs Consultation Appointment'
+	    			free: true,
+	    	
 	    		});
 		},
 		data: function(start, end, callback) {
@@ -162,6 +154,8 @@ function TriggerInit(rawData){
 		showAsSeperateUser: true,
 		displayOddEven: true,
 		displayFreeBusys: true,
+		maxDate:  new Date(+new Date + 12096e5), //can't make appt's more than 2 weeks in advance
+		minDate: new Date(), //can't make appointments in the past. 
         		daysToShow: 3,
         		defaultEventLength: 1,
 		useShortDayNames: true,
@@ -179,10 +173,10 @@ if(window.outerWidth <= 767) {
 	// });
 $('#cal_submit').on('click', function(event){
 	event.preventDefault();
-	$nonce = $('#schedule_nonce').val();
+	// $nonce = $('#schedule_nonce').val();
 	$eventsList = $calendar.weekCalendar('serializeEvents')
 	//fake url switch
-	window.location.href = '/sign-up';
+	// window.location.href = '/sign-up';
 
 	
 });
