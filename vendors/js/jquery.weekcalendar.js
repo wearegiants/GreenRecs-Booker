@@ -729,7 +729,7 @@
             $calendarContainer.find('.wc-nav .wc-next')
               .button({
                 text: false,
-                icons: {primary: 'ui-icon-seek-next'}})
+                icons: {secondary: 'ui-icon-seek-next'}})
               .click(function() {
                   self.element.weekCalendar('next');
                   return false;

@@ -9,8 +9,9 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-		'js/greensched.min.js' : [
-			'js/*.js'
+		'js/greenrecs.min.js' : [
+			'js/Schedule-Runner.js',
+                  'js/grajax.js'
 		]	
 		}
       }

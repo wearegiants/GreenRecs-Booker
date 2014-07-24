@@ -14,9 +14,6 @@ if(defined("ABSPATH") && defined("WPINC")) {
   define('CSRF_SALT', getenv('CSRF_SALT'));
 
   include_once ABSPATH.WPINC.'/class-http.php';
- // Calendar Front End
-  include_once "calendar/grCalBoot.php";
-  new \GreenRecs\grCalBoot();
 
 //API Routing
 
@@ -25,6 +22,7 @@ if(defined("ABSPATH") && defined("WPINC")) {
   include_once "yerbaverde/apiCallProperties.php";
 
   include_once "apiCalls/SignupapiCall.php";
+  include_once "apiCalls/ScheduleEventapiCall.php";
 
 $yvApi = \YerbaVerde\controllerVerde::getInstance();
 
