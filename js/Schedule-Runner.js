@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
    $.ajax({
-   	url: 'https://yerbaverde.local/freeschedule',
+   	url: 'https://api.greenrecs.org/freeschedule',
    	type: 'GET',
    	datatype: "json",
    	success: function (data){
