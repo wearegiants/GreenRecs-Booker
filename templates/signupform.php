@@ -1,5 +1,6 @@
 <form role="form" id="patientSignup" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
 <?php echo $this->getSubmitFields('Signup');?>
+<input type="hidden" value="<?php $_COOKIE['appointment_hash']; ?>">
 <div class="col-md-10 col-centered">
     <!-- General Patient Information -->
 
