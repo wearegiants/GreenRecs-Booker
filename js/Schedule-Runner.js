@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
    $.ajax({
-   	url: 'https://yerbaverde.local/freeschedule',
+   	url: $('input#scheduleUrl').val(),
    	type: 'GET',
    	datatype: "json",
    	success: function (data){
