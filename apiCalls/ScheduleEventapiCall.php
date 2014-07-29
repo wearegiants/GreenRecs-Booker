@@ -37,8 +37,7 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
       'doc_name' => $new_params['doc_name']
       ); 
     
-    setcookie('appointment_hash', $final_params['appointment_hash'], time()+3600);
-    
+
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
         array(
@@ -50,12 +49,14 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
     }
 
     $api_result = $this->callYerbaVerde("eventPost", $final_params);
+
  $this->echoJSONResponse(
       array(
         "status" => 0,
         "message" => "Successfully submitted a schedule time",
         "msgtype" => "global",
-        "redirect" => $redirect
+        "redirect" => $redirect,
+        "appt_cookie" => $final_params['appointment_hash']
       )
     );
 

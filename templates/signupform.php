@@ -1,6 +1,6 @@
 <form role="form" id="patientSignup" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
 <?php echo $this->getSubmitFields('Signup');?>
-<input type="hidden" value="<?php $_COOKIE['appointment_hash']; ?>">
+<input type="hidden" name="data[appointment_hash]" value="<?php echo $_COOKIE['appointment_hash']; ?>">
 <div class="col-md-10 col-centered">
     <!-- General Patient Information -->
 
@@ -329,7 +329,7 @@
                     <input type="radio" name="data[cal_id_bool]" value="true">Yes
                 </label>
                 <label class="btn btn-primary">
-                    <input type="radio" name="data[cal_id_bool]" value="false">No
+                    <input type="radio" name="data[cal_id_bool]" value="false" checked>No
                 </label>
             </div>
         </div>
@@ -378,7 +378,7 @@
             <input type="radio" name="data[can_sympt_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_bool]" value="false"> No
+            <input type="radio" name="data[can_sympt_bool]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -407,7 +407,7 @@
             <input type="radio" name="data[can_sympt_diag_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_diag_bool]" value="false"> No
+            <input type="radio" name="data[can_sympt_diag_bool]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -420,7 +420,7 @@
         </p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_start_time]" value="1 month"> 1 Month
+            <input type="radio" name="data[can_sympt_start_time]" value="1 month" checked> 1 Month
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="data[can_sympt_start_time]" value="1 year"> 1 Year
@@ -504,7 +504,7 @@
         </p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_doc_time]" value="1 month"> 1 Month
+            <input type="radio" name="data[can_sympt_doc_time]" value="1 month" checked> 1 Month
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="data[can_sympt_doc_time]" value="1 year"> 1 Year
@@ -536,7 +536,7 @@
             <input type="radio" name="data[can_sympt_prim_care]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_prim_care]" value="false"> No
+            <input type="radio" name="data[can_sympt_prim_care]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -554,7 +554,7 @@
             <input type="radio" name="data[can_sympt_prim_care_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[can_sympt_prim_care_bool]" value="false"> No
+            <input type="radio" name="data[can_sympt_prim_care_bool]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -582,7 +582,7 @@
             <input type="radio" name="data[privacy_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[privacy_bool]" value="false"> No
+            <input type="radio" name="data[privacy_bool]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -605,7 +605,7 @@
             <input type="radio" name="data[pain_area_img]" value=" Right"> Right
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[pain_area_img]" value=" Left"> Left
+            <input type="radio" name="data[pain_area_img]" value=" Left" checked> Left
           </label>
         </div>
       </div>
@@ -637,7 +637,7 @@
             <input type="radio" name="data[legal_prob_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[legal_prob_bool]" value="false"> No
+            <input type="radio" name="data[legal_prob_bool]" value="false" checked> No
           </label>
         </div>
         <div class="row input-group">
@@ -659,7 +659,7 @@
             <input type="radio" name="data[legal_can_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[legal_can_bool]" value="false"> No
+            <input type="radio" name="data[legal_can_bool]" value="false" checked> No
           </label>
         </div>
         <div class="row input-group">
@@ -698,7 +698,7 @@
             <input type="radio" name="data[use_prev_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_prev_bool]" value="false"> No
+            <input type="radio" name="data[use_prev_bool]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -714,7 +714,7 @@
             <input type="radio" name="data[use_med_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_med_booll]" value="false"> No
+            <input type="radio" name="data[use_med_booll]" value="false" checked> No
           </label>
         </div>
       </div>
@@ -727,7 +727,7 @@
         </p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_med_time]" value="1 Times Per Month"> 1x per Month
+            <input type="radio" name="data[use_med_time]" value="1 Times Per Month" checked> 1x per Month
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="data[use_med_time]" value="2-3 Times Per Week"> 2-3x per week
@@ -756,7 +756,7 @@
         </p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_consumpt]" value="less than 1 gram"> &lt;1 gram
+            <input type="radio" name="data[use_consumpt]" value="less than 1 gram" checked> &lt;1 gram
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="data[use_consumpt]" value="1 gram"> 1 gram
@@ -793,7 +793,7 @@
         </p>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_change]" value="Much More"> Much More
+            <input type="radio" name="data[use_change]" value="Much More" checked> Much More
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="data[use_change]" value="Little More"> Little More
@@ -827,7 +827,7 @@
             <input type="radio" name="data[use_condition]" value="Better (effective)"> Better (effective)
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_condition]" value="Slightly better (somewhat effective)"> Slightly better (somewhat effective)
+            <input type="radio" name="data[use_condition]" value="Slightly better (somewhat effective)" checked> Slightly better (somewhat effective)
           </label>
         </div>
       </div>
@@ -843,7 +843,7 @@
             <input type="radio" name="data[use_quit_bool]" value="true"> Yes
           </label>
           <label class="btn btn-primary">
-            <input type="radio" name="data[use_quit_bool]" value="false"> No
+            <input type="radio" name="data[use_quit_bool]" value="false" checked> No
           </label>
         </div>
       </div>
