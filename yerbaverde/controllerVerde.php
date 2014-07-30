@@ -20,14 +20,14 @@ function __construct() {
     add_action('wp_ajax_nopriv_green_rec_form', array(&$this, 'doFormSubmit'));
     add_action('init', array(&$this, 'setYVPages'));
     add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
-    // add_action('template_redirect', array(&$this, 'doCalendarMarkup'));
+    add_action('template_redirect', array(&$this, 'doCalendarMarkup'));
     add_action('wp_enqueue_scripts', array(&$this, 'process_ajax'));
-    add_action('wp_footer', array(&$this, 'calEmbed'));
+    
 }
 
 
 function process_ajax() {
-  wp_enqueue_script('gr_ajax', GR_PLUGIN_URL.'js/greenrecs.min.js', 'jquery' ,null ,true);
+  wp_enqueue_script('gr_ajax', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
 }
 
 /**
@@ -190,25 +190,31 @@ function process_ajax() {
     }
   }
 
-  // function doCalendarMarkup() {
-  //   global $template;
-  //   if (is_front_page()){
-  //     add_action('wp_footer', array(&$this, 'calEmbed'));
-  //    }
-  // }
+  function doCalendarMarkup() {
+    global $template;
+    if (is_front_page()){
+      add_action('wp_footer', array(&$this, 'calEmbed'));
+      add_action('wp_footer', array(&$this, 'calMarkup'));
+     }
+  }
+
+function calMarkup() {
+      $calInstance = $this->getActionClassName('ScheduleEvent');
+      return $calInstance->getTemplate();
+}
 
 function calEmbed(){
-  wp_register_script( 'jquery_calendar', GR_PLUGIN_URL .  'vendors/js/jquery.weekcalendar.js' , array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
+  wp_register_script( 'jquery_calendar', GR_PLUGIN_URL .  'vendors/js/jquery.weekcalendar.js', array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
   wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/date.js', 'jquery');
-  wp_enqueue_script('date_lib');
-  wp_enqueue_script('jquery_calendar' );
   wp_enqueue_style('cal_add_greenrec', GR_PLUGIN_URL .  'css/greensched.min.css' );
-  wp_enqueue_style('jquery_cal_style', GR_PLUGIN_URL .  'vendors/css/jquery.weekcalendar.css', 'jquery-ui-core' );
+  wp_enqueue_style('jquery_cal_style', GR_PLUGIN_URL .  'vendors/css/jquery.weekcalendar.css', 'jquery-ui-core');
   wp_enqueue_style('cal_add_style', GR_PLUGIN_URL . 'vendors/css/default.css' );
   wp_enqueue_style('cal_add_gcal_style', GR_PLUGIN_URL . 'vendors/css/gcalendar.css' );  
-  $calInstance = $this->getActionClassName('ScheduleEvent');
-  return $calInstance->getTemplate();
+  wp_enqueue_script('date_lib', null, null, null, true);
+  wp_enqueue_script('jquery_calendar', null,  null, null,  true );
 }
+
+
 /**
 * Create system pages upon activation
 * @since 0.1
