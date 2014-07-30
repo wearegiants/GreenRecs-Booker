@@ -40,6 +40,7 @@ $('input[type="submit"]').on('click', function(){
 			url: actionPost,
 			type: 'POST',
 			success: function (data) {
+				console.log(data);
 			 if ('appt_cookie' in data) {
 			 	docCookies.setItem('appointment_hash', data.appt_cookie, 3600, null, window.location.hostname);
 			 }
