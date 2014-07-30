@@ -27,8 +27,8 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
             "field" => '[event]'
             );
      }
-    $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
-    parse_str($params['event'], $new_params);
+    
+     parse_str($params['event'], $new_params);
 
     $final_params = array (
       'appointment_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
@@ -47,7 +47,7 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
         )
       );
     }
-
+$redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     $api_result = $this->callYerbaVerde("eventPost", $final_params);
 
  $this->echoJSONResponse(
