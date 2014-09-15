@@ -16,6 +16,7 @@ $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
+	console.log(dataForm);
 	if (formSelect == $('form#cal_schedule')[0]) {
 		var captureEvents = $('#calendar').weekCalendar('serializeEvents');
 
@@ -36,17 +37,18 @@ $('input[type="submit"]').on('click', function(){
 	});
 
 	function ajaxSubmit(formData, actionPost) {
+
 		return $.ajax({
 			url: actionPost,
 			type: 'POST',
 			success: function (data) {
 				console.log(data);
-			 if ('appt_cookie' in data) {
-			 	docCookies.setItem('appointment_hash', data.appt_cookie, 3600, null, window.location.hostname);
-			 }
-			 if ('redirect' in data) {
-			 	window.location = data.redirect ;
-			 }
+			 // if ('appt_cookie' in data) {
+			 // 	docCookies.setItem('appointment_hash', data.appt_cookie, 3600, null, window.location.hostname);
+			 // }
+			 // if ('redirect' in data) {
+			 // 	window.location = data.redirect ;
+			 // }
 
 			},
 			error: function (data) {
