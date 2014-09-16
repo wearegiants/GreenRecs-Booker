@@ -65,12 +65,9 @@ class VerifyapiCall extends apiCall implements apiCallProperties {
 
     $api_result = $this->callYerbaVerde("verify", $params);
 
+
      $this->echoJSONResponse(
-          array(
-            "status" => 0,
-            "message" => "Successfully submitted an application",
-            "msgtype" => "global"
-          )
+          $api_result
         );
 
   }

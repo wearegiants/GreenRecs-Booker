@@ -1,4 +1,4 @@
-
+<div class='col-md-6 col-md-offset-3 ' style='padding-top: 40px; margin-bottom: 30px;'>
 	<form role="form" id="verifyPatient" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" >
 		<?php echo $this->getSubmitFields('verify');?>
 	<div class="row" style="margin-bottom:30px;">
@@ -16,12 +16,9 @@
 		</div>
 		<div class="col-md-6">
 			<div class="form-group form-group-lg">
-				<div class="col-md-4">
 			                <label class="col-md-12  col-xs-12" for="data[dob]">Date of Birth*</label>
-			                <div class="col-md-4 col-sm-4 col-xs-4">
-			                    <div class="input-group">
-			                        <div class="btn-group date">
-			                            <select name="data[dob-day]" data-error="data[dob-day]">
+			                <div class="col-md-4">
+			                            <select name="data[dob-day]" class="form-control" data-error="data[dob-day]">
 			                            <?php 
 			                                for ($day = 01; $day < 32; $day++) {
 			                                    $selected = '';
@@ -37,16 +34,8 @@
 			                            ?>
 			                            </select>
 			                        </div>
-			                        <!-- Button Group -->
-			                    </div>
-			                    <!-- /input-group -->
-			                </div>
-			                <!-- /.col-lg-3 -->
-
-			                <div class="col-md-4 col-sm-4 col-xs-4">
-			                    <div class="input-group">
-			                        <div class="btn-group date">
-			                            <select name="data[dob-month]" data-error="data[dob-month]">
+			                        <div class="col-md-4">
+			                            <select name="data[dob-month]" class="form-control col-md-2" data-error="data[dob-month]">
 			                                <option selected value="01">January</option>
 			                                <option value="02">February</option>
 			                                <option value="03">March</option>
@@ -61,16 +50,8 @@
 			                                <option value="12">December</option>
 			                            </select>
 			                        </div>
-			                        <!-- Button Group -->
-			                    </div>
-			                    <!-- /input-group -->
-			                </div>
-			                <!-- /.col-lg-3 -->
-
-			                <div class="col-md-4 col-sm-4 col-xs-4">
-			                    <div class="input-group">
-			                        <div class="btn-group date">
-			                            <select name="data[dob-year]"  data-error="data[dob-year]">
+			                        <div class="col-md-4">
+			                            <select name="data[dob-year]" class="form-control col-md-2"  data-error="data[dob-year]">
 			                            <?php 
 			                            for ($iter = (date('Y') - 18); $iter > 1910; $iter--) {
 			                                $selected = '';
@@ -83,21 +64,13 @@
 			                                
 			                            </select>
 			                        </div>
-			                        <!-- Button Group -->
-			                    </div>
-			                    <!-- /input-group -->
-			                </div>
-			                <!-- /.col-lg-3 -->
-
-
-			        </div>
-			        <!-- /.col-lg-3 -->
+			            </div>
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2 col-md-offset-5 ">
 			<div class="form-group form-group-lg">
 				<input class="btn btn-primary btn-lg custom" data-form-id="verifyPatient" type="submit" value="Verify Patient" />
 			</div>
@@ -105,3 +78,4 @@
 	</div>
 
 	</form>
+</div>
