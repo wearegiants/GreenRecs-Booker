@@ -57,7 +57,6 @@ class VerifyapiCall extends apiCall implements apiCallProperties {
       return $this->echoJSONResponse(
         array(
           "status" => 1,
-          "msgtype" => "bulk",
           "errors" => $errors
         )
       );

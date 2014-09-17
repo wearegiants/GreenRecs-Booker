@@ -67,13 +67,10 @@
 			            </div>
 			</div>
 		</div>
-	</div>
 
 	<div class="row">
-		<div class="col-md-2 col-md-offset-5 ">
-			<div class="form-group form-group-lg">
-				<input class="btn btn-primary btn-lg custom" data-form-id="verifyPatient" type="submit" value="Verify Patient" />
-			</div>
+		<div class="col-md-4 col-md-offset-4 ">
+			<input class="btn btn-primary btn-lg custom" data-form-id="verifyPatient" type="submit" value="Verify Patient" />
 		</div>
 	</div>
 
