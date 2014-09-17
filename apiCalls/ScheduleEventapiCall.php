@@ -27,8 +27,8 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
             "field" => '[event]'
             );
      }
-    $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
-    parse_str($params['event'], $new_params);
+    
+     parse_str($params['event'], $new_params);
 
     $final_params = array (
       'appointment_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
@@ -37,8 +37,7 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
       'doc_name' => $new_params['doc_name']
       ); 
     
-    setcookie('appointment_hash', $final_params['appointment_hash'], time()+3600);
-    
+
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
         array(
@@ -48,14 +47,16 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
         )
       );
     }
-
+$redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     $api_result = $this->callYerbaVerde("eventPost", $final_params);
+
  $this->echoJSONResponse(
       array(
         "status" => 0,
         "message" => "Successfully submitted a schedule time",
         "msgtype" => "global",
-        "redirect" => $redirect
+        "redirect" => $redirect,
+        "appt_cookie" => $final_params['appointment_hash']
       )
     );
 

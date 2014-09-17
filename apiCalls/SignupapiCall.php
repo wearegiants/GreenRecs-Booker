@@ -45,17 +45,20 @@ class SignupapiCall extends apiCall implements apiCallProperties {
             );
         }
       }
-      function symptMerge ($params) {
-        $newTreat = implode(" ,", $params['can_sympt_treat']);
-        unset($params['can_sympt_treat']);
-        $params['can_sympt_treat'] = $newTreat;
-      }
   function doSubmitProcess($params) {
       $params['dob'] = $params['dob-year'] . '-' . $params['dob-month'] . '-' . $params['dob-day'];
       $errors = array();
-      $this->symptMerge($params);
+      if (isset($params['can_sympt_treat']) || isset($params['can_sympt_treat_other'])) {
+            $value = $params['can_sympt_treat'];
+            $newTreat = implode(" , ", $value) . (isset($params['can_sympt_treat_other']) ? ', ' . $params['can_sympt_treat_other'] : '');
+              unset($params['can_sympt_treat']);
+             $params['can_sympt_treat'] = $newTreat;
+           } else {
+            $errors[] = "missing treatment options";
+           }
+      ($params['appointment_hash'] ? $params['appointment_hash'] : $errors[] = "missing appointment hash");
     foreach( $params as $key => $value) {
-      if (strlen($value) == 0) {
+      if (count($params[$key]) == 0) {
         if ($key != 'address2' || $key != 'can_sympt_treat_other' || $key != 'can_sympt_treat' || $key != 'can_sympt_med' || $key != 'legal_can' || $key != 'legal_prob'){
           $testEmpty = $this->noempty($value, $key);
           ($testEmpty ? $errors[] = $testEmpty : false); 
@@ -83,8 +86,6 @@ class SignupapiCall extends apiCall implements apiCallProperties {
     }
 
     $api_result = $this->callYerbaVerde("patient_add", $params);
-
-// var_dump($api_result);
 
  $this->echoJSONResponse(
       array(

@@ -12,7 +12,7 @@ class apiCall {
 	 */
 	public function callYerbaVerde($method, $data) {
 		$sendItem = array();
-		$sendItem['signature'] = hash_hmac('sha256', implode($data), $this->getTheSalt());
+		$sendItem['signature'] = hash_hmac('sha256', implode(',',array_values($data)), $this->getTheSalt());
 		$sendItem['sending_data'] = $data;
 
 		$post = array( 'body' => $sendItem,
@@ -27,7 +27,6 @@ class apiCall {
 				return false;
 			}
 		}
-		
 		if( is_wp_error($response) || $response['response']['code'] === 500 ){
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
@@ -55,7 +54,7 @@ class apiCall {
 	}
 	//error message prefix template
 	function ErrorMessaging($error) {
-		return 'GreenRecs :' . json_encode($error);
+		return json_encode(array('GreenRecsErrors' => $error));
 	}
 	function getPageUrl($page = false) {
 	    return controllerVerde::getPageUrl($page);

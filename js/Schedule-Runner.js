@@ -1,18 +1,19 @@
 jQuery(document).ready(function($){
-   $.ajax({
-   	url: 'https://api.greenrecs.org/freeschedule',
-   	type: 'GET',
-   	datatype: "json",
-   	success: function (data){
-   		TriggerInit(data);
-   	},
-   	error : function( data ) {
-   		console.log('Error : ' + data);
-   		$('.ErrorMsg').html('<p class="warning"> It appears there is an error with retrieving the scheduling calendar, please try again later...</p>');
-   	}
 
-   });
-
+   if ($('#calendar').length){
+    $.ajax({
+        url: $('input#scheduleUrl').val(),
+        type: 'GET',
+        datatype: "json",
+        success: function (data){
+          TriggerInit(data);
+        },
+        error : function( data ) {
+          console.log('Error : ' + data);
+          $('.ErrorMsg').html('<p class="warning"> It appears there is an error with retrieving the scheduling calendar, please try again later...</p>');
+        }
+   
+      });
 
 var modal = (function(){
     var 
@@ -76,7 +77,7 @@ $('#closeModal').click( function(e) {
 	e.preventDefault;
 	modal.close();
 });
-
+   }
 
 function TriggerInit(rawData){
 

@@ -4,6 +4,7 @@
 	<div class="row clearfix"><a href='#' id='closeModal'>&times;</a></div>
     	<div class="row clearfix"> <div class="ErrorMsg"></div>
     	<div id='calendar'></div></div>
+    	<input type="hidden" id="scheduleUrl" value="<?php echo GR_URL_API; ?>/freeschedule" >
     	<div class="row clearfix">
 	    	<form method="post" id="cal_schedule" action="<?php echo $this->getFormActionUrl(); ?>" method="POST">
 	    	<?php echo $this->getSubmitFields('ScheduleEvent'); ?>
