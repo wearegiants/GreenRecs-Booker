@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
         },
         error : function( data ) {
           console.log('Error : ' + data);
-          $('.ErrorMsg').html('<p class="warning"> It appears there is an error with retrieving the scheduling calendar, please try again later...</p>');
+          // $('.ErrorMsg').html('<p class="warning"> It appears there is an error with retrieving the scheduling calendar, please try again later...</p>');
         }
    
       });
@@ -81,96 +81,6 @@ $('#closeModal').click( function(e) {
 
 function TriggerInit(rawData){
 
-    window.$schedule = {
-    	options: {
-    		timeslotHeight: 60,
-    		defaultFreeBusy: {free: true}
-    	},
-    	// events: rawData.appointments,
-    	events: [],
-    	freebusys: rawData.availibility,
-    	userNames : rawData.doctors
-    };
-
-    	var $calendar = $('#calendar').weekCalendar({
-    		timeslotsPerHour: 2,
-    		scrollToHourMillis: 0,
-		height: function($calendar){
-			return 480;
-		},
-    		eventRender: function(calEvent, $event){
-    			calEvent.title = 'Your GreenRecs Consultation Appointment';
-    			if (calEvent.end.getTime() < new Date().getTime()) {
-    				$event.css('backgroundColor', '#22b73a');
-    			}
-    		},
-    		eventClick: function(calEvent, $event) {	
-    			// $totalEvents = this.weekCalendar('serializeEvents');
-    			// if ($totalEvents.length > 1 ) { 
-    			// 	return false;
-    			// }
-    		},
-    		beforeEventNew: function ($event, ui) {
-    			$totalEvents = $(this).weekCalendar('serializeEvents');
-    			if ($totalEvents.length > 1 ) {
-    			 	return false;
-    			}
-    		
-    		},
-    		eventNew: function(calEvent, $event, FreeBusyManager, calendar){
-	    		var isFree = true;
-	    		$.each(FreeBusyManager.getFreeBusys(calEvent.start, calEvent.end), function() {
-	    			if (
-	    			this.getStart().getTime() != calEvent.end.getTime()
-	    			&& this.getEnd().getTime() != calEvent.start.getTime()
-	    			&& !this.getOption('free')
-	    			) {
-	    				isFree = false;
-	    				return false;
-	    			}
-	    		});
-	    		if (!isFree) {
-	    			$(calendar).weekCalendar('removeEvent', calEvent.id);
-	    			alert("We're sorry but GreenRecs does not currently have this availible time slot with this doctor, please choose another time or another doctor.");
-	    			return false;
-	    		}
-	    		
-	    		$(calendar).weekCalendar('updateFreeBusy', {
-	    			userId: calEvent.userId,
-	    			start: calEvent.start,
-	    			end: calEvent.end,
-	    			free: true,
-	    	
-	    		});
-		},
-		data: function(start, end, callback) {
-			callback($schedule);
-		},
-		resizable : function (calEvent, $event) {
-			return false;
-		},
-		preventDragOnEventCreation: true,
-		businessHours: {start: 8, end: 20, limitDisplay: true},
-		users: $schedule.userNames,
-		showAsSeperateUser: true,
-		displayOddEven: true,
-		displayFreeBusys: true,
-		maxDate:  new Date(+new Date + 12096e5), //can't make appt's more than 2 weeks in advance
-		minDate: new Date(), //can't make appointments in the past. 
-        		daysToShow: 3,
-        		defaultEventLength: 1,
-		useShortDayNames: true,
-		dateFormat: 'd F y',
-		hourLine: true,
-    	});
-
-if(window.outerWidth <= 767) {
-	$calendar.weekCalendar({daysToShow: 1});
-	$('#scheduleModal').css({ width: '100%' });
-	$calendar.weekCalendar('refresh');
-}
-
-$calendar.weekCalendar('refresh');	
 }
 
 //mdn's rec'd cookie maker. 
