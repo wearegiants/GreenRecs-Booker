@@ -116,7 +116,7 @@ body {
 }
 
 .week {
- background: #bfbfbf;
+ // background: #bfbfbf;
 }
 
 .day {
@@ -210,6 +210,25 @@ body {
   background: rgba(164, 164, 164, 1);
   margin-top: 10px;
   border-radius: 4px;
+  .appointment {
+    padding: 4px 8px;
+    font-size: 18px;
+    line-height: 24px;
+    background: rgba(55, 55, 55, 0.75);
+    position: absolute;
+    z-index: 3;
+    &.msg {
+      color: #fff;
+      font-weight: 300;
+    }
+    .clr-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      &:hover, &:active {
+        background: rgba(255,255,255, 0.4);
+      }
+    }
+  }
 }
 
 .details.in {
@@ -239,9 +258,11 @@ body {
 
 .events {
   height: 100%;
-  padding: 7px 0;
+  padding: 30px 15px;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .events.in {
@@ -340,10 +361,6 @@ h2.month-title {
   left: 14px;
 }
 
-.entry.blue:after { background: rgba(156, 202, 235, 1); }
-.entry.orange:after { background: rgba(247, 167, 0, 1); }
-.entry.green:after { background: rgba(153, 198, 109, 1); }
-.entry.yellow:after { background: rgba(249, 233, 0, 1); }
 
 /* Animations are cool!  */
 @-webkit-keyframes moveFromTopFade {
