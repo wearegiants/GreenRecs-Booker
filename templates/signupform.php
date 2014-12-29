@@ -1,8 +1,11 @@
 
 <section class="form-part" id="CalendarPicker">
-<div class="show apptCalendar">
-    <div id="calendar"></div>
-</div>
+<form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="calendarform">
+<?php echo $this->getSubmitFields('Signup');?>
+    <div class="apptCalendar">
+        <div id="calendar"></div>
+    </div>
+</form>
 </section>
 
 <section class="form-part" id="ContactForm">
