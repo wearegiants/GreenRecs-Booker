@@ -20,7 +20,6 @@ class apiCall {
 			'sslverify'=> 0);
 		$endpoint = sprintf(GR_URL_API . '/%s', $method);
 		$response = wp_remote_post($endpoint, $post);
-		
 		if (isset($response->errors)) {
 			if($response->errors['http_request_failed']) {
 				trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
@@ -44,6 +43,31 @@ class apiCall {
 		}
 
 	}
+
+	public function alphavalid($value, $fieldname) {
+            if (!preg_match('/^[a-z .\-]+$/i', $value)) {
+              return array(
+                "message" => "This field can only contain alphabetic characters. ie. (A-Z).",
+                "field" => $fieldname
+              );
+            } else if (strlen($value) < 2) {
+              return array(
+                "message" => "This field must be longer than 2 characters.",
+                "field" => $fieldname
+              );
+            }
+     }
+
+     public function noempty($value, $fieldname) {
+      if ( empty($value) ) {
+        return array(
+          "message" => "This is a required field and must be filled out to the best of your knowledge",
+          "field" => $fieldname
+          );
+      } 
+     }
+
+
 	//where our end point goes
 	function getFormActionUrl() {
     		return admin_url('admin-ajax.php');
@@ -53,14 +77,14 @@ class apiCall {
 		return CSRF_SALT;
 	}
 	//error message prefix template
-	function ErrorMessaging($error) {
+	public function ErrorMessaging($error) {
 		return json_encode(array('GreenRecsErrors' => $error));
 	}
-	function getPageUrl($page = false) {
+	public function getPageUrl($page = false) {
 	    return controllerVerde::getPageUrl($page);
 	}
 	//appends a nonce to our form fields.
-	function getSubmitFields($action_name ) {
+	public function getSubmitFields($action_name ) {
     	$output = '<input type="hidden" name="action" value="green_rec_form"><input type="hidden" name="method" value="'. $action_name .'">';
     	$output .= wp_nonce_field('green_rec_form_nonce', 'gr_wp_nonce', true, false);
 
@@ -68,7 +92,7 @@ class apiCall {
   	}
 
   	//simple json array formatter
-  	 function echoJSONResponse($array) {
+  	public function echoJSONResponse($array) {
 	    header('Content-Type: application/json');
 	    echo json_encode($array);
 	    die;
