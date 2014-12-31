@@ -40,37 +40,28 @@ $('input[type="submit"]').on('click', function(){
 			url: actionPost,
 			type: 'POST',
 			success: function (data) {
-				console.log(data);
-				$('span.text-danger').remove();
-				
-				$('.ErrorMsg').removeClass('ErrorMsg');
+			//RESET our errors states to normal
+			$('.ErrorMsg').removeClass('ErrorMsg');
+			$('.has-error').removeClass('has-error');
+			$('[data-error]').off('focus');
+			$('[data-error]').off('blur');
 			if ('errors' in data) {
-				$('span.text-success').remove();
-				for (var iter =0, errLength = data['errors'].length; iter < errLength; iter++) {
-					if (data['errors'][iter]['field'] !== 'general') {
-						var affectedField = $("input[name='data[" + data['errors'][iter]['field'] + "]']").parent();
-						console.log(affectedField)
-						affectedField.addClass('ErrorMsg');
-						affectedField.before("<span class='text-danger'>" + data['errors'][iter]['message'] +"</span>");
-					} else if (data['errors'][iter]['field'] == 'general') {
-						console.log(data['errors'][iter]['field']);
-						var errorStr = "<span class='text-danger col-md-12' style='font-size: 18px; line-height: 21px; padding-top: 20px;'>" + data['errors'][iter]['message'] +"</span>";
-						console.log(errorStr);
-						$("input[type='submit']").parent().after(errorStr);
-					}
+				//need to do complete rewrite of the errors states. 
+				for (var iter = 0, errLength = data['errors'].length; iter < errLength; iter++) {
+					var errItem = data['errors'][iter];
+					console.log(errItem);
+					errorTooltips(errItem.field, errItem.message);
 				}
 			} 
 			if (data['status'] == 0) {
-				var errorStr = '<span class="text-success col-md-12" style="font-size: 18px; line-height: 21px; padding-top: 20px;">'+ data['message'] +'</span>';
-				console.log(errorStr);
-				$("input[type='submit']").parent().after(errorStr);
+				
 			}
-			 // if ('appt_cookie' in data) {
-			 // 	docCookies.setItem('appointment_hash', data.appt_cookie, 3600, null, window.location.hostname);
+			 // if ('session_cookie' in data) {
+			 // 	docCookies.setItem('session_hash', data.appt_cookie, 3600, null, window.location.hostname);
 			 // }
-			 // if ('redirect' in data) {
-			 // 	window.location = data.redirect ;
-			 // }
+			 if ('redirect' in data) {
+			 	window.location = data.redirect;
+			 }
 
 			},
 			error: function (data) {
@@ -83,5 +74,22 @@ $('input[type="submit"]').on('click', function(){
 		}, 'json');
 
 	};
+
+	function errorTooltips(field, msg) {
+		var input = $('[data-error="data['+field+']"]');
+		var label = $('label[for="data['+field+']"]');
+
+		label.addClass('ErrorMsg');
+		input.parent().addClass('has-error');
+		input.on('focus', function() {
+			input.parent().append('<span id="msgBubble">' + msg + '</span>');
+		});
+		input.on('blur', function(){
+			$('#msgBubble').remove();
+		});		
+		
+	}
+
+
 
 });
