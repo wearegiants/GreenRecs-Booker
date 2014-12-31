@@ -129,7 +129,7 @@
       self.openDay(this);
     });
 
-     //Events
+    //Events
     // var eventsents = createElement('div', 'day-events');
     // this.drawEvents(day, events);
 
@@ -306,18 +306,16 @@
       viewEvents.forEach(function (eventItem) {
         eventItem.addEventListener('mousedown', function() {
           if (!this.querySelectorAll('input').checked) {
-          clearRadio();
-          // console.log(this);
-          this.classList.add('active');
-          this.querySelectorAll('input').checked = true;
-          // console.log(this.querySelectorAll('input'));
-          setAttributes(this.querySelectorAll('input')[0], {'checked' : true});
-
+            clearRadio();
+            this.classList.add('active');
+            this.querySelectorAll('input').checked = true;
+            setAttributes(this.querySelectorAll('input')[0], {'checked' : true});
           }
           var dateProp = this.querySelectorAll('input')[0].getAttribute('iso-date');
           var appointmentEl = createElement('div', 'appointment msg col-md-12', ' You have selected ' + moment(dateProp).format('dddd, MMMM Do YYYY [at] h:mm a') + ' as your appointment time. ');
+
           var submitbtn = createElement('button', 'btn btn-default clr-btn pull-right', 'Request This Time');
-          setAttributes(submitbtn, {'data-form-id' : 'calendarform'})
+          setAttributes(submitbtn, {'data-form-id' : 'calendarform'});
           appointmentEl.appendChild(submitbtn);
           wrapper.parentNode.insertBefore(appointmentEl, wrapper.parentNode.firstChild);
         });
