@@ -21,13 +21,7 @@ function __construct() {
     add_action('init', array(&$this, 'setYVPages'));
     add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
     add_action('template_redirect', array(&$this, 'doCalendarMarkup'));
-    add_action('wp_enqueue_scripts', array(&$this, 'process_ajax'));
     
-}
-
-
-function process_ajax() {
-  wp_enqueue_script('gr_ajax', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
 }
 
 /**
@@ -206,9 +200,9 @@ public function calMarkup() {
 public function calEmbed(){
   wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/moment.js', 'jquery');
   wp_enqueue_style('cal_add_greenrec', GR_PLUGIN_URL .  'css/greensched.min.css' );
-  wp_register_script('calendar', GR_PLUGIN_URL .  'vendors/js/eventcalendar.js');
   wp_enqueue_script('date_lib', null, null, null, true);
-  wp_enqueue_script('calendar', null, null, null, true);
+  wp_enqueue_script('gr_lib', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
+  // wp_enqueue_script('calendar', null, null, null, true);
 
 }
 
