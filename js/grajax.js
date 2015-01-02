@@ -12,22 +12,53 @@ function fData (context) {
 		return curForm;
 	};
 
+
+docCookies = {
+  getItem: function (sKey) {
+    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  },
+  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+    var sExpires = "";
+    if (vEnd) {
+      switch (vEnd.constructor) {
+        case Number:
+          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+          break;
+        case String:
+          sExpires = "; expires=" + vEnd;
+          break;
+        case Date:
+          sExpires = "; expires=" + vEnd.toUTCString();
+          break;
+      }
+    }
+    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+    return true;
+  },
+  removeItem: function (sKey, sPath, sDomain) {
+    if (!sKey || !this.hasItem(sKey)) { return false; }
+    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+    return true;
+  },
+  hasItem: function (sKey) {
+    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+  },
+  keys: /* optional method: you can safely remove it! */ function () {
+    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+    for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+    return aKeys;
+  }
+};
+
 $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
+
+
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
-	if (formSelect == $('form#cal_schedule')[0]) {
-		var captureEvents = $('#calendar').weekCalendar('serializeEvents');
-		if (captureEvents.length == 0) { 
-			console.log('hey buddy you\'re missing an appointment');
-			return false;
-		} else {
-			mutableId = captureEvents[0].userId;
-			captureEvents[0]['doc_name'] = $schedule['userNames'][mutableId];
-			var CalEventJSON = $.param(captureEvents[0]);
-			dataForm.append('data[event]', CalEventJSON);
-
-		}
+	if (docCookies.hasItem('pid')) {
+		dataForm.append('pid', docCookies.getItem('pid'));
 	}
 	var dataAction = formSelect.getAttribute('action');
 	ajaxSubmit(dataForm, dataAction);
@@ -40,11 +71,26 @@ $('input[type="submit"]').on('click', function(){
 			url: actionPost,
 			type: 'POST',
 			success: function (data) {
+				console.log(data);
 			//RESET our errors states to normal
 			$('.ErrorMsg').removeClass('ErrorMsg');
 			$('.has-error').removeClass('has-error');
 			$('[data-error]').off('focus');
 			$('[data-error]').off('blur');
+			if ('session_hash' in data) {
+				var domainPath = decodeURI(window.location.hostname);
+			 	docCookies.setItem('session_hash', data['session_hash'], 3600, '/', domainPath, false);
+			 	if ('pid' in data) {
+			 		if (!docCookies.hasItem('pid')){
+			 			docCookies.setItem('pid', data['pid'], 3600, '/', domainPath, false);
+			 		}
+			 		if ('redirect' in data) {
+				 		window.location = data['redirect'];
+					}
+				}
+				
+			}
+
 			if ('errors' in data) {
 				//need to do complete rewrite of the errors states. 
 				for (var iter = 0, errLength = data['errors'].length; iter < errLength; iter++) {
@@ -56,12 +102,6 @@ $('input[type="submit"]').on('click', function(){
 			if (data['status'] == 0) {
 				
 			}
-			 // if ('session_cookie' in data) {
-			 // 	docCookies.setItem('session_hash', data.appt_cookie, 3600, null, window.location.hostname);
-			 // }
-			 if ('redirect' in data) {
-			 	window.location = data.redirect;
-			 }
 
 			},
 			error: function (data) {
@@ -89,7 +129,5 @@ $('input[type="submit"]').on('click', function(){
 		});		
 		
 	}
-
-
 
 });
