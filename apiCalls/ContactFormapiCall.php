@@ -22,22 +22,29 @@ class ContactFormapiCall extends apiCall implements apiCallProperties {
 
   function doSubmitProcess($params) {
     $errors = array();
-    
-    $params['dob'] = $params['dob-year'] . '-' . $params['dob-month'] . '-' . $params['dob-day'];
-    
+    $params['phone'] = preg_replace('/\D+/', '', $params['phone']);
     foreach ($params as $key => $value) {
 
       $checkEmpty = $this->noempty($value, $key);
+
       if ($checkEmpty && $key !== 'address2') {
         $errors[] = $checkEmpty;
       }
       
+      if ( $key == 'address2' ) {
+        if (strlen($value) > 0) {
+          $params['address'] = $params['address'] . ' ' . $params[$key];
+        } else {
+          unset($params['address2']);
+        }
+      }
+
       switch($key) {
         case'first_name':
         case'last_name': 
         case'city': 
         case'emr_name': 
-        case'emr_rel':
+        case'emr_relation':
           $checkText = $this->alphavalid($value, $key);
           if ($checkText) {
             $errors[] = $checkText;
@@ -47,20 +54,13 @@ class ContactFormapiCall extends apiCall implements apiCallProperties {
         break;
       }
 
+      if ($key == 'email' || $key == 'phone'){
+        $testEmail = $this->existingInfo($value, $key, 'chkBasic'); 
+        if ($testEmail) {
+          $errors[] = $testEmail;
+          }
+        }
     }
-
-    $params['address'];
-    $params['address2'];
-    $params['zip'];
-    $params['email'];
-    $params['phone'];
-    $params['emr_phone'];
-    $params['cal_id_bool'];
-
-    $final_params = array (
-      'session_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
-      ); 
-    
 
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
@@ -71,20 +71,24 @@ class ContactFormapiCall extends apiCall implements apiCallProperties {
         )
       );
     }
+    $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
+    $params['dob'] = $params['dob-year'] . '-' . $params['dob-month'] . '-' . $params['dob-day'];
+    //unset this after we have iterated over it for the no empty check
     unset($params['dob_day'], $params['dob_month'], $params['dob_year']);
+    
 
-$redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     $api_result = $this->callYerbaVerde("patadd/contact", $params);
 
- $this->echoJSONResponse(
-      array(
-        "status" => 0,
-        "message" => "Successfully submitted a schedule time",
-        "msgtype" => "global",
-        "redirect" => $redirect,
-        "session_cookie" => $final_params['session_hash']
-      )
-    );
+      $this->echoJSONResponse(
+            array(
+              "status" => $api_result['status'],
+              "message" => "Successfully submitted a schedule time",
+              "msgtype" => "global",
+              'session_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
+              "pid" => $api_result['id'],
+              "redirect" => $redirect
+            )
+          );
 
-  }
+    }
 }
