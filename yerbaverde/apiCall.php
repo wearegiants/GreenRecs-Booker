@@ -20,6 +20,9 @@ class apiCall {
 			'sslverify'=> 0);
 		$endpoint = sprintf(GR_URL_API . '/%s', $method);
 		$response = wp_remote_post($endpoint, $post);
+
+		// var_dump($response['body']);
+		// die();
 		if (isset($response->errors)) {
 			if($response->errors['http_request_failed']) {
 				trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
@@ -36,7 +39,9 @@ class apiCall {
 			trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
 			return false;
 		} else {
+			// var_dump($response['body']); die();
 			if (!isset($body["status"])) {
+				//go ahead code. 
 				$body["status"] = -1;
 			}
 			return $body;
@@ -65,6 +70,20 @@ class apiCall {
           "field" => $fieldname
           );
       } 
+     }
+
+     public function existingInfo($value, $fieldname, $type = 'chkDetail') {
+     	$data = array($fieldname => $value);
+     	$data[$type] = $type;
+     	$api_check = $this->callYerbaVerde('check_exists', $data);
+     	if (isset($api_check['doublecreation'])) {
+     		return array(
+     			"message" => "It appears we already have this information in our patient information. Please provide alternate information in this field or contact us.",
+     			"field" => $fieldname
+     		);
+     	} else {
+     		return false;
+     	}
      }
 
 
