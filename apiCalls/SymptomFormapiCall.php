@@ -23,20 +23,38 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
 
   function doSubmitProcess($params) {
     $errors = array();
-
-     if (!isset($params['event'])) {
-      $errors[] = array (
-            "message" => "You do not have an appointment. Please choose a time on the calendar. ",
-            "field" => '[event]'
+    if (empty($params['can_sympt_treat'])) {
+      $errors[] = array(
+          "message" => "Please select atleast one condition from this section.",
+          //silly hack for this 
+          "field" => "can_sympt_treat]["
+          );
+    } else {
+      $treatstr = "";
+      foreach ($params['can_sympt_treat'] as $item) {
+        if ($item == 'Other' && empty($params['can_sympt_treat_other'])) {
+          $errors[] = array(
+            "message" => "Please what other conditions you have sought to treat your problem.",
+            "field" => "can_sympt_treat_other"
             );
-     }
-    
-     parse_str($params['event'], $new_params);
+        }
+        $treatstr .= $item . " , ";
 
-    $final_params = array (
-      'appointment_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
-      ); 
+      }
+      if (!empty($params['can_sympt_treat_other'])) {
+        $treatstr .= $params['can_sympt_treat_other'];
+      } else {
+        unset($params['can_sympt_treat_other']);
+      }
+      unset($params['can_sympt_treat']);
+      $params['can_sympt_treat'] = $treatstr;
+
+    }
     
+    foreach ($params as $key => $value) {
+      $checkEmpties = $this->noempty($value, $key);
+      if ($checkEmpties) {$errors[] = $checkEmpties;}
+    }
 
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
@@ -47,9 +65,10 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
         )
       );
     }
+    var_dump($params); die();
 
-$redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
-    $api_result = $this->callYerbaVerde("eventPost", $final_params);
+$redirect = (isset($params['redirect']) ? $params['redirect'] : '');
+    $api_result = $this->callYerbaVerde("patadd/symptoms", $final_params);
 
  $this->echoJSONResponse(
       array(
