@@ -6,7 +6,9 @@
     this.el = document.querySelector(selector);
     this.events = events;
     this.current = moment().date(1);
-    this.draw();
+    if ((this.el)){
+    this.draw();  
+    }
     var current = document.querySelector('.today');
     if(current) {
       var self = this;
