@@ -190,8 +190,8 @@
 
                 <div class="col-md-4">
                     <div class="input-group spacer">
-                        <label for="data[emr_rel]">Relationship*</label>
-                        <input type="text" name="data[emr_rel]" class="form-control" data-error="data[emr_rel]">
+                        <label for="data[emr_relation]">Relationship*</label>
+                        <input type="text" name="data[emr_relation]" class="form-control" data-error="data[emr_rel]">
                     </div>
                     <!-- /input-group -->
                 </div>
