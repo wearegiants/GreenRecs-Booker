@@ -86,7 +86,17 @@ class apiCall {
      	}
      }
 
-
+    public function checkPID ($params) {
+	     if (!$params['pid']) {
+	      return $this->echoJSONResponse(
+	        array(
+	          "status" => 2,
+	          "cookieCheck" => false
+	          )
+	        );
+    	}	
+    }    
+     
 	//where our end point goes
 	function getFormActionUrl() {
     		return admin_url('admin-ajax.php');
