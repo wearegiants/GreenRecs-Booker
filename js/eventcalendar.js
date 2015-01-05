@@ -313,16 +313,23 @@
             this.querySelectorAll('input').checked = true;
             setAttributes(this.querySelectorAll('input')[0], {'checked' : true});
           }
+
           var dateProp = this.querySelectorAll('input')[0].getAttribute('iso-date');
+          var idSlot = this.querySelectorAll('input')[0].getAttribute('slot-id');
           var appointmentEl = createElement('div', 'appointment msg col-md-12', ' You have selected ' + moment(dateProp).format('dddd, MMMM Do YYYY [at] h:mm a') + ' as your appointment time. ');
 
-          var submitbtn = createElement('button', 'btn btn-default clr-btn pull-right', 'Request This Time');
-          setAttributes(submitbtn, {'data-form-id' : 'calendarform'});
+          var submitbtn = createElement('input', 'btn btn-default clr-btn pull-right');
+          setAttributes(submitbtn, {'data-form-id' : 'calendarform', 'value': 'Request This Time', 'type' : 'submit'});
           appointmentEl.appendChild(submitbtn);
+          // document.querySelectorAll('input[type="submit"]')[0].on('click', function() {
+          //   $('input[type="submit"]').trigger('click');
+          // })
           wrapper.parentNode.insertBefore(appointmentEl, wrapper.parentNode.firstChild);
         });
       });
+      
     };
+
     //so because we like to keep our nodes tidy, 
     //we remove the event queue on each click of this and rebuild it from scratch
     // this means we actually always remove the previous list on each date node click.
