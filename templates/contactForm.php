@@ -211,14 +211,14 @@
 
             <div class="row questions nonlist clearfix">
                 <div class="col-md-6 spacer">
-                    <span class="input-group-title" data-error="data[cal_id_bool]">Do you have a valid Calfornia ID?*</span>
+                    <label for="data[cal_id]" class="input-group-title">Do you have a valid Calfornia ID?*</label>
                     </br>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label for="data[cal_id_bool]" class="btn btn-primary">
-                            <input type="radio" name="data[cal_id_bool]" value="true">Yes
+                    <div class="btn-group">
+                        <label for="data[cal_id]" class="radio-inline">
+                            <input type="radio" name="data[cal_id]" value="true">Yes
                         </label>
-                        <label for="data[cal_id_bool]" class="btn btn-primary">
-                            <input type="radio" name="data[cal_id_bool]" value="false" checked>No
+                        <label for="data[cal_id]" class="radio-inline">
+                            <input type="radio" name="data[cal_id]" value="false" checked>No
                         </label>
                     </div>
                 </div>
