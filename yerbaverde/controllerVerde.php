@@ -21,13 +21,7 @@ function __construct() {
     add_action('init', array(&$this, 'setYVPages'));
     add_shortcode("yv_page", array(&$this, 'doActionShortcode'));
     add_action('template_redirect', array(&$this, 'doCalendarMarkup'));
-    add_action('wp_enqueue_scripts', array(&$this, 'process_ajax'));
     
-}
-
-
-function process_ajax() {
-  wp_enqueue_script('gr_ajax', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
 }
 
 /**
@@ -192,26 +186,24 @@ function process_ajax() {
 
   function doCalendarMarkup() {
     global $template;
+    add_action('wp_footer', array(&$this, 'calEmbed'));
     if (is_front_page()){
-      add_action('wp_footer', array(&$this, 'calEmbed'));
       add_action('wp_footer', array(&$this, 'calMarkup'));
      }
   }
 
-function calMarkup() {
+public function calMarkup() {
       $calInstance = $this->getActionClassName('ScheduleEvent');
       return $calInstance->getTemplate();
 }
 
-function calEmbed(){
-  wp_register_script( 'jquery_calendar', GR_PLUGIN_URL .  'vendors/js/jquery.weekcalendar.js', array('jquery', 'jquery-migrate', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse', 'jquery-ui-position', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-resizable', 'jquery-ui-selectable', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
-  wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/date.js', 'jquery');
+public function calEmbed(){
+  wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/moment.js', 'jquery');
   wp_enqueue_style('cal_add_greenrec', GR_PLUGIN_URL .  'css/greensched.min.css' );
-  wp_enqueue_style('jquery_cal_style', GR_PLUGIN_URL .  'vendors/css/jquery.weekcalendar.css', 'jquery-ui-core');
-  wp_enqueue_style('cal_add_style', GR_PLUGIN_URL . 'vendors/css/default.css' );
-  wp_enqueue_style('cal_add_gcal_style', GR_PLUGIN_URL . 'vendors/css/gcalendar.css' );  
   wp_enqueue_script('date_lib', null, null, null, true);
-  wp_enqueue_script('jquery_calendar', null,  null, null,  true );
+  wp_enqueue_script('gr_lib', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
+  // wp_enqueue_script('calendar', null, null, null, true);
+
 }
 
 

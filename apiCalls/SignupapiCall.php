@@ -19,33 +19,19 @@ class SignupapiCall extends apiCall implements apiCallProperties {
   function hasPage() {
     return true;
   }
-
- function alphavalid($value, $fieldname) {
-            if (!preg_match('/^[a-z .\-]+$/i', $value)) {
-              return array(
-                "message" => "This field can only contain alphabetic characters. ie. (A-Z).",
-                "field" => $fieldname
-              );
-            }
-      }
-      function noempty($value, $fieldname) {
-          if( empty($value) ){
-            return array(
-              "message" => "This is a required field and must be filled out to the best of your knowledge",
-              "field" => $fieldname
-              );
-          } 
-      }
-
-      function patient_sign ($value, $fieldname, $params) {
-        if ($params['sign1'] != $value) {
-          return array (
-            "message" => "Your initaled signature does not match in this field",
-            "field" => $fieldname
-            );
-        }
-      }
+     
+  function patient_sign ($value, $fieldname, $params) {
+    if ($params['sign1'] != $value) {
+      return array (
+        "message" => "Your initaled signature does not match in this field",
+        "field" => $fieldname
+        );
+    }
+  }
   function doSubmitProcess($params) {
+      // echo "<pre>";
+      // var_dump($params);
+      // die();
       $params['dob'] = $params['dob-year'] . '-' . $params['dob-month'] . '-' . $params['dob-day'];
       $errors = array();
       if (isset($params['can_sympt_treat']) || isset($params['can_sympt_treat_other'])) {
