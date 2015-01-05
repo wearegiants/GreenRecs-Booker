@@ -24,19 +24,26 @@ class LegalFormapiCall extends apiCall implements apiCallProperties {
   function doSubmitProcess($params) {
     $errors = array();
 
-     if (!isset($params['event'])) {
-      $errors[] = array (
-            "message" => "You do not have an appointment. Please choose a time on the calendar. ",
-            "field" => '[event]'
-            );
-     }
-    
-     parse_str($params['event'], $new_params);
-
-    $final_params = array (
-      'appointment_hash' => hash_hmac('sha256', mt_rand(0, 800), $this->getTheSalt()),
-      ); 
-    
+    $this->checkPID($params);
+     
+    foreach($params as $key => $value) {
+      switch($key) {
+        case "legal_prob_bool":
+          if (filter_var($value, FILTER_VALIDATE_BOOLEAN)){
+            $probInfo = $this->noempty($params['legal_prob'], "legal_prob");
+            if ($probInfo) {$errors[] = $probInfo;}
+          }
+        break;
+        case "legal_can_bool":
+          if (filter_var($value, FILTER_VALIDATE_BOOLEAN)){
+            $canInfo = $this->noempty($params['legal_can'], "legal_can");
+            if ($canInfo) {$errors[] = $canInfo;}
+          }
+        break;
+        default:
+        break;
+      }
+    }
 
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
@@ -49,15 +56,15 @@ class LegalFormapiCall extends apiCall implements apiCallProperties {
     }
 
 $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
-    $api_result = $this->callYerbaVerde("eventPost", $final_params);
+    $api_result = $this->callYerbaVerde("patadd/legal", $params);
 
  $this->echoJSONResponse(
       array(
         "status" => 0,
-        "message" => "Successfully submitted a schedule time",
+        "message" => "Update Legal Patient Information",
         "msgtype" => "global",
         "redirect" => $redirect,
-        "appt_cookie" => $final_params['appointment_hash']
+        "session_hash" => hash_hmac('sha256', mt_rand(0, 100), $this->getTheSalt())
       )
     );
 
