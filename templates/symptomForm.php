@@ -17,16 +17,16 @@
           <label for="data[can_sympt_bool]"><p>
             <strong>Do you have a medical condition that could benefit from the use of cannabis?</strong>
             (AIDS, Cancer, Migraines, Glaucoma, Asthma, Chronic Pain, Multiple Sclerosis, Nausea, 
-            Insomnia, depression, Anxiety, Anorexia or other serious illnesses) View full list 
-            of conditions*
+            Insomnia, depression, Anxiety, Anorexia or other serious illnesses) <a href="#">View full list 
+            of conditions</a>*
           </p>
           </label>
           <div class="">
             <label for="data[can_sympt_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="true"> Yes
             </label>
-            <label for="data[can_sympt_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" value="false"> No
+            <label for="data[can_sympt_bool]"  class="radio-inline">
+              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="false"> No
             </label>
           </div>
         </div>
@@ -54,11 +54,11 @@
           </p>
           </label>
           <div class="">
-            <label for="data[can_sympt_diag_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" value="true"> Yes
+            <label for="data[can_sympt_diag_bool]"class="radio-inline">
+              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="true"> Yes
             </label>
-            <label for="data[can_sympt_diag_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" value="false"> No
+            <label for="data[can_sympt_diag_bool]"  class="radio-inline">
+              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="false"> No
             </label>
           </div>
         </div>
@@ -126,7 +126,7 @@
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input id="othercheckbox" type="checkbox" name="data[can_sympt_treat][]" value="Other">Other</label>
               </div>
-              <input type="text" name="data[can_sympt_treat_other]" class="form-control">
+              <input type="text" data-error="data[can_sympt_treat_other]" name="data[can_sympt_treat_other]" class="form-control">
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@
           </label>
           <div class="row input-group">
             <div class="col-md-12">
-              <input type="text" name="data[can_sympt_med]" class="form-control">
+              <input type="text" data-error="data[can_sympt_med]" name="data[can_sympt_med]" class="form-control">
             </div>
           </div>
         </div>
@@ -188,14 +188,7 @@
             primary care physician or the doctor that diagnosed your condition?</strong>
           </p>
           </label>
-          <div class="btn-group">
-            <label class="radio-inline">
-              <input type="radio" name="data[can_sympt_prim_care]" value="true"> Yes
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="data[can_sympt_prim_care]" value="false"> No
-            </label>
-          </div>
+          <input type="text" data-error="data[can_sympt_prim_care]" name="data[can_sympt_prim_care]" class="form-control" />
         </div>
       </li><!-- Question 8 -->
       
@@ -210,10 +203,10 @@
           </label>
           <div class="btn-group">
             <label class="radio-inline">
-              <input type="radio" name="data[can_sympt_prim_care_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="true"> Yes
             </label>
-            <label class="radio-inliney">
-              <input type="radio" name="data[can_sympt_prim_care_bool]" value="false"> No
+            <label class="radio-inline" >
+              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="false"> No
             </label>
           </div>
         </div>
@@ -221,32 +214,44 @@
       
       <li>
         <div class="col-md-12">
-          <label for="data[can_sympt_phys_val]">
+          <label for="data[can_sympt_phys_val]" class="row spacer">
           <p>
             <strong>When did this problem or condition start?</strong>
           </p>
           </label>
-          <div class="checkbox">
-            <label><input name="data[can_sympt_phys_val]" type="checkbox" value="agree">I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
+          <div class="">
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="1 month"> 1 Month
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="1 year"> 1 Year
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="1-3 years"> 1-3 Years
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="3-5 years"> 3-5 Years
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="5-10 years"> 5-10 Years
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_phys_val]" value="10+ years"> 5-10 Years
+            </label>
           </div>
         </div>
       </li><!-- Question 9a -->
       
       <li>
         <div class="col-md-12">
-          <label for="data[privacy_bool]">
+          <label for="data[privacy]">
           <p>
             <strong>Have you read our privacy policy?*</strong> 
             <a href="#">View PRIVACY POLICY</a>
           </p>
           </label>
-          <div class="btn-group">
-            <label class="radio-inline">
-              <input type="radio" name="data[privacy_bool]" value="true"> Yes
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="data[privacy_bool]" value="false"> No
-            </label>
+          <div class="checkbox">
+            <label><input name="data[privacy]" type="checkbox" value="1">I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
           </div>
         </div>
       </li><!-- Question 10 -->
@@ -260,24 +265,32 @@
           </p>
           </label>
           <div class="btn-group">
+          <div class="row spacer">
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value=" Front"> Front
+              <input type="radio" name="data[pain_area_img]" value="0"> Front
+              <img src="http://placehold.it/140&text=Front+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value=" Back"> Back
+              <input type="radio" name="data[pain_area_img]" value="1"> Back
+              <img src="http://placehold.it/140&text=Back+image" />
+            </label>
+          </div>
+          <div class="row spacer">
+            <label class="radio-inline">
+              <input type="radio" name="data[pain_area_img]" value="2"> Right
+              <img src="http://placehold.it/140&text=Right+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value=" Right"> Right
+              <input type="radio" name="data[pain_area_img]" value="3"> Left
+              <img src="http://placehold.it/140&text=Left+image" />
             </label>
-            <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value=" Left"> Left
-            </label>
+          </div>
           </div>
         </div>
       </li><!-- Question 11 -->
       
     </ul>
-
+    <div class="row spacer"></div>
     <div class="text-center col-md-12 spacer"> 
         <input class="btn btn-primary btn-lg custom" data-form-id="symptoms" type="submit" value="Next" />
     </div>
