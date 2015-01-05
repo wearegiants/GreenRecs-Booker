@@ -58,7 +58,8 @@ $('input[type="submit"]').on('click', function(){
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
 	if (docCookies.hasItem('pid')) {
-		dataForm.append('pid', docCookies.getItem('pid'));
+		console.log(docCookies.getItem('pid'));
+		dataForm.append('data[pid]', docCookies.getItem('pid'));
 	}
 	var dataAction = formSelect.getAttribute('action');
 	ajaxSubmit(dataForm, dataAction);
@@ -77,19 +78,26 @@ $('input[type="submit"]').on('click', function(){
 			$('.has-error').removeClass('has-error');
 			$('[data-error]').off('focus');
 			$('[data-error]').off('blur');
+			
+			if ('cookieCheck' in data) {
+				var missingNotice = "We are sorry but it appears you\'ve either reached this page without a session cookie or your cookies for this page have expired. "
+				generalTopbarError(missingNotice);
+			}
+
 			if ('session_hash' in data) {
 				var domainPath = decodeURI(window.location.hostname);
-			 	docCookies.setItem('session_hash', data['session_hash'], 3600, '/', domainPath, false);
+			 	docCookies.setItem('session_hash', data['session_hash'], 36000 , '/', domainPath, false);
 			 	if ('pid' in data) {
 			 		if (!docCookies.hasItem('pid')){
-			 			docCookies.setItem('pid', data['pid'], 3600, '/', domainPath, false);
+			 			docCookies.setItem('pid', data['pid'], 36000, '/', domainPath, false);
 			 		}
-			 		if ('redirect' in data) {
-				 		window.location = data['redirect'];
-					}
+			 		
 				}
-				
+				if ('redirect' in data) {
+				 	window.location = data['redirect'];
+				}
 			}
+
 
 			if ('errors' in data) {
 				//need to do complete rewrite of the errors states. 
@@ -114,6 +122,16 @@ $('input[type="submit"]').on('click', function(){
 		}, 'json');
 
 	};
+
+	function generalTopbarError(msg) {
+		$('.content').append('<div id="msgGlobal"><i class="ss-icon ss-alert"></i><p>'+ msg +'</p><div class="ss-icon ss-delete"></div></div>');
+		$('.ss-delete').on('click', function (ev, el){
+			ev.preventDefault();
+			$(ev.target).off('click');
+			$(ev.target).parent().remove();
+		})
+
+	}
 
 	function errorTooltips(field, msg) {
 		var input = $('[data-error="data['+field+']"]');
