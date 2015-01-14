@@ -24,8 +24,12 @@ class CalendarFormapiCall extends apiCall implements apiCallProperties {
     $errors = array();
     $this->checkPID($params);
 
-    var_dump($params);
-    die();
+    if (!isset($params['apptdata'])) {
+      $errors[] = array(
+        "field" => "apptdata",
+        "message" => "You are missing the time appointment"
+        );
+    }
 
     if(count($errors) > 0) {
       return $this->echoJSONResponse(
@@ -41,7 +45,7 @@ class CalendarFormapiCall extends apiCall implements apiCallProperties {
     $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     unset($params['redirect_to']);
 
-    $api_result = $this->callYerbaVerde("patadd/history", $params);
+    $api_result = $this->callYerbaVerde("freeschedule/book", $params);
 
  $this->echoJSONResponse(
       array(
