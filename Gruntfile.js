@@ -4,14 +4,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     uglify: {
       options: {
-	   sourceMap: 'js/greensched.min.js.map',
+	     sourceMap: 'js/greensched.min.js.map',
         sourceMappingURL: '/app/plugins/greenrecs-schedule/js/greensched.min.js.map'
       },
       dist: {
         files: {
 		'js/greenrecs.min.js' : [
-		'js/Schedule-Runner.js',
-    'js/grajax.js',
     'js/eventcalendar.js'
 		]	
 		}
