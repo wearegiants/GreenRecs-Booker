@@ -5,8 +5,9 @@
   function Calendar(selector, events) {
     this.el = document.querySelector(selector);
     this.events = events;
+    // console.log(this.events, this.el);
     this.current = moment().date(1);
-    if ((this.el)){
+    if (this.el) {
     this.draw();  
     }
     var current = document.querySelector('.today');
@@ -87,21 +88,21 @@
 
     if(!dayOfWeek) { return; }
 
-    clone.subtract('days', dayOfWeek+1);
+    clone.subtract(dayOfWeek+1, 'days');
 
     for(var i = dayOfWeek; i > 0 ; i--) {
-      this.drawDay(clone.add('days', 1));
+      this.drawDay(clone.add(1, 'days'));
     }
   }
 
   Calendar.prototype.fowardFill = function() {
-    var clone = this.current.clone().add('months', 1).subtract('days', 1);
+    var clone = this.current.clone().add(1, 'months').subtract(1, 'days');
     var dayOfWeek = clone.day();
 
     if(dayOfWeek === 6) { return; }
 
     for(var i = dayOfWeek; i < 6 ; i++) {
-      this.drawDay(clone.add('days', 1));
+      this.drawDay(clone.add(1, 'days'));
     }
   }
 
@@ -110,7 +111,7 @@
 
     while(clone.month() === this.current.month()) {
       this.drawDay(clone);
-      clone.add('days', 1);
+      clone.add(1, 'days');
     }
   }
 
@@ -255,12 +256,11 @@
     var viewEvents = [];
     var chunkSize = 6;
 
+    var btngroup = createElement('div', 'center-block');
+
     for (i=0,j=events.length; i<j; i+=chunkSize) {
       eventsChunk = events.slice(i,i+chunkSize);
-
-      var btngroup = createElement('div', 'col-md-3 panel panel-default');
-      
-      var btnbody = createElement('div', 'panel-body btn-group-vertical');
+      var btnbody = createElement('div', ' btn-group-vertical');
       btnbody.setAttribute('data-toggle', 'buttons');
 
       //iterate over each event in the chunk to mark it up in html 
@@ -321,17 +321,35 @@
           var submitbtn = createElement('input', 'btn btn-default clr-btn pull-right');
           setAttributes(submitbtn, {'data-form-id' : 'calendarform', 'value': 'Request This Time', 'type' : 'submit'});
           appointmentEl.appendChild(submitbtn);
-          // document.querySelectorAll('input[type="submit"]')[0].on('click', function() {
-          //   $('input[type="submit"]').trigger('click');
-          // })
           wrapper.parentNode.insertBefore(appointmentEl, wrapper.parentNode.firstChild);
+
+          document.getElementById('calendarform').addEventListener('submit', function (ev) {
+            if ( ev.preventDefault ) { ev.preventDefault();}
+              ev.returnValue = false;
+            SubmitAction();
+            return false;
+          }, false);
+
         });
       });
       
     };
 
-    //so because we like to keep our nodes tidy, 
-    //we remove the event queue on each click of this and rebuild it from scratch
+    SubmitAction = function () {
+
+      var formD = new FormData(document.getElementById('calendarform'));
+      var cookiePID = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent('pid').replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+      formD.append('data[pid]', cookiePID);
+      var request = new XMLHttpRequest();
+      request.open("POST", document.getElementById('calendarform').getAttribute('action'), true);
+      request.onloadend = function() {
+          console.log(request);
+      }
+      request.send(formD);
+    }
+
+    //so because we like to keep our nodes tidy
+    // we remove the event queue on each click of this and rebuild it from scratch
     // this means we actually always remove the previous list on each date node click.
     if(currentWrapper) {
       currentWrapper.className = 'events out';
@@ -385,13 +403,13 @@
   }*/
 
   Calendar.prototype.nextMonth = function() {
-    this.current.add('months', 1);
+    this.current.add(1, 'months');
     this.next = true;
     this.draw();
   }
 
   Calendar.prototype.prevMonth = function() {
-    this.current.subtract('months', 1);
+    this.current.subtract(1, 'months');
     this.next = false;
     this.draw();
   }
@@ -444,27 +462,56 @@
 })();
 
 (function() {
-  var data = [
-    { id: 0, date: moment().hour(9) , eventName: '9:00 AM', opencount: 2 },
-    { id: 1, date: moment().hour(10) , eventName: '10:00 AM', opencount: 3  },
-    { id: 2, date: moment().hour(11) , eventName: '11:00 AM', opencount: 1  },
-    { id: 3, date: moment().hour(12) , eventName: '12:00 PM', opencount: 5  },
 
-    { id: 4, date: moment(), eventName: '1:00 PM', opencount: 1  },
-    { id: 5, date: moment(), eventName: '2:00 PM', opencount: 4  },
-    { id: 6, date: moment(), eventName: '3:00 PM', opencount: 1  },
-    { id: 7, date: moment(), eventName: '4:00 PM', opencount: 6  },
+  var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://yerbaverde.local/freeschedule', true);
+xhr.onloadend = function () {
+   if (xhr.status >= 200 && xhr.status < 400) {
+    // Success!
+    var data = JSON.parse(xhr.responseText);
+    var count = 0;
+    data.forEach(function(item) {
+      item.id = parseInt(item.id);
+      item.opencount = parseInt(item.slots_available);
+      if (count > 3) {
+        item.date = moment(item.availability_slot);  
+      } else {
+        item.date = moment();  
+      }
+      item.eventName = item.date.format('h:mm A');
+      count++;
+      delete item.slots_available, delete item.availability_slot;
+    });
 
-    { id: 8, date: moment(), eventName: '5:00 PM',  opencount: 2  },
-    { id: 9, date: moment(), eventName: '6:00 PM',  opencount: 2  },
-    { id: 10, date: moment(), eventName: '7:00 PM',  opencount: 1  },
-    { id: 11, date: moment(), eventName: '8:00 PM',  opencount: 3  },
+    console.log(data);
+    var calendar = new Calendar('#calendar', data);
+  } else {
+    console.log(xhr.response)
+  }
+};
+xhr.send();
 
-    { id: 12, date: moment().add(1, 'day').hour(9) , eventName: '9:00 PM', opencount: 1  },
-    { id: 13, date: moment().add(1, 'day').hour(10) , eventName: '10:00 AM', opencount: 3  },
-    { id: 14, date: moment().add(1, 'day').hour(11) , eventName: '11:00 AM', opencount: 2  },
-    { id: 15, date: moment().add(1, 'day').hour(12) , eventName: '12:00 AM', opencount: 4  }
-  ];
+  // var data = [
+  //   { id: 0, date: moment().hour(9).minutes(30) , eventName: '9:30 AM', opencount: 2 },
+  //   { id: 1, date: moment().hour(10).minutes(30) , eventName: '10:30 AM', opencount: 3  },
+  //   { id: 2, date: moment().hour(11).minutes(30) , eventName: '11:30 AM', opencount: 1  },
+  //   { id: 3, date: moment().hour(12).minutes(30) , eventName: '12:30 PM', opencount: 5  },
+
+  //   { id: 4, date: moment().hour(13).minute(0), eventName: '1:00 PM', opencount: 1  },
+  //   { id: 5, date: moment().hour(14).minute(0), eventName: '2:00 PM', opencount: 4  },
+  //   { id: 6, date: moment().hour(15).minute(0), eventName: '3:00 PM', opencount: 1  },
+  //   { id: 7, date: moment().hour(16).minute(0), eventName: '4:00 PM', opencount: 6  },
+
+  //   { id: 8, date: moment(), eventName: '5:00 PM',  opencount: 2  },
+  //   { id: 9, date: moment(), eventName: '6:00 PM',  opencount: 2  },
+  //   { id: 10, date: moment(), eventName: '7:00 PM',  opencount: 1  },
+  //   { id: 11, date: moment(), eventName: '8:00 PM',  opencount: 3  },
+
+  //   { id: 12, date: moment().add(1, 'day').hour(9) , eventName: '9:00 PM', opencount: 1  },
+  //   { id: 13, date: moment().add(1, 'day').hour(10) , eventName: '10:00 AM', opencount: 3  },
+  //   { id: 14, date: moment().add(1, 'day').hour(11) , eventName: '11:00 AM', opencount: 2  },
+  //   { id: 15, date: moment().add(1, 'day').hour(12) , eventName: '12:00 AM', opencount: 4  }
+  // ];
 
   
 
@@ -472,6 +519,6 @@
     
   }
 
-  var calendar = new Calendar('#calendar', data);
+  
 
 })();
