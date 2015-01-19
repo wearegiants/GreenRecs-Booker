@@ -5,7 +5,7 @@ namespace YerbaVerde;
 class CalendarFormapiCall extends apiCall implements apiCallProperties {
 
   function getDefaultTitle() {
-    return "Book Your Appointment";
+    return "";
   }
 
   function getUniqueName() {
