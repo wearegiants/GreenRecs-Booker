@@ -8,3 +8,6 @@ This is a scheduling calendar plugin for wordpress with the intent to connect to
 - refactored the sign up form into multiple pages.
 -changed calendar from week calendar to [event calendar](http://codepen.io/peanav/pen/ulkof)
 - tightened up error states on the form fields. 
+
+v.0.0.6
+-swapped up the calendar to be in accordance with the carousel mockup as shared. 
