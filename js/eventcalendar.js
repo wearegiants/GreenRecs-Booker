@@ -12,7 +12,7 @@
               data[inner].forEach(function(item) {
                 item.id = parseInt(item.id);
                 item.opencount = parseInt(item.slots_available);
-                item.date = moment(item.availability_slot, 'YYYY-MM-DD HH:mm:ss', true);
+                item.date = moment(item.availability_slot, 'YYYY-MM-DD HH:mm');
                 item.eventName = item.date.format('h:mm A');
                 delete item.slots_available, delete item.availability_slot;
               });
@@ -48,7 +48,7 @@
         var sList = createElement('ul', {'class' : 'eventslist'});
         list.forEach(function (item) {
 
-            eSlot = createElement('li', {'class' : 'event' + ((item.opencount > 0) ? ' open' : ' closed')});
+            eSlot = createElement('li', {'class' : 'event radio' + ((item.opencount > 0) ? ' open' : ' closed')});
             eSlotName = createElement('label', {'class': 'btn btn-default btn-lg', 'for' : item.date.format('MM-DD-H-m-s') + 'ID'+ item.id}, item.eventName);
             if (item.opencount > 0 ){
               inputRadio = createElement('input', 
@@ -59,9 +59,11 @@
                 'class': 'appointment-choice', 
                 // 'checked': 'false', 
                 'value': item.id,
+                'autocomplete': 'off',
                 'styles': 
                   {'visibility' : 'hidden'}
               });
+              inputRadio.dataset.date = item.date.format('YYYY-MM-DD HH:mm');
               inputHidden = createElement('input', {
                 'id': item.date.format('MM-DD-H-m-s') + 'ID'+ item.id,
                 'type': 'hidden',
@@ -110,7 +112,7 @@
             $carousel = $('.c'),
             $cList = $('.c-list'),
             $cWidth = $carousel.outerWidth(),
-            $li = $('.c li'),
+            $li = $('.c li.day'),
             $liLength = $li.size(),
             numPages = $liLength/multiplier,
             $prev = $('.c-nav .prev'),
@@ -172,6 +174,16 @@
             posCarousel();
           });
 
+          $('.btn').on('click', function (e) {
+            $('.btn.active').removeClass('active');
+            return;
+          }); 
+          $('input[type=radio]').on('change', function () {
+            var RadioId = $('input[type=radio]:checked').attr('data-date');
+            $('.modal').modal('toggle');
+            $('#appointment-date-seed').text('You have selected '+ moment(RadioId).format('MMMM Do YYYY, h:mm a') + ' as your appointment time. If this is correct please confirm the appointment below.');
+          });
+          
       }
      
 
