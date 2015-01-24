@@ -45,7 +45,7 @@ class CalendarFormapiCall extends apiCall implements apiCallProperties {
     $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     unset($params['redirect_to']);
 
-    $api_result = $this->callYerbaVerde("freeschedule/book", $params);
+    $api_result = $this->callYerbaVerde("/book", $params);
 
  $this->echoJSONResponse(
       array(
