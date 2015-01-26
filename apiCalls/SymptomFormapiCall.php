@@ -25,7 +25,7 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
     $errors = array();
 
     $this->checkPID($params);
-
+    $treatstr = "";
     if (empty($params['can_sympt_treat'])) {
       $errors[] = array(
           "message" => "Please select atleast one condition from this section.",
@@ -33,7 +33,6 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
           "field" => "can_sympt_treat]["
           );
     } else {
-      $treatstr = "";
       foreach ($params['can_sympt_treat'] as $item) {
         if ($item == 'Other' ) {
           if (empty($params['can_sympt_treat_other'])) {
