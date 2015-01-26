@@ -21,7 +21,7 @@ class apiCall {
 		$endpoint = sprintf(GR_URL_API . '/%s', $method);
 		$response = wp_remote_post($endpoint, $post);
 
-		// var_dump($response['body']);
+		// var_dump($response);
 		// die();
 		if (isset($response->errors)) {
 			if($response->errors['http_request_failed']) {
@@ -29,7 +29,9 @@ class apiCall {
 				return false;
 			}
 		}
+
 		if( is_wp_error($response) || $response['response']['code'] === 500 ){
+			var_dump($response);
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
 		} else {
@@ -39,7 +41,6 @@ class apiCall {
 			trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
 			return false;
 		} else {
-			// var_dump($response['body']); die();
 			if (!isset($body["status"])) {
 				//go ahead code. 
 				$body["status"] = -1;
@@ -87,7 +88,7 @@ class apiCall {
      }
 
     public function checkPID ($params) {
-	     if (!$params['pid']) {
+	     if (!isset($params['pid'])) {
 	      return $this->echoJSONResponse(
 	        array(
 	          "status" => 2,
