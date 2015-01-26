@@ -1,32 +1,31 @@
 
 (function(w){
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://yerbaverde.local/freeschedule', true);
-        xhr.onloadend = function () {
-           if (xhr.status >= 200 && xhr.status < 400) {
-            // Success!
-            var data = JSON.parse(xhr.responseText);
-            //sanitize the results into the appropriate formats.
-            Object.keys(data).forEach(function (inner) {
-              data[inner].forEach(function(item) {
-                item.id = parseInt(item.id);
-                item.opencount = parseInt(item.slots_available);
-                item.date = moment(item.availability_slot, 'YYYY-MM-DD HH:mm');
-                item.eventName = item.date.format('h:mm A');
-                delete item.slots_available, delete item.availability_slot;
-              });
-            });
-            window.events = data;
-            GetDays();
-            StartCarousel();
-          } else {
-            console.log(xhr.response)
-          }
-        };
-        xhr.send();
-
-
+        if (document.querySelectorAll('input#calLoad').length) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://yerbaverde.local/freeschedule', true);
+                xhr.onloadend = function () {
+                   if (xhr.status >= 200 && xhr.status < 400) {
+                    // Success!
+                    var data = JSON.parse(xhr.responseText);
+                    //sanitize the results into the appropriate formats.
+                    Object.keys(data).forEach(function (inner) {
+                      data[inner].forEach(function(item) {
+                        item.id = parseInt(item.id);
+                        item.opencount = parseInt(item.slots_available);
+                        item.date = moment(item.availability_slot, 'YYYY-MM-DD HH:mm');
+                        item.eventName = item.date.format('h:mm A');
+                        delete item.slots_available, delete item.availability_slot;
+                      });
+                    });
+                    window.events = data;
+                    GetDays();
+                    StartCarousel();
+                  } else {
+                    console.log(xhr.response)
+                  }
+                };
+                xhr.send();
+      }
 
       function GetDays() {
         days = Object.keys(events);
@@ -55,7 +54,7 @@
                 {
                 'id': item.date.format('MM-DD-H-m-s') + 'ID'+ item.id,
                 'type': 'radio', 
-                'name': 'data[apptdate]', 
+                'name': 'data[apptdata]', 
                 'class': 'appointment-choice', 
                 // 'checked': 'false', 
                 'value': item.id,
