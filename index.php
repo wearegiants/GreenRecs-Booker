@@ -31,6 +31,7 @@ if(defined("ABSPATH") && defined("WPINC")) {
   include_once "apiCalls/AgreementFormapiCall.php";
   include_once "apiCalls/SignupapiCall.php";
   include_once "apiCalls/ScheduleEventapiCall.php";
+  include_once "apiCalls/confirmationPageapiCall.php";
 
 $yvApi = \YerbaVerde\controllerVerde::getInstance();
 
