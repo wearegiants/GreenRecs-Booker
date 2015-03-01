@@ -31,7 +31,7 @@ class apiCall {
 		}
 
 		if( is_wp_error($response) || $response['response']['code'] === 500 ){
-			var_dump($response);
+			var_dump($response['body']);
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
 		} else {

@@ -1,13 +1,16 @@
 
 (function(w){
         if (document.querySelectorAll('input#calLoad').length) {
+                var yerbaurl = document.querySelectorAll('input[name="freescheduleurl"]')[0]
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://yerbaverde.local/freeschedule', true);
+
+                xhr.open('GET', yerbaurl.value, true);
+
                 xhr.onloadend = function () {
                    if (xhr.status >= 200 && xhr.status < 400) {
                     // Success!
                     var data = JSON.parse(xhr.responseText);
-                    //sanitize the results into the appropriate formats.
+                    //sanitize the results into the appropriate formats.;
                     Object.keys(data).forEach(function (inner) {
                       data[inner].forEach(function(item) {
                         item.id = parseInt(item.id);

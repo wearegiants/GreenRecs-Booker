@@ -200,7 +200,7 @@ public function calMarkup() {
 public function calEmbed(){
   wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/moment.js', 'jquery');
   wp_enqueue_style('cal_add_greenrec', GR_PLUGIN_URL .  'css/greensched.min.css' );
-  wp_register_script('grajax', GR_PLUGIN_URL . '/js/grajax.js', 'jquery');
+  wp_register_script('grajax', GR_PLUGIN_URL . 'js/grajax.js', 'jquery');
   wp_enqueue_script('date_lib', null, null, null, true);
   wp_enqueue_script('grajax', null, null, null, true);
   wp_enqueue_script('gr_lib', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
