@@ -2,7 +2,7 @@
 (function(w){
         if (document.querySelectorAll('input#calLoad').length) {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://api.greenrecs.org/freeschedule', true);
+                xhr.open('GET', 'https://yerbaverde.local/freeschedule', true);
                 xhr.onloadend = function () {
                    if (xhr.status >= 200 && xhr.status < 400) {
                     // Success!
