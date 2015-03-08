@@ -41,9 +41,11 @@ class apiCall {
 			trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
 			return false;
 		} else {
-			if (!isset($body["status"])) {
+			if (is_array($body)) {
+				if (!isset($body["status"])){
+					$body["status"] = -1;
+				}
 				//go ahead code. 
-				$body["status"] = -1;
 			}
 			return $body;
 		}
