@@ -1,12 +1,12 @@
 
 (function(w){
         if (document.querySelectorAll('input#calLoad').length) {
-                var yerbaurl = document.querySelectorAll('input[name="freescheduleurl"]')[0]
+                var yerbaurl = document.querySelectorAll('input[name="freescheduleurl"]')[0];
                 var xhr = new XMLHttpRequest();
 
                 xhr.open('GET', yerbaurl.value, true);
 
-                xhr.onloadend = function () {
+                xhr.onloadend = function() {
                    if (xhr.status >= 200 && xhr.status < 400) {
                     // Success!
                     var data = JSON.parse(xhr.responseText);

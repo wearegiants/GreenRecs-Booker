@@ -24,13 +24,17 @@ class AgreementFormapiCall extends apiCall implements apiCallProperties {
   function doSubmitProcess($params) {
     $errors = array();
 
-    $this->checkPID($params);
-
-
     foreach($params as $key => $value) {
       switch($key) {
         case 'redirect_to':
         case 'pid':
+        break;
+        case 'appointment_base':
+          $newObj = unserialize(base64_decode($value));
+
+          $params['pid'] = $newObj['pid'];
+          $params['appoint_id'] = $newObj['appoint_id'];
+          unset($params['appointment_base']);
         break;
         default:
         $checkEmptySig = $this->noempty($value, $key);
@@ -56,6 +60,7 @@ class AgreementFormapiCall extends apiCall implements apiCallProperties {
     $redirect = (isset($params['redirect_to']) ? $params['redirect_to'] : '');
     unset($params['redirect_to']);
 
+    $api_result = $this->callYerbaVerde("/patadd/confirm", $params);
     // $api_result = $this->callYerbaVerde("patadd/agreement", $params);
 
  $this->echoJSONResponse(
