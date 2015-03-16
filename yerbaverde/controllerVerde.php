@@ -206,8 +206,6 @@ public function calEmbed(){
   wp_enqueue_script('gr_lib', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
 
   // For Magnoliyan
-  wp_enqueue_script('bootstrap','//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js',null,null,true);
-  wp_enqueue_style('bootstrap_css','//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css');
   wp_enqueue_script('magnoliyan','/../client/mgVideoChat/mgVideoChat-1.6.0.js', array('jquery'),null, true);
   wp_enqueue_style('mag_css','/../client/mgVideoChat/mgVideoChat-1.6.0.css');
   // wp_enqueue_script('calendar', null, null, null, true);
