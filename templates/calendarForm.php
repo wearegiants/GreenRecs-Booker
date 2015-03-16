@@ -1,6 +1,7 @@
 <section class="form-part" id="CalendarPicker">
     <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="calendarform">
     <?php echo $this->getSubmitFields('CalendarForm');?>
+    <input type="hidden" name="freescheduleurl" value="<?php echo getenv('GR_URL_API') . '/freeschedule' ;?>" />
     <input type="hidden" name="data[redirect_to]" value="<?php echo \YerbaVerde\controllerVerde::getPageUrl('AgreementForm'); ?>" />
     <input type="hidden" id="calLoad" value="true"/>
         <div id="apptCalendar">

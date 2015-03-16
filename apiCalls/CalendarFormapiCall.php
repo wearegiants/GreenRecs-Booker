@@ -46,13 +46,14 @@ class CalendarFormapiCall extends apiCall implements apiCallProperties {
     unset($params['redirect_to']);
 
     $api_result = $this->callYerbaVerde("/book", $params);
-
+    
  $this->echoJSONResponse(
       array(
         "status" => 0,
         "message" => "Finished updating the symptom fields",
         "msgtype" => "global",
         "redirect" => $redirect,
+        "appointment_base" => base64_encode(serialize($api_result)),
         "session_hash" => hash_hmac('sha256', mt_rand(0, 100), $this->getTheSalt())
       )
     );

@@ -61,6 +61,9 @@ $('input[type="submit"]').on('click', function(){
 		console.log(docCookies.getItem('pid'));
 		dataForm.append('data[pid]', docCookies.getItem('pid'));
 	}
+	if (docCookies.hasItem('appointment_base')) {
+		dataForm.append('data[appointment_base]', docCookies.getItem('appointment_base'));
+	}
 	var dataAction = formSelect.getAttribute('action');
 	ajaxSubmit(dataForm, dataAction);
 	
@@ -83,7 +86,11 @@ $('input[type="submit"]').on('click', function(){
 				var missingNotice = "We are sorry but it appears you\'ve either reached this page without a session cookie or your cookies for this page have expired. "
 				generalTopbarError(missingNotice);
 			}
-
+			if ('appointment_base' in data) {
+					if (!docCookies.hasItem('appointment_base')) {
+						docCookies.setItem('appointment_base', data['appointment_base'], 3600, '/', domainPath, false);
+					}
+			}
 			if ('session_hash' in data) {
 				var domainPath = decodeURI(window.location.hostname);
 			 	docCookies.setItem('session_hash', data['session_hash'], 36000 , '/', domainPath, false);
@@ -93,12 +100,11 @@ $('input[type="submit"]').on('click', function(){
 			 		}
 			 		
 				}
+
 				if ('redirect' in data) {
 				 	window.location = data['redirect'];
 				}
 			}
-
-
 			if ('errors' in data) {
 				//need to do complete rewrite of the errors states. 
 				for (var iter = 0, errLength = data['errors'].length; iter < errLength; iter++) {

@@ -11,3 +11,8 @@ This is a scheduling calendar plugin for wordpress with the intent to connect to
 
 v.0.0.6
 -swapped up the calendar to be in accordance with the carousel mockup as shared. 
+
+v.0.0.8
+-Fixed up the confirmation of appointments. 
+-fixed a ton of small inconsistencies with processing the form data.
+-added in cookie checking and page for magnoliyan client connection. 

@@ -31,7 +31,7 @@ class apiCall {
 		}
 
 		if( is_wp_error($response) || $response['response']['code'] === 500 ){
-			var_dump($response);
+			var_dump($response['body']);
 			trigger_error($this->ErrorMessaging($response->errors), E_USER_NOTICE);
 			return false;
 		} else {
@@ -41,9 +41,11 @@ class apiCall {
 			trigger_error($this->ErrorMessaging(), E_USER_NOTICE);
 			return false;
 		} else {
-			if (!isset($body["status"])) {
+			if (is_array($body)) {
+				if (!isset($body["status"])){
+					$body["status"] = -1;
+				}
 				//go ahead code. 
-				$body["status"] = -1;
 			}
 			return $body;
 		}

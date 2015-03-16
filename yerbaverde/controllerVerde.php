@@ -200,10 +200,16 @@ public function calMarkup() {
 public function calEmbed(){
   wp_register_script('date_lib', GR_PLUGIN_URL .  'vendors/js/moment.js', 'jquery');
   wp_enqueue_style('cal_add_greenrec', GR_PLUGIN_URL .  'css/greensched.min.css' );
-  wp_register_script('grajax', GR_PLUGIN_URL . '/js/grajax.js', 'jquery');
+  wp_register_script('grajax', GR_PLUGIN_URL . 'js/grajax.js', 'jquery');
   wp_enqueue_script('date_lib', null, null, null, true);
   wp_enqueue_script('grajax', null, null, null, true);
   wp_enqueue_script('gr_lib', GR_PLUGIN_URL.'js/greenrecs.min.js', array('jquery') ,null ,true);
+
+  // For Magnoliyan
+  wp_enqueue_script('bootstrap','//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js',null,null,true);
+  wp_enqueue_style('bootstrap_css','//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css');
+  wp_enqueue_script('magnoliyan','/../client/mgVideoChat/mgVideoChat-1.6.0.js', array('jquery'),null, true);
+  wp_enqueue_style('mag_css','/../client/mgVideoChat/mgVideoChat-1.6.0.css');
   // wp_enqueue_script('calendar', null, null, null, true);
 
 }
