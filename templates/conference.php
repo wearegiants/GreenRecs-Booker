@@ -1,8 +1,13 @@
 <?php
+// $params = $this->getSubmitFields('conference');
+$params = [];
+$params['token']= $_GET['token'];
+$params['method'] = 'conference';
+$params['action'] = 'green_rec_form';
+$params['gr_wp_nonce'] = wp_create_nonce('green_rec_form_nonce'); ?>
+<?php 
+$res = $this->callYerbaVerde("verify/appointment", $params); 
 
-$params = array();
-$params['token'] = $_GET['token'];
-$res = $this->callYerbaVerde("verify/appointment", $params);
 
 echo "<pre>".var_export($res,true)."</pre>";
 $room = '';
