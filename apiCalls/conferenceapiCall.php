@@ -24,7 +24,8 @@ class conferenceapiCall extends apiCall implements apiCallProperties {
 
     $api_result = $this->callYerbaVerde("verify/appointment", $params);
 
-
+    var_dump($api_result);
+    die();
       $this->echoJSONResponse(
             array(
               "status" => $api_result['status'],
