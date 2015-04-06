@@ -15,11 +15,12 @@ if(is_array($res)) {
 	unset($res['status']);
 	unset($res['room']);	
 	setcookie('pat-info',base64_encode(json_encode($res)),time()+3600,'/');
+	$wsUrl = preg_replace('/(http(s)?)\:\/\//', 'ws://', getenv('WP_HOME'));
 
 
 	// do the magnolian stuff
 	?>
-<div class="row">
+<div class="row" id="statusToken">
 	<div class="col-md-4 col-md-offset-4" style="padding-top: 40px; padding-bottom: 40px; height: 400px;">
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -32,7 +33,7 @@ if(is_array($res)) {
 <script type="text/javascript">
 $(document).ready(function(){
     $('#mgVideoChat').mgVideoChat({
-        wsURL: 'ws://<?php echo getenv('WP_HOME'); ?>:8080?room=<?php echo $room; ?>' //domain:port and room id info
+        wsURL: '<?php echo $wsUrl; ?>:8080/?room=<?php echo $room; ?>' //domain:port and room id info
     });
 
     //on connections change remove text message option
@@ -40,11 +41,12 @@ $(document).ready(function(){
         console.log('[mgVideoChat.connections]firedx',connections);
         $(".chatMsg.btn").hide();
 		$(".cmdBtn.call").hide();
+		$("#statusToken").hide();
     }); 
 });
 </script>
 
-<div id="mgVideoChat"></div>
+<div id="mgVideoChat" style="padding-top: 40px;"></div>
 <?php 
 	} else {
 ?>
