@@ -63,7 +63,7 @@
           <div class="col-md-2"><input type="text" class="form-control" name="data[sign6]" data-error="data[sign6]"></div>
           <div class="col-md-10"><label for="data[sign6]">
           I have read and accept the GreenRecs terms and conditions in full.<br>
-          <a href="#">Please read in full. Click here to view.</a>
+          <a target="_blank" href="/app/themes/GreenRecs/termsofuse_v2.pdf">Please read in full. Click here to view.</a>
           </label></div>
           </div>
         </div></div>
