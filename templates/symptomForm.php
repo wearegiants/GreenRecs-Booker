@@ -247,7 +247,7 @@
           <label for="data[privacy]">
           <p>
             <strong>Have you read our privacy policy?*</strong> 
-            <a href="#">View PRIVACY POLICY</a>
+            <a target="_blank" href="/app/themes/GreenRecs/privacypolicy.pdf">View PRIVACY POLICY</a>
           </p>
           </label>
           <div class="checkbox">
