@@ -30,7 +30,7 @@
               </div>
               <div class="row input-group">
                 <div class="col-md-8">
-                  <label for="data[legal_prob]">If yes, please explain (Case #, County)</label>
+                  <label for="data[legal_prob]">If yes, please briefly explain (include case # and county of conviction)</label>
                   <textarea rows="5" class="form-control" name="data[legal_prob]" data-error="data[legal_prob]"></textarea>
                 </div>
               </div>
@@ -41,7 +41,7 @@
             <div class="col-md-12">
             <label for="data[legal_can_bool]">
               <p data-error="data[legal_can_bool]">
-                <strong>Do you have a pending legal cannabis case?</strong>
+                <strong>Do you have a pending criminal case involving the use or distribution of cannabis?</strong>
               </p>
             </label>
               <div class="btn-group" data-toggle="buttons">
@@ -60,6 +60,30 @@
               </div>
             </div>
           </li><!-- Question 2 -->
+
+          <li>
+            <div class="col-md-12">
+            <label for="data[legal_can_bool]">
+              <p data-error="data[legal_can_bool]">
+                <strong>Have you ever given cannabis to a minor?</strong>
+              </p>
+            </label>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <input type="radio" name="data[legal_can_bool]" data-error="data[legal_can_bool]" value="true"> Yes
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="data[legal_can_bool]" data-error="data[legal_can_bool]" value="false"> No
+                </label>
+              </div>
+              <div class="row input-group">
+                <div class="col-md-8">
+                  <label for="data[legal_can]"> If yes, please briefly explain.</label>
+                  <textarea rows="5" class="form-control" data-error="data[legal_can]" name="data[legal_can]"></textarea>
+                </div>
+              </div>
+            </div>
+          </li><!-- Question 3 -->
           
         </ul>
 

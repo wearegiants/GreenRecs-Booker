@@ -8,7 +8,7 @@
             <div class="row clearfix">
 
                 <div class="col-md-12">
-                    <h2>General Patient Information</h2>
+                    <!--<h2>General Patient Information</h2>-->
                     <p>* = Required</p>
                 </div>
 
@@ -39,7 +39,7 @@
                     <div class="input-group spacer">
                         <label for="data[address]">Address*</label>
                         <input type="text" name="data[address]" class="spacer form-control" placeholder="Street Address" data-error="data[address]">
-                        <input type="text" class="form-control spacer" name="data[address2]" placeholder="Apt #/Building # etc." data-error="data[address2]">
+                        <input type="text" class="form-control spacer" name="data[address2]" placeholder="Apt., Suite, Bldg #, etc…" data-error="data[address2]">
                     </div>
                     <!-- /input-group -->
                 </div>
@@ -211,7 +211,7 @@
 
             <div class="row questions nonlist clearfix">
                 <div class="col-md-6 spacer">
-                    <label for="data[cal_id]" class="input-group-title">Do you have a valid Calfornia ID?*</label>
+                    <label for="data[cal_id]" class="input-group-title">Do you have a valid California ID?*</label>
                     </br>
                     <div class="btn-group">
                         <label for="data[cal_id]" class="radio-inline">
@@ -223,20 +223,30 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <p>Please provide a valid form of California identification. Please choose an acceptable form of identification from thetypes listed below. We do not accept birth certificates.*</p>
+                    <p>Please provide a valid form of California identification. Please choose an acceptable form of California identification then upload. We do not accept birth certificates.*</p>
                 </div>
                 <ul class="col-md-6">
-                    <li>Valid California ID (DMV issued California driver’s license or Identification card)</li>
+                    <!-- Old  Bullet Points -->
+                    <!--
+                    <li>Valid California ID (DMV issued California driver’s license or identification card)</li>
                     <li>Valid Passport</li>
                     <li>Out of State ID with proof of California residency (utility bill, lease, car or voter registration</li>
-                    <li>Valid Passport or Out of State ID with temporary DMV form</li>
+                    <li>Valid Passport or out of state ID with temporary DMV form</li>
+                    -->
+                    <li>Valid California identification (ID) Either California issued drivers license or identification card.</li>
+                    <li>Valid Passport</li>
+                    <li>Current out of state drivers license or ID with proof of California residency. (Apartment lease, utility bill or voter registration card)</li>
+                    <li>Valid government issued ID noting current California address</li>
+                    <li>USA military card with proof of California residency</li>
+                    <li>Any other valid ID not listed previously must be government issued listing a current California address or be submitted with acceptable proof of California residency.</li>
+
                 </ul>
                 <ul class="col-md-6">
-                    <li>Valid Government-issued ID</li>
-                    <li>Valid Resident Card for California</li>
+                    <li>Valid government-issued ID</li>
+                    <li>Valid resident card for California</li>
                     <li>Temporary DMV form with any photo ID</li>
-                    <li>Military Card with proof of residency</li>
-                    <li>Any “other” ID must be Government issued</li>
+                    <li>Military card with proof of residency</li>
+                    <li>Any “other” ID must be government issued</li>
                 </ul>
             </div>
             <!-- Do you have a California id? -->

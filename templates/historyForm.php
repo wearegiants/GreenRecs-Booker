@@ -17,7 +17,7 @@
           <li>
             <div class="col-md-12">
                <label for="data[use_prev_bool]">
-                <p><strong>Have you used cannabis</strong></p>
+                <p><strong>Have you ever you used medical cannabis</strong></p>
                </label>
               <div>
                 <label class="radio-inline">
@@ -33,8 +33,8 @@
           <li>
             <div class="col-md-12">
               <label for="data[use_med_bool]">
-                <p >
-                  <strong>If yes, did you discover that cannabis eased your medical symptoms?</strong>
+                <p>
+                  <strong>If you answered yes to question #1, did you discover that medical cannabis eased your symptoms or pain?</strong>
                 </p>
               </label>
               <div class="">
@@ -48,6 +48,7 @@
             </div>
           </li><!-- Question 1a -->
           
+          <!--
           <li>
             <div class="col-md-12">
               <label for="data[use_med_time]">
@@ -76,29 +77,31 @@
                 </label>
               </div>
             </div>
-          </li><!-- Question 2 -->
+          </li>--><!-- Question 2 -->
+
           
           <li>
             <div class="col-md-12">
               <label for="data[use_consumpt]">
                 <p >
-                  <strong>Estimate the average amount of cannabis you use per day.</strong>
+                  <strong>If you answered yes to question #2, estimate the average of medical cannabis you use per day.</strong>
                   (Large joint = 1 gram, 1/8 oz. = 3.5 gm)
                 </p>
               </label>
               <div class="spacer">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="less than 1 gram"> &lt;1 gram
+                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="None"> None
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="1 gram"> 1 gram
+                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="1-3 grams"> 1-3 grams
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="2 gram"> 2 grams
+                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="4-6 grams"> 4-6 grams
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="3 gram"> 3 grams
+                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="more"> More
                 </label>
+                <!--
                 <label class="radio-inline">
                   <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="4 gram"> 4 grams
                 </label>
@@ -108,6 +111,7 @@
                 <label class="radio-inline">
                   <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="6 gram"> 6 grams
                 </label>
+                -->
               </div>
               <div class="row input-group spacer">
                 <div class="col-md-8">
@@ -122,7 +126,7 @@
             <div class="col-md-12">
               <label for="data[use_change]">
                 <p >
-                  <strong>Has the amount of cannabis needed to manage your symptoms/condition changed over time?</strong>
+                  <strong>If currently using medical cannabis, has the amount needed to manage your condition/symptoms changed over time.</strong>
                 </p>
               </label>
               <div class="">
@@ -152,7 +156,7 @@
             <div class="col-md-12">
               <label for="data[use_condition]">
                 <p >
-                  <strong>How effective has cannabis been in treating your condition?</strong>
+                  <strong>Please rate the effectiveness of medical cannabis in treating your condition.</strong>
                 </p>
               </label>
               <div class="">
@@ -173,7 +177,7 @@
             <div class="col-md-12">
               <label for="data[use_quit_bool]">
               <p >
-                <strong>Have you ever stopped using cannabis only to find that your symptoms have returned or have become worse?</strong>
+                <strong>Have you ever stopped using medical cannabis only to find that your symptoms have returned or have become worse?</strong>
               </p>
               </label>
               <div class="">

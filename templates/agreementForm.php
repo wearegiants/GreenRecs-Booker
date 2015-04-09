@@ -7,7 +7,7 @@
         
         <div class="col-md-12">
           <h2>Patient Acknowledgements</h2>
-          <p>All Required</p>
+          <p>All fields require your initials</p>
           <p>Please type your initials to confirm that you acknowledge and confirm the GreenRecs terms and conditions</p>
         </div>
         
