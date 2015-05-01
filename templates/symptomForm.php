@@ -21,12 +21,12 @@
             of conditions</a>*
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_bool]">
             <label for="data[can_sympt_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_bool]" value="1"> Yes
             </label>
             <label for="data[can_sympt_bool]"  class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_bool]" value="0"> No
             </label>
           </div>
         </div>
@@ -53,12 +53,12 @@
             <strong>Have you been previously diagnosed for your condition?*</strong>
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_diag_bool]" >
             <label for="data[can_sympt_diag_bool]"class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_diag_bool]" value="1"> Yes
             </label>
             <label for="data[can_sympt_diag_bool]"  class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_diag_bool]" value="0"> No
             </label>
           </div>
         </div>
@@ -69,7 +69,7 @@
           <label for="data[can_sympt_start_time]"><p>
             <strong>When did this problem or condition start?</strong>
           </p>
-          <div class="">
+          <div class="" data-error="data[can_sympt_start_time]">
             <label for="data[can_sympt_start_time]" class="radio-inline">
               <input type="radio" name="data[can_sympt_start_time]" value="1 month"> 1 Month
             </label>
@@ -92,7 +92,7 @@
       <li>
         <div class="col-md-12">
           <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought in treating your problem:*</label>
-          <div class="row">
+          <div class="row" data-error="data[can_sympt_treat][]">
             <div class=" col-md-6">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Medications">Medications</label>
@@ -157,7 +157,7 @@
             <strong>When did you last see your doctor or a specialist about this condition or complaint?</strong>
           </p>
           </label>
-          <div class="btn-group">
+          <div class="btn-group" data-error="data[can_sympt_doc_time]">
             <label class="radio-inline">
               <input type="radio" name="data[can_sympt_doc_time]" value="1 month"> 1 Month
             </label>
@@ -201,12 +201,12 @@
             showing that you have been to a doctor and have been diagnosed with your condition.)*
           </p>
           </label>
-          <div class="btn-group">
+          <div class="btn-group" data-error="data[can_sympt_prim_care_bool]">
             <label class="radio-inline">
-              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_prim_care_bool]" value="1"> Yes
             </label>
             <label class="radio-inline" >
-              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_prim_care_bool]" value="0"> No
             </label>
           </div>
         </div>
@@ -219,7 +219,7 @@
             <strong>When did this problem or condition start?</strong>
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_phys_val]">
             <label class="radio-inline">
               <input type="radio" name="data[can_sympt_phys_val]" value="1 month"> 1 Month
             </label>
@@ -250,7 +250,7 @@
             <a target="_blank" href="/app/themes/GreenRecs/privacypolicy.pdf">View PRIVACY POLICY</a>
           </p>
           </label>
-          <div class="checkbox">
+          <div class="checkbox" data-error="data[privacy]">
             <label><input name="data[privacy]" type="checkbox" value="1">I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
           </div>
         </div>
@@ -264,24 +264,24 @@
               area that hurts the most. </strong> 
           </p>
           </label>
-          <div class="btn-group">
+          <div class="btn-group" data-error="data[pain_area_img]">
           <div class="row spacer">
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="0"> Front
+              <input type="radio" name="data[pain_area_img]" value="front"> Front
               <img src="http://placehold.it/140&text=Front+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="1"> Back
+              <input type="radio" name="data[pain_area_img]" value="back"> Back
               <img src="http://placehold.it/140&text=Back+image" />
             </label>
-          </div>
+          </div> 
           <div class="row spacer">
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="2"> Right
+              <input type="radio" name="data[pain_area_img]" value="right"> Right
               <img src="http://placehold.it/140&text=Right+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="3"> Left
+              <input type="radio" name="data[pain_area_img]" value="left"> Left
               <img src="http://placehold.it/140&text=Left+image" />
             </label>
           </div>

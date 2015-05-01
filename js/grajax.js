@@ -12,6 +12,14 @@ function fData (context) {
 		return curForm;
 	};
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+};
+
 
 docCookies = {
   getItem: function (sKey) {
@@ -54,11 +62,9 @@ docCookies = {
 $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
 
-
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
 	if (docCookies.hasItem('pid')) {
-		console.log(docCookies.getItem('pid'));
 		dataForm.append('data[pid]', docCookies.getItem('pid'));
 	}
 	if (docCookies.hasItem('appointment_base')) {
@@ -79,8 +85,8 @@ $('input[type="submit"]').on('click', function(){
 			//RESET our errors states to normal
 			$('.ErrorMsg').removeClass('ErrorMsg');
 			$('.has-error').removeClass('has-error');
-			$('[data-error]').off('focus');
-			$('[data-error]').off('blur');
+			$('[data-error]').off('mouseenter');
+			$('[data-error]').off('blur mouseleave');
 			
 			if ('cookieCheck' in data) {
 				var missingNotice = "We are sorry but it appears you\'ve either reached this page without a session cookie or your cookies for this page have expired. "
@@ -100,9 +106,13 @@ $('input[type="submit"]').on('click', function(){
 			 		}
 			 		
 				}
-
-				if ('redirect' in data) {
-				 	window.location = data['redirect'];
+				urlParams = getUrlVars()['noredirect'];
+				if (urlParams.length > 0) {
+					console.log('halted a refresh');
+				} else {
+					if ('redirect' in data) {
+						window.location = data['redirect'];
+					}
 				}
 			}
 			if ('errors' in data) {
@@ -113,9 +123,6 @@ $('input[type="submit"]').on('click', function(){
 					errorTooltips(errItem.field, errItem.message);
 				}
 			} 
-			if (data['status'] == 0) {
-				
-			}
 
 			},
 			error: function (data) {
@@ -145,12 +152,17 @@ $('input[type="submit"]').on('click', function(){
 
 		label.addClass('ErrorMsg');
 		input.parent().addClass('has-error');
-		input.on('focus', function() {
-			input.parent().append('<span id="msgBubble">' + msg + '</span>');
+		input.on('mouseenter', function() {
+			if (input.parent().find('span').length < 2) {
+				input.parent().append('<span id="msgBubble">' + msg + '</span>');
+			}
+			input.on('blur mouseleave', function(){
+			$('#msgBubble').empty().remove();
+				input.off('blur mouseleave');
+			});
 		});
-		input.on('blur', function(){
-			$('#msgBubble').remove();
-		});		
+
+
 		
 	}
 

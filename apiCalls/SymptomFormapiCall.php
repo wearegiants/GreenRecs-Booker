@@ -52,6 +52,7 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
         unset($params['can_sympt_treat_other']);
       }
       $params['can_sympt_treat'] = $treatstr;
+
     
     foreach ($params as $key => $value) {
       switch ($key) {
@@ -64,6 +65,23 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
         break;
       }
     }
+
+    $rdios = [
+          'can_sympt_bool',
+          'can_sympt_diag_bool',
+          'can_sympt_doc_time',
+          'can_sympt_start_time',
+          'can_sympt_prim_care_bool',
+          'can_sympt_phys_val',
+          'pain_area_img', 
+          'privacy'
+      ];
+      foreach ($rdios as $item) {
+        if ( array_key_exists($item, $params) ) {
+            $errors[] = array('field' => $item,
+            'message' => 'This is a required field, please select an answer.');
+        }
+      }
 
 
 

@@ -213,12 +213,12 @@
                 <div class="col-md-6 spacer">
                     <label for="data[cal_id]" class="input-group-title">Do you have a valid Calfornia ID?*</label>
                     </br>
-                    <div class="btn-group">
+                    <div class="btn-group" data-error="data[cal_id]">
                         <label for="data[cal_id]" class="radio-inline">
-                            <input type="radio" name="data[cal_id]" value="true">Yes
+                            <input type="radio" name="data[cal_id]" value="1">Yes
                         </label>
                         <label for="data[cal_id]" class="radio-inline">
-                            <input type="radio" name="data[cal_id]" value="false" checked>No
+                            <input type="radio" name="data[cal_id]" value="0">No
                         </label>
                     </div>
                 </div>
