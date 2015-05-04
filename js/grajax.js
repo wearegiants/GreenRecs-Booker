@@ -118,19 +118,19 @@ $('input[type="submit"]').on('click', function(){
 			}
 			if ('appointment_base' in data) {
 					if (!docCookies.hasItem('appointment_base')) {
-						docCookies.setItem('appointment_base', data['appointment_base'], 3600000, '/', domainPath, false);
+						docCookies.setItem('appointment_base', data['appointment_base'], 360000, '/', domainPath, false);
 					}
 			}
 			if ('session_hash' in data) {
 				var domainPath = decodeURI(window.location.hostname);
-			 	docCookies.setItem('session_hash', data['session_hash'], 3600000 , '/', domainPath, false);
+			 	docCookies.setItem('session_hash', data['session_hash'], 360000, '/', domainPath, false);
 			 	if ('pid' in data) {
 			 		if (!docCookies.hasItem('pid')){
-			 			docCookies.setItem('pid', data['pid'], 3600000, '/', domainPath, false);
+			 			docCookies.setItem('pid', data['pid'], 360000, '/', domainPath, false);
 			 		} else if (docCookies.hasItem('pid') && docCookies.getItem('pid') != data['pid']) {
 			 			//if this cookie exists then we remove it and reset it. 
 			 			docCookies.removeItem('pid', '/', domainPath);
-			 			docCookies.setItem('pid', data['pid'], 3600000, '/', domainPath, false);
+			 			docCookies.setItem('pid', data['pid'], 360000, '/', domainPath, false);
 
 			 		}
 			 		
