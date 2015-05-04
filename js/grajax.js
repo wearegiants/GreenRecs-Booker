@@ -12,12 +12,36 @@ function fData (context) {
 		return curForm;
 	};
 
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+function getUrlVars(paramName) {
+    var sURL = window.document.URL.toString();
+    if (sURL.indexOf("?") > 0)
+    {
+        var arrParams = sURL.split("?");
+        var arrURLParams = arrParams[1].split("&");
+        var arrParamNames = new Array(arrURLParams.length);
+        var arrParamValues = new Array(arrURLParams.length);
+
+        var i = 0;
+        for (i = 0; i<arrURLParams.length; i++)
+        {
+            var sParam =  arrURLParams[i].split("=");
+            arrParamNames[i] = sParam[0];
+            if (sParam[1] != "")
+                arrParamValues[i] = unescape(sParam[1]);
+            else
+                arrParamValues[i] = "No Value";
+        }
+
+        for (i=0; i<arrURLParams.length; i++)
+        {
+            if (arrParamNames[i] == paramName)
+            {
+                //alert("Parameter:" + arrParamValues[i]);
+                return 1;
+            }
+        }
+        return 0;
+    }
 };
 
 
@@ -94,20 +118,25 @@ $('input[type="submit"]').on('click', function(){
 			}
 			if ('appointment_base' in data) {
 					if (!docCookies.hasItem('appointment_base')) {
-						docCookies.setItem('appointment_base', data['appointment_base'], 3600, '/', domainPath, false);
+						docCookies.setItem('appointment_base', data['appointment_base'], 3600000, '/', domainPath, false);
 					}
 			}
 			if ('session_hash' in data) {
 				var domainPath = decodeURI(window.location.hostname);
-			 	docCookies.setItem('session_hash', data['session_hash'], 36000 , '/', domainPath, false);
+			 	docCookies.setItem('session_hash', data['session_hash'], 3600000 , '/', domainPath, false);
 			 	if ('pid' in data) {
 			 		if (!docCookies.hasItem('pid')){
-			 			docCookies.setItem('pid', data['pid'], 36000, '/', domainPath, false);
+			 			docCookies.setItem('pid', data['pid'], 3600000, '/', domainPath, false);
+			 		} else if (docCookies.hasItem('pid') && docCookies.getItem('pid') != data['pid']) {
+			 			//if this cookie exists then we remove it and reset it. 
+			 			docCookies.removeItem('pid', '/', domainPath);
+			 			docCookies.setItem('pid', data['pid'], 3600000, '/', domainPath, false);
+
 			 		}
 			 		
 				}
-				urlParams = getUrlVars()['noredirect'];
-				if (urlParams.length > 0) {
+				urlParams = getUrlVars('noredirect');
+				if (urlParams > 0) {
 					console.log('halted a refresh');
 				} else {
 					if ('redirect' in data) {
