@@ -19,12 +19,12 @@
                <label for="data[use_prev_bool]">
                 <p><strong>Have you ever you used medical cannabis</strong></p>
                </label>
-              <div>
+              <div data-error="data[use_prev_bool]">
                 <label class="radio-inline">
-                  <input data-error="data[use_prev_bool]" type="radio" name="data[use_prev_bool]" value="true"> Yes
+                  <input  type="radio" name="data[use_prev_bool]" value="1"> Yes
                 </label>
                 <label class="radio-inline">
-                  <input data-error="data[use_prev_bool]" type="radio" name="data[use_prev_bool]" value="false"> No
+                  <input type="radio" name="data[use_prev_bool]" value="0"> No
                 </label>
               </div>
             </div>
@@ -37,12 +37,12 @@
                   <strong>If you answered yes to question #1, did you discover that medical cannabis eased your symptoms or pain?</strong>
                 </p>
               </label>
-              <div class="">
+              <div class="" data-error="data[use_med_bool]">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_bool]" name="data[use_med_bool]" value="true"> Yes
+                  <input type="radio"  name="data[use_med_bool]" value="1"> Yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_bool]" name="data[use_med_bool]" value="false"> No
+                  <input type="radio" name="data[use_med_bool]" value="0"> No
                 </label>
               </div>
             </div>
@@ -56,28 +56,29 @@
                   <strong>When did you last see your doctor or a specialist about this condition or complaint?</strong>
                 </p>
               </label>
-              <div class="">
+              <div class="" data-error="data[use_med_time]">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="1 Times Per Month"> 1x per Month
+                  <input type="radio" name="data[use_med_time]" value="1 Times Per Month"> 1x per Month
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="2-3 Times Per Week"> 2-3x per week
+                  <input type="radio" name="data[use_med_time]" value="2-3 Times Per Week"> 2-3x per week
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="1 Times Per Day"> 1x per day
+                  <input type="radio" name="data[use_med_time]" value="1 Times Per Day"> 1x per day
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="2 Times Per Day"> 2x per day
+                  <input type="radio" name="data[use_med_time]" value="2 Times Per Day"> 2x per day
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="3 Times Per Day"> 3x per day
+                  <input type="radio" name="data[use_med_time]" value="3 Times Per Day"> 3x per day
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_med_time]" name="data[use_med_time]" value="More"> More
+                  <input type="radio" name="data[use_med_time]" value="More"> More
                 </label>
               </div>
             </div>
-          </li>--><!-- Question 2 -->
+          </li>-->
+          <!-- Question 2 -->
 
           
           <li>
@@ -88,7 +89,7 @@
                   (Large joint = 1 gram, 1/8 oz. = 3.5 gm)
                 </p>
               </label>
-              <div class="spacer">
+              <div class="spacer" data-error="data[use_consumpt]">
                 <label class="radio-inline">
                   <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="None"> None
                 </label>
@@ -98,20 +99,6 @@
                 <label class="radio-inline">
                   <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="4-6 grams"> 4-6 grams
                 </label>
-                <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="more"> More
-                </label>
-                <!--
-                <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="4 gram"> 4 grams
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="5 gram"> 5 grams
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="6 gram"> 6 grams
-                </label>
-                -->
               </div>
               <div class="row input-group spacer">
                 <div class="col-md-8">
@@ -129,24 +116,24 @@
                   <strong>If currently using medical cannabis, has the amount needed to manage your condition/symptoms changed over time.</strong>
                 </p>
               </label>
-              <div class="">
+              <div class="" data-error="data[use_change]">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="Much More"> Much More
+                  <input type="radio"  name="data[use_change]" value="Much More"> Much More
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="Little More"> Little More
+                  <input type="radio" name="data[use_change]" value="Little More"> Little More
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="About the Same"> About the Same
+                  <input type="radio" name="data[use_change]" value="About the Same"> About the Same
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="Little Less"> Little Less
+                  <input type="radio" name="data[use_change]" value="Little Less"> Little Less
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="Much Less"> Much Less
+                  <input type="radio" name="data[use_change]" value="Much Less"> Much Less
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_change]" name="data[use_change]" value="Variable"> Variable
+                  <input type="radio" name="data[use_change]" value="Variable"> Variable
                 </label>
               </div>
             </div>
@@ -159,15 +146,15 @@
                   <strong>Please rate the effectiveness of medical cannabis in treating your condition.</strong>
                 </p>
               </label>
-              <div class="">
+              <div class="" data-error="data[use_condition]">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_condition]" name="data[use_condition]" value="Much better (very effective)"> Much better (very effective)
+                  <input type="radio"  name="data[use_condition]" value="Much better (very effective)"> Much better (very effective)
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_condition]" name="data[use_condition]" value="Better (effective)"> Better (effective)
+                  <input type="radio" name="data[use_condition]" value="Better (effective)"> Better (effective)
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_condition]" name="data[use_condition]" value="Slightly better (somewhat effective)"> Slightly better (somewhat effective)
+                  <input type="radio" name="data[use_condition]" value="Slightly better (somewhat effective)"> Slightly better (somewhat effective)
                 </label>
               </div>
             </div>
@@ -180,12 +167,12 @@
                 <strong>Have you ever stopped using medical cannabis only to find that your symptoms have returned or have become worse?</strong>
               </p>
               </label>
-              <div class="">
+              <div class="" data-error="data[use_quit_bool]">
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_quit_bool]" name="data[use_quit_bool]" value="true"> Yes
+                  <input type="radio"  name="data[use_quit_bool]" value="1"> Yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" data-error="data[use_quit_bool]" name="data[use_quit_bool]" value="false"> No
+                  <input type="radio" name="data[use_quit_bool]" value="0"> No
                 </label>
               </div>
             </div>

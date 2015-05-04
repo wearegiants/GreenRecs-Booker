@@ -18,4 +18,7 @@ v.0.0.8
 -added in cookie checking and page for magnoliyan client connection. 
 
 v.0.0.9 
-- minor bugfixes. 
+- minor bugfixes.
+
+v.0.1.1
+- some bugfixes for boolean handling as well as some safeguards for erronious submissions 

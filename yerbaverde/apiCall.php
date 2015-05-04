@@ -51,7 +51,14 @@ class apiCall {
 		}
 
 	}
-
+	public function booleanvalid ($value, $fieldname) {
+		if (is_int($value) === false) {
+			return array(
+				"message" => "Please select a value ",
+				"field"=> $fieldname
+				);
+		}
+	}
 	public function alphavalid($value, $fieldname) {
             if (!preg_match('/^[a-z .\-]+$/i', $value)) {
               return array(

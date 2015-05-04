@@ -20,12 +20,12 @@
                 <strong>Are you on probation or parole?</strong>
               </p>
               </label>
-              <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group" data-toggle="buttons" data-error="data[legal_prob_bool]">
                 <label class="btn btn-primary">
-                  <input type="radio" name="data[legal_prob_bool]" data-error="data[legal_prob_bool]" value="true"> Yes
+                  <input type="radio" name="data[legal_prob_bool]" value="1"> Yes
                 </label>
                 <label class="btn btn-primary">
-                  <input type="radio" name="data[legal_prob_bool]" data-error="data[legal_prob_bool]" value="false"> No
+                  <input type="radio" name="data[legal_prob_bool]" value="0"> No
                 </label>
               </div>
               <div class="row input-group">
@@ -44,12 +44,12 @@
                 <strong>Do you have a pending criminal case involving the use or distribution of cannabis?</strong>
               </p>
             </label>
-              <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group" data-toggle="buttons" data-error="data[legal_can_bool]">
                 <label class="btn btn-primary">
-                  <input type="radio" name="data[legal_can_bool]" data-error="data[legal_can_bool]" value="true"> Yes
+                  <input type="radio" name="data[legal_can_bool]" value="1"> Yes
                 </label>
                 <label class="btn btn-primary">
-                  <input type="radio" name="data[legal_can_bool]" data-error="data[legal_can_bool]" value="false"> No
+                  <input type="radio" name="data[legal_can_bool]" value="0"> No
                 </label>
               </div>
               <div class="row input-group">

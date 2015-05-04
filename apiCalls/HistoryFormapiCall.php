@@ -25,31 +25,33 @@ class HistoryFormapiCall extends apiCall implements apiCallProperties {
 
     $this->checkPID($params);
 
-    // $expectedBooleans = [
-    //   "use_prev_bool",
-    //   "use_med_bool",
-    //   "use_med_time",
-    //   "use_change",
-    //   "use_condition",
-    //   "use_quit_bool"
-    // ];
+    $expectedBooleans = [
+      "use_prev_bool",
+      "use_med_bool",
+      "use_med_time",
+      "use_change",
+      "use_condition",
+      "use_quit_bool"
+    ];
 
-    // for($key = 0; $key < count($expectedBooleans); $key++) {
-    //   // var_dump($expectedBooleans[$key]);
-    //   // var_dump($params);
-    //   // die();
-    //   $checkBools = array_key_exists($expectedBooleans[$key], $params);
-    //   if (!$checkBools) {
-    //     $errors[] = array(
-    //       "message" => "This is a required field and must be filled out to the best of your knowledge",
-    //       "field" => $expectedBooleans[$key]
-    //       );
-    //   }
-    // }
+    foreach($expectedBooleans as $key => $value) {
+      if (!array_key_exists($expectedBooleans[$key], $params)) {
+        $errors[] = array(
+          "message" => "This is a required field and must be filled out to the best of your knowledge",
+          "field" => $expectedBooleans[$key]
+          );
+      }
+    }
     
     foreach ($params as $key => $value) {
       switch ($key) {
         case "redirect_to":
+        case "use_prev_bool":
+        case "use_med_bool":
+        case "use_med_time":
+        case "use_change":
+        case "use_condition":
+        case "use_quit_bool":
         break;
         case "use_consumpt":
         case "use_consumpt_other":

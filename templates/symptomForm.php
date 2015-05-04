@@ -20,12 +20,12 @@
             of conditions</a>*
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_bool]">
             <label for="data[can_sympt_bool]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_bool]" value="1"> Yes
             </label>
             <label for="data[can_sympt_bool]"  class="radio-inline">
-              <input type="radio" name="data[can_sympt_bool]" data-error="data[can_sympt_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_bool]" value="0"> No
             </label>
           </div>
         </div>
@@ -53,12 +53,12 @@
             <small>You must have been previously diagnosed "in person" by a licensed medical physician to be eligible to use the GreenRecs service.</small>
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_diag_bool]" >
             <label for="data[can_sympt_diag_bool]"class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_diag_bool]" value="1"> Yes
             </label>
             <label for="data[can_sympt_diag_bool]"  class="radio-inline">
-              <input type="radio" name="data[can_sympt_diag_bool]" data-error="data[can_sympt_diag_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_diag_bool]" value="0"> No
             </label>
           </div>
           <div class="checkbox">
@@ -73,7 +73,7 @@
             <strong>When did this problem or condition start?</strong>
           </p>
           </label>
-          <div class="">
+          <div class="" data-error="data[can_sympt_start_time]">
             <label for="data[can_sympt_start_time]" class="radio-inline">
               <input type="radio" name="data[can_sympt_start_time]" value="1 month"> 1-6 months
             </label>
@@ -97,8 +97,8 @@
       
       <li>
         <div class="col-md-12">
-          <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought to manage your condition:*</label>
-          <div class="row">
+          <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought in treating your problem:*</label>
+          <div class="row" data-error="data[can_sympt_treat][]">
             <div class=" col-md-6">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Oral Medications">Oral Medications</label>
@@ -164,11 +164,15 @@
             <strong>When did you last see your doctor or a specialist about your condition or complaint?</strong>
           </p>
           </label>
-          <div class="btn-group">
-            <!-- Old Options -->
-            <!--
+          <div class="btn-group" data-error="data[can_sympt_doc_time]">
+           <label class="radio-inline">
+              <input type="radio" name="data[can_sympt_doc_time]" value="< 1 month"> &lt; 1 Month
+            </label>
             <label class="radio-inline">
               <input type="radio" name="data[can_sympt_doc_time]" value="1 month"> 1 Month
+            </label>
+            <label for="data[can_sympt_start_time]" class="radio-inline">
+              <input type="radio" name="data[can_sympt_start_time]" value="6 months - 1 Year">  6 months - 1 Year
             </label>
             <label class="radio-inline">
               <input type="radio" name="data[can_sympt_doc_time]" value="1 year"> 1 Year
@@ -184,19 +188,6 @@
             </label>
             <label class="radio-inline">
               <input type="radio" name="data[can_sympt_doc_time]" value="10+ years"> 5-10 Years
-            </label>
-            -->
-            <label for="data[can_sympt_start_time]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_start_time]" value="1 month"> 1-6 months
-            </label>
-            <label for="data[can_sympt_start_time]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_start_time]" value="6 months - 1 Year">  6 months - 1 Year
-            </label>
-            <label for="data[can_sympt_start_time]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_start_time]" value="1-5 Years"> 1-5 Years
-            </label>
-            <label for="data[can_sympt_start_time]" class="radio-inline">
-              <input type="radio" name="data[can_sympt_start_time]" value="5-10 Years"> 5-10 Years
             </label>
           </div>
         </div>
@@ -226,12 +217,12 @@
             (X-rays, MRI’s, physician’s letter or any other paperwork verifying your diagnosis)
           </p>
           </label>
-          <div class="btn-group">
+          <div class="btn-group" data-error="data[can_sympt_prim_care_bool]">
             <label class="radio-inline">
-              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="true"> Yes
+              <input type="radio" name="data[can_sympt_prim_care_bool]" value="1"> Yes
             </label>
             <label class="radio-inline" >
-              <input type="radio" name="data[can_sympt_prim_care_bool]" data-error="data[can_sympt_prim_care_bool]" value="false"> No
+              <input type="radio" name="data[can_sympt_prim_care_bool]" value="0"> No
             </label>
           </div>
         </div>
@@ -245,11 +236,11 @@
             <a target="_blank" href="/app/themes/GreenRecs/privacypolicy.pdf">View PRIVACY POLICY</a>
           </p>
           </label>
-          <div class="checkbox">
+          <div class="checkbox" data-error="data[privacy]">
             <label><input name="data[privacy]" type="checkbox" value="1">I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
           </div>
         </div>
-      </li>--><!-- Question 10 -->
+      </li>-->
       
       <li>
         <div class="col-md-12">
@@ -258,24 +249,24 @@
             <strong>If you are seeking medical marijuana to manage pain, please clarify by marking an “X” in the appropriate area(s).</strong> 
           </p>
           </label>
-          <div class="btn-group">
+          <div class="btn-group" data-error="data[pain_area_img]">
           <div class="row spacer">
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="0"> Front
+              <input type="radio" name="data[pain_area_img]" value="front"> Front
               <img src="http://placehold.it/140&text=Front+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="1"> Back
+              <input type="radio" name="data[pain_area_img]" value="back"> Back
               <img src="http://placehold.it/140&text=Back+image" />
             </label>
-          </div>
+          </div> 
           <div class="row spacer">
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="2"> Right
+              <input type="radio" name="data[pain_area_img]" value="right"> Right
               <img src="http://placehold.it/140&text=Right+image" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="data[pain_area_img]" value="3"> Left
+              <input type="radio" name="data[pain_area_img]" value="left"> Left
               <img src="http://placehold.it/140&text=Left+image" />
             </label>
           </div>
