@@ -11,7 +11,7 @@ class ScheduleEventapiCall extends apiCall implements apiCallProperties {
   }
 
   function getTemplate() {
-    return include_once(GR_PLUGIN_PATH . '/templates/grCal.php');
+    return include_once(GR_PLUGIN_PATH . '/templates/calendarForm.php');
   }
 
   function hasPage() {
