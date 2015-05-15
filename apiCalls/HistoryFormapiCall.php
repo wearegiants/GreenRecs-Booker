@@ -23,6 +23,10 @@ class HistoryFormapiCall extends apiCall implements apiCallProperties {
   function doSubmitProcess($params) {
     $errors = array();
 
+// TODO use_med_time is currently commented out on the form.  It either
+// needs to be uncommented or removed as a requirement.
+$params['use_med_time'] = '1 Times Per Month';
+
     $this->checkPID($params);
 
     $expectedBooleans = [
