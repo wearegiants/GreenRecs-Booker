@@ -53,7 +53,10 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
       }
       $params['can_sympt_treat'] = $treatstr;
 
-    
+// TODO Fix form
+// Hack to pass form error because can_sympt_phys_val does not exist on form.
+    $params['can_sympt_phys_val'] = 1;
+
     foreach ($params as $key => $value) {
       switch ($key) {
         case "redirect_to":
