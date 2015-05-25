@@ -18,4 +18,11 @@ v.0.0.8
 -added in cookie checking and page for magnoliyan client connection. 
 
 v.0.0.9 
-- minor bugfixes. 
+- minor bugfixes.
+
+v.0.1.1
+- some bugfixes for boolean handling as well as some safeguards for erronious submissions
+
+v.0.1.2
+- mid refactor, some fields are TBD, validation states added for booleans (which are actually ints.) 
+- still have a few things that are working. 

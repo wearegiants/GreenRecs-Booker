@@ -52,11 +52,24 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
         unset($params['can_sympt_treat_other']);
       }
       $params['can_sympt_treat'] = $treatstr;
-    
+
+// TODO Fix form
+// Hack to pass form error because can_sympt_phys_val does not exist on form.
+    $params['can_sympt_phys_val'] = 1;
+
     foreach ($params as $key => $value) {
       switch ($key) {
         case "redirect_to":
         case "can_sympt_treat":
+        //don't check for empty booleans here
+        case 'can_sympt_bool':
+        case 'can_sympt_diag_bool':
+        case 'can_sympt_doc_time':
+        case 'can_sympt_start_time':
+        case 'can_sympt_prim_care_bool':
+        case 'can_sympt_phys_val':
+        case 'pain_area_img':
+        case 'privacy':
         break;
         default:
           $checkEmpties = $this->noempty($value, $key);
@@ -64,6 +77,23 @@ class SymptomFormapiCall extends apiCall implements apiCallProperties {
         break;
       }
     }
+
+    $rdios = [
+          'can_sympt_bool',
+          'can_sympt_diag_bool',
+          'can_sympt_doc_time',
+          'can_sympt_start_time',
+          'can_sympt_prim_care_bool',
+          'can_sympt_phys_val',
+          'pain_area_img', 
+          'privacy'
+      ];
+      foreach ($rdios as $item) {
+        if ( !array_key_exists($item, $params) ) {
+            $errors[] = array('field' => $item,
+            'message' => 'This is a required field, please select an answer.');
+        }
+      }
 
 
 

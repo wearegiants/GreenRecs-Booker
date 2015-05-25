@@ -12,6 +12,38 @@ function fData (context) {
 		return curForm;
 	};
 
+function getUrlVars(paramName) {
+    var sURL = window.document.URL.toString();
+    if (sURL.indexOf("?") > 0)
+    {
+        var arrParams = sURL.split("?");
+        var arrURLParams = arrParams[1].split("&");
+        var arrParamNames = new Array(arrURLParams.length);
+        var arrParamValues = new Array(arrURLParams.length);
+
+        var i = 0;
+        for (i = 0; i<arrURLParams.length; i++)
+        {
+            var sParam =  arrURLParams[i].split("=");
+            arrParamNames[i] = sParam[0];
+            if (sParam[1] != "")
+                arrParamValues[i] = unescape(sParam[1]);
+            else
+                arrParamValues[i] = "No Value";
+        }
+
+        for (i=0; i<arrURLParams.length; i++)
+        {
+            if (arrParamNames[i] == paramName)
+            {
+                //alert("Parameter:" + arrParamValues[i]);
+                return 1;
+            }
+        }
+        return 0;
+    }
+};
+
 
 docCookies = {
   getItem: function (sKey) {
@@ -54,11 +86,9 @@ docCookies = {
 $('input[type="submit"]').on('click', function(){
 	event.preventDefault();
 
-
 	var formSelect = fData(this);
 	var dataForm = new FormData(formSelect);
 	if (docCookies.hasItem('pid')) {
-		console.log(docCookies.getItem('pid'));
 		dataForm.append('data[pid]', docCookies.getItem('pid'));
 	}
 	if (docCookies.hasItem('appointment_base')) {
@@ -79,8 +109,8 @@ $('input[type="submit"]').on('click', function(){
 			//RESET our errors states to normal
 			$('.ErrorMsg').removeClass('ErrorMsg');
 			$('.has-error').removeClass('has-error');
-			$('[data-error]').off('focus');
-			$('[data-error]').off('blur');
+			$('[data-error]').off('mouseenter');
+			$('[data-error]').off('blur mouseleave');
 			
 			if ('cookieCheck' in data) {
 				var missingNotice = "We are sorry but it appears you\'ve either reached this page without a session cookie or your cookies for this page have expired. "
@@ -88,21 +118,30 @@ $('input[type="submit"]').on('click', function(){
 			}
 			if ('appointment_base' in data) {
 					if (!docCookies.hasItem('appointment_base')) {
-						docCookies.setItem('appointment_base', data['appointment_base'], 3600, '/', domainPath, false);
+						docCookies.setItem('appointment_base', data['appointment_base'], 360000, '/', domainPath, false);
 					}
 			}
 			if ('session_hash' in data) {
 				var domainPath = decodeURI(window.location.hostname);
-			 	docCookies.setItem('session_hash', data['session_hash'], 36000 , '/', domainPath, false);
+			 	docCookies.setItem('session_hash', data['session_hash'], 360000, '/', domainPath, false);
 			 	if ('pid' in data) {
 			 		if (!docCookies.hasItem('pid')){
-			 			docCookies.setItem('pid', data['pid'], 36000, '/', domainPath, false);
+			 			docCookies.setItem('pid', data['pid'], 360000, '/', domainPath, false);
+			 		} else if (docCookies.hasItem('pid') && docCookies.getItem('pid') != data['pid']) {
+			 			//if this cookie exists then we remove it and reset it. 
+			 			docCookies.removeItem('pid', '/', domainPath);
+			 			docCookies.setItem('pid', data['pid'], 360000, '/', domainPath, false);
+
 			 		}
 			 		
 				}
-
-				if ('redirect' in data) {
-				 	window.location = data['redirect'];
+				urlParams = getUrlVars('noredirect');
+				if (urlParams > 0) {
+					console.log('halted a refresh');
+				} else {
+					if ('redirect' in data) {
+						window.location = data['redirect'];
+					}
 				}
 			}
 			if ('errors' in data) {
@@ -113,9 +152,6 @@ $('input[type="submit"]').on('click', function(){
 					errorTooltips(errItem.field, errItem.message);
 				}
 			} 
-			if (data['status'] == 0) {
-				
-			}
 
 			},
 			error: function (data) {
@@ -145,12 +181,17 @@ $('input[type="submit"]').on('click', function(){
 
 		label.addClass('ErrorMsg');
 		input.parent().addClass('has-error');
-		input.on('focus', function() {
-			input.parent().append('<span id="msgBubble">' + msg + '</span>');
+		input.on('mouseenter', function() {
+			if (input.parent().find('span').length < 2) {
+				input.parent().append('<span id="msgBubble">' + msg + '</span>');
+			}
+			input.on('blur mouseleave', function(){
+			$('#msgBubble').empty().remove();
+				input.off('blur mouseleave');
+			});
 		});
-		input.on('blur', function(){
-			$('#msgBubble').remove();
-		});		
+
+
 		
 	}
 
