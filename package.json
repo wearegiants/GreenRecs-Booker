@@ -1,6 +1,6 @@
 {
   "name": "GreenRecs-Scheduler",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A scheduling mechanism for medical canibus doctors",
   "main": "Gruntfile.js",
   "scripts": {
