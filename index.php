@@ -43,3 +43,22 @@ $yvApi = \YerbaVerde\controllerVerde::getInstance();
     $yvApi->doDisable();
   });
  }
+
+add_action('init','set_vc_cookie');
+function set_vc_cookie() {
+  if(isset($_GET['token'])) {
+    
+    $apiVerde = new \YerbaVerde\apiCall;
+    $params = [];
+    $params['token']= $_GET['token'];
+    $params['method'] = 'conference';
+    $params['action'] = 'green_rec_form';
+    $params['gr_wp_nonce'] = wp_create_nonce('green_rec_form_nonce'); 
+    $res = $apiVerde->callYerbaVerde("verify/appointment", $params); 
+    if(is_array($res)) {
+        unset($res['status']);
+        unset($res['room']);  
+        setcookie('pat-info',base64_encode(json_encode($res)),time()+3600,'/');
+    }
+  }
+}

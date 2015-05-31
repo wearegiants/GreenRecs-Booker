@@ -5,11 +5,11 @@ namespace YerbaVerde;
 class conferenceapiCall extends apiCall implements apiCallProperties {
 
   function getDefaultTitle() {
-    return "conference";
+    return "Conference";
   }
 
   function getUniqueName() {
-    return "conference";
+    return "Conference";
   }
 
   function getTemplate() {

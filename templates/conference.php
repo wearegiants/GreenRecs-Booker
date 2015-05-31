@@ -14,7 +14,6 @@ if(is_array($res)) {
 	$room = $res['room'];
 	unset($res['status']);
 	unset($res['room']);	
-	setcookie('pat-info',base64_encode(json_encode($res)),time()+3600,'/');
 	$wsUrl = preg_replace('/(http(s)?)\:\/\//', 'ws://', getenv('WP_HOME'));
 
 
