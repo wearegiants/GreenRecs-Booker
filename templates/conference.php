@@ -40,6 +40,7 @@ $(document).ready(function(){
         console.log('[mgVideoChat.connections]firedx',connections);
         $(".chatMsg.btn").hide();
 		$(".cmdBtn.call").hide();
+		$(".cmdBtn.callAudio").hide();
 		$("#statusToken").hide();
     }); 
 });
