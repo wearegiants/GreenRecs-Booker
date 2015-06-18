@@ -2,8 +2,8 @@
 <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="contact">
 <?php echo $this->getSubmitFields('ContactForm');?>
 <input type="hidden" name="data[redirect_to]" value="<?php echo self::getPageUrl('SymptomForm'); ?>" />
-<div class="fs-row">
-<div class="fs-cell fs-lg-10 fs-md-5 fs-sm-3 fs-centered">
+
+
 <!-- General Patient Information -->
 
 <div class="fs-row clearfix">
@@ -262,7 +262,7 @@
 <hr class="invisible">
 <input class="btn btn-primary btn-lg cta custom" data-form-id="contact" type="submit" value="Next" />
 <hr class="invisible">
-</div>
-</div><!-- row -->
+
+
 </form>
 </section>

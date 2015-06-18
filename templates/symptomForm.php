@@ -1,8 +1,8 @@
 <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="symptoms">
 <?php echo $this->getSubmitFields('SymptomForm');?>
 <input type="hidden" name="data[redirect_to]" value="<?php echo self::getPageUrl('LegalForm'); ?>" />
-<div class="fs-row">
-<div class="fs-cell fs-lg-10 fs-md-5 fs-sm-3 fs-centered">
+
+
   <div class="fs-row">
 
     <div class="fs-cell fs-full-all text-center">
@@ -287,6 +287,6 @@
     </div>
 
   </div>
-</div>
-</div>
+
+
 </form>
