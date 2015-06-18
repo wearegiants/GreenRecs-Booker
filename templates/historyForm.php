@@ -2,10 +2,10 @@
   <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="history">
   <?php echo $this->getSubmitFields('HistoryForm');?>
    <input type="hidden" name="data[redirect_to]" value="<?php echo self::getPageUrl('CalendarForm'); ?>" />
-
-    <div class="col-md-10 col-centered">
+   <div class="fs-row">
+    <div class="fs-cell fs-lg-10 fs-md-5 fs-sm-3 fs-centered">
       <div class="row">
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all text-center">
           <h2>Cannabis Use History / Pattern</h2>
           <p>* = Required</p>
         </div>
@@ -15,7 +15,7 @@
         <ol class="questions">
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
                <label for="data[use_prev_bool]">
                 <p><strong>Have you ever you used medical cannabis</strong></p>
                </label>
@@ -31,7 +31,7 @@
           </li><!-- Question 1 -->
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
               <label for="data[use_med_bool]">
                 <p>
                   <strong>If you answered yes to question #1, did you discover that medical cannabis eased your symptoms or pain?</strong>
@@ -50,7 +50,7 @@
           
           <!--
           <li>
-            <div class="col-md-12">
+            <div class=" fs-full-all">
               <label for="data[use_med_time]">
                 <p >
                   <strong>When did you last see your doctor or a specialist about this condition or complaint?</strong>
@@ -82,7 +82,7 @@
 
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
               <label for="data[use_consumpt]">
                 <p >
                   <strong>If you answered yes to question #2, estimate the average of medical cannabis you use per day.</strong>
@@ -100,9 +100,9 @@
                   <input type="radio" data-error="data[use_consumpt]" name="data[use_consumpt]" value="4-6 grams"> 4-6 grams
                 </label>
               </div>
-              <div class="row input-group spacer">
-                <div class="col-md-8">
-                  <label for="data[use_consumpt_other]"><p>Other<p></label>
+              <div class="fs-row input-group spacer">
+                <div class="fs-cell fs-lg-6 fs-md-4 fs-sm-3">
+                  <label for="data[use_consumpt_other]"><p>Other</p></label>
                   <input type="text" data-error="data[use_consumpt_other]" class="form-control" name="data[use_consumpt_other]">
                 </div>
               </div>
@@ -110,7 +110,7 @@
           </li><!-- Question 3 -->
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
               <label for="data[use_change]">
                 <p >
                   <strong>If currently using medical cannabis, has the amount needed to manage your condition/symptoms changed over time.</strong>
@@ -140,7 +140,7 @@
           </li><!-- Question 4 -->
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
               <label for="data[use_condition]">
                 <p >
                   <strong>Please rate the effectiveness of medical cannabis in treating your condition.</strong>
@@ -161,7 +161,7 @@
           </li><!-- Question 5 -->
           
           <li>
-            <div class="col-md-12">
+            <div class="fs-cell fs-full-all">
               <label for="data[use_quit_bool]">
               <p >
                 <strong>Have you ever stopped using medical cannabis only to find that your symptoms have returned or have become worse?</strong>
@@ -181,9 +181,10 @@
         </ul>       
       </div>
     </div>
-    <div class="text-center col-md-12 spacer"> 
-      <input class="btn btn-primary btn-lg custom" data-form-id="history" type="submit" value="Next" />
+    <div class="text-center fs-cell fs-full-all spacer"> 
+      <input class="btn btn-primary btn-lg cta custom" data-form-id="history" type="submit" value="Next" />
+      <hr class="invisible">
     </div>
-
+    </div>
   </form>
 </section>

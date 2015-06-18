@@ -1,19 +1,20 @@
 <form role="form" action="<?php echo $this->getFormActionUrl(); ?>" method="POST" enctype="multipart/form-data" class="show" id="symptoms">
 <?php echo $this->getSubmitFields('SymptomForm');?>
 <input type="hidden" name="data[redirect_to]" value="<?php echo self::getPageUrl('LegalForm'); ?>" />
-<div class="col-md-10 col-centered">
-  <div class="row">
+<div class="fs-row">
+<div class="fs-cell fs-lg-10 fs-md-5 fs-sm-3 fs-centered">
+  <div class="fs-row">
 
-    <div class="col-md-12">
+    <div class="fs-cell fs-full-all text-center">
       <h2>Tell us why you're here</h2>
       <p>* = Required</p>
     </div>
     
     <div class="clearfix"></div>
     
-    <ul class="questions">
+    <ul class="questions fs-row">
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_bool]"><p>
             <strong>Do you have a medical condition that could benefit from the use of cannabis?</strong>
             (Cancer, migraines, chronic pain, nausea, insomnia, low appetite, etc..) <a href="#">View full list 
@@ -32,14 +33,14 @@
       </li><!-- Question 1 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_condition]">
           <p>
             <strong>What is the condition that you are seeking a physician’s medical marijuana recommendation?</strong>
           </p>
           </label>
-          <div class="row">
-            <div class="col-md-4">
+          <div class="fs-row">
+            <div class="fs-cell fs-full-all">
               <input type="text" name="data[can_sympt_condition]" class="form-control" placeholder="Condition" data-error="data[can_sympt_condition]">
             </div>
           </div>
@@ -47,7 +48,7 @@
       </li><!-- Question 2 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_diag_bool]"><p>
             <strong> Have you been previously diagnosed for your condition "in person" by a licensed California medical physician?*</strong>
             <small>You must have been previously diagnosed "in person" by a licensed medical physician to be eligible to use the GreenRecs service.</small>
@@ -68,7 +69,7 @@
       </li><!-- Question 3 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_start_time]"><p>
             <strong>When did this problem or condition start?</strong>
           </p>
@@ -96,9 +97,9 @@
       </li><!-- Question 4 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought in treating your problem:*</label>
-          <div class="row" data-error="data[can_sympt_treat][]">
+          <div class="fs-row" data-error="data[can_sympt_treat][]">
             <div class=" col-md-6">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Oral Medications">Oral Medications</label>
@@ -141,7 +142,7 @@
       </li><!-- Question 5 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_med]">
           <p>
             <strong>Over-the-Counter and Herbal Medications:</strong>
@@ -149,8 +150,8 @@
             condition that you are seeking cannabis to manage. (i.e: ibuprofen, aspirin, vicodin, sleeping pills, milk thistle, etc...)
           </p>
           </label>
-          <div class="row input-group">
-            <div class="col-md-12">
+          <div class="fs-row input-group">
+            <div class="fs-cell fs-full-all">
               <input type="text" data-error="data[can_sympt_med]" name="data[can_sympt_med]" class="form-control">
             </div>
           </div>
@@ -158,7 +159,7 @@
       </li><!-- Question 6 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_doc_time]">
           <p>
             <strong>When did you last see your doctor or a specialist about your condition or complaint?</strong>
@@ -194,7 +195,7 @@
       </li><!-- Question 7 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_prim_care]">
           <p>
             <strong>Do you have the name and contact information for your 
@@ -206,7 +207,7 @@
       </li><!-- Question 8 -->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[can_sympt_prim_care_bool]">
           <p>
             <strong>Can you provide any medical documentation to support your diagnosis?</strong>
@@ -229,7 +230,7 @@
       </li><!-- Question 9 -->
       
       <!--<li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[privacy]">
           <p>
             <strong>Have you read our privacy policy?*</strong> 
@@ -243,31 +244,36 @@
       </li>-->
       
       <li>
-        <div class="col-md-12">
+        <div class="fs-cell fs-full-all">
           <label for="data[pain_area_img]">
           <p>
             <strong>If you are seeking medical marijuana to manage pain, please clarify by marking an “X” in the appropriate area(s).</strong> 
           </p>
           </label>
-          <div class="btn-group" data-error="data[pain_area_img]">
-          <div class="row spacer">
+          <div class="btn-group fs-row" data-error="data[pain_area_img]">
+
+          <div class="fs-cell fs-lg-fourth fs-md-fourth">
             <label class="radio-inline">
               <input type="radio" name="data[pain_area_img]" value="front"> Front
-              <img src="http://placehold.it/140&text=Front+image" />
+              <img class="img-responsive" src="http://placehold.it/340x400&text=Front+image" />
             </label>
+          </div>
+          <div class="fs-cell fs-lg-fourth fs-md-fourth">
             <label class="radio-inline">
               <input type="radio" name="data[pain_area_img]" value="back"> Back
-              <img src="http://placehold.it/140&text=Back+image" />
+              <img class="img-responsive" src="http://placehold.it/340x400&text=Back+image" />
             </label>
-          </div> 
-          <div class="row spacer">
+          </div>
+          <div class="fs-cell fs-lg-fourth fs-md-fourth">
             <label class="radio-inline">
               <input type="radio" name="data[pain_area_img]" value="right"> Right
-              <img src="http://placehold.it/140&text=Right+image" />
+              <img class="img-responsive" src="http://placehold.it/340x400&text=Right+image" />
             </label>
+          </div>
+          <div class="fs-cell fs-lg-fourth fs-md-fourth">
             <label class="radio-inline">
               <input type="radio" name="data[pain_area_img]" value="left"> Left
-              <img src="http://placehold.it/140&text=Left+image" />
+              <img class="img-responsive" src="http://placehold.it/340x400&text=Left+image" />
             </label>
           </div>
           </div>
@@ -275,12 +281,12 @@
       </li><!-- Question 11 -->
       
     </ul>
-    <div class="row spacer"></div>
-    <div class="text-center col-md-12 spacer"> 
-        <input class="btn btn-primary btn-lg custom" data-form-id="symptoms" type="submit" value="Next" />
+    <div class="fs-row spacer"></div>
+    <div class="text-center fs-cell fs-full-all spacer"> 
+        <input class="btn btn-primary btn-lg cta custom" data-form-id="symptoms" type="submit" value="Next" />
     </div>
 
   </div>
 </div>
-
+</div>
 </form>

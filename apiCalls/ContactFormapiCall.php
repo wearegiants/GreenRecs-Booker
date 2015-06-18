@@ -5,7 +5,7 @@ namespace YerbaVerde;
 class ContactFormapiCall extends apiCall implements apiCallProperties {
 
   function getDefaultTitle() {
-    return "Your Contact Info";
+    return "General Patient Information";
   }
 
   function getUniqueName() {
