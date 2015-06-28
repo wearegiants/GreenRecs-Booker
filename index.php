@@ -26,6 +26,7 @@ if(defined("ABSPATH") && defined("WPINC")) {
   include_once "apiCalls/ContactFormapiCall.php";
   include_once "apiCalls/SymptomFormapiCall.php";
   include_once "apiCalls/LegalFormapiCall.php";
+  include_once "apiCalls/thankYouapiCall.php";
   include_once "apiCalls/HistoryFormapiCall.php";
   include_once "apiCalls/CalendarFormapiCall.php";
   include_once "apiCalls/AgreementFormapiCall.php";
