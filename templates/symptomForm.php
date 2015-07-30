@@ -62,8 +62,8 @@
               <input type="radio" name="data[can_sympt_diag_bool]" value="0"> No
             </label>
           </div>
-          <div class="checkbox">
-            <label><input name="data[privacy]" type="checkbox" value="1">I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
+          <div class="radio-inline">
+            <label class="radio-inline"><input name="data[privacy]" type="checkbox" value="1"> I acknowledge here that the initial examination for the condition in which I am seeking a medical marijuana recommendation was in-person and performed by a licensed medical physician.</label>
           </div>
         </div>
       </li><!-- Question 3 -->
@@ -98,9 +98,9 @@
       
       <li>
         <div class="fs-cell fs-full-all">
-          <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought in treating your problem:*</label>
+          <label for="data[can_sympt_treat][]" >Check the appropriate boxes for treatments that you have sought in treating your condition:*</label>
           <div class="fs-row" data-error="data[can_sympt_treat][]">
-            <div class=" col-md-6">
+            <div class="fs-cell fs-all-half fs-sm-full">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Oral Medications">Oral Medications</label>
               </div>
@@ -114,7 +114,7 @@
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Physical Therapy">Physical Therapy</label>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="fs-cell fs-all-half fs-sm-full">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input type="checkbox" name="data[can_sympt_treat][]" value="Holistic Remedies (vitamins, herbs, etc…)">Holistic Remedies (vitamins, herbs, etc…)</label>
               </div>
@@ -131,7 +131,7 @@
               </div>
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-3">
+            <div class="fs-cell fs-all-full">
               <div class="checkbox">
                 <label for="data[can_sympt_treat][]"><input id="othercheckbox" type="checkbox" name="data[can_sympt_treat][]" value="Other">Other</label>
               </div>
